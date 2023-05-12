@@ -1,5 +1,6 @@
 CREATE TABLE [Song] (
   [id] int NOT NULL IDENTITY(1, 1),
+  [title] varchar(200) NOT NULL,
   [genre_id] int NOT NULL,
   [album_id] int NOT NULL,
   [song_url] varchar(8000) NOT NULL,
@@ -25,13 +26,13 @@ GO
 
 CREATE TABLE [Genre] (
   [id] int NOT NULL IDENTITY(1, 1),
-  [name] varchar(100)
+  [name] varchar(100) NOT NULL
 )
 GO
 
 CREATE TABLE [Album] (
   [id] int NOT NULL IDENTITY(1, 1),
-  [title] varchar(200),
+  [title] varchar(200) NOT NULL,
   [coverart_url] varchar(8000) NOT NULL,
   [release_date] date
 )
@@ -39,11 +40,11 @@ GO
 
 CREATE TABLE [Playlist] (
   [id] int NOT NULL IDENTITY(1, 1),
-  [title] varchar(200)
+  [title] varchar(200) NOT NULL
 )
 GO
 
-CREATE TABLE [PlaylistSong] (
+CREATE TABLE [SongPlaylist] (
   [id] int NOT NULL IDENTITY(1, 1),
   [playlist_id] int NOT NULL,
   [song_id] int NOT NULL
@@ -62,8 +63,8 @@ GO
 ALTER TABLE [Song] ADD FOREIGN KEY ([album_id]) REFERENCES [Album] ([id])
 GO
 
-ALTER TABLE [PlaylistSong] ADD FOREIGN KEY ([song_id]) REFERENCES [Song] ([id])
+ALTER TABLE [SongPlaylist] ADD FOREIGN KEY ([song_id]) REFERENCES [Song] ([id])
 GO
 
-ALTER TABLE [PlaylistSong] ADD FOREIGN KEY ([playlist_id]) REFERENCES [Playlist] ([id])
+ALTER TABLE [SongPlaylist] ADD FOREIGN KEY ([playlist_id]) REFERENCES [Playlist] ([id])
 GO

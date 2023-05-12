@@ -1,5 +1,6 @@
 CREATE TABLE `Song` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
   `genre_id` int NOT NULL,
   `album_id` int NOT NULL,
   `song_url` varchar(8000) NOT NULL,
@@ -22,22 +23,22 @@ CREATE TABLE `SongArtist` (
 
 CREATE TABLE `Genre` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100)
+  `name` varchar(100) NOT NULL
 );
 
 CREATE TABLE `Album` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(200),
+  `title` varchar(200) NOT NULL,
   `coverart_url` varchar(8000) NOT NULL,
   `release_date` date
 );
 
 CREATE TABLE `Playlist` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(200)
+  `title` varchar(200) NOT NULL
 );
 
-CREATE TABLE `PlaylistSong` (
+CREATE TABLE `SongPlaylist` (
   `id` int NOT NULL AUTO_INCREMENT,
   `playlist_id` int NOT NULL,
   `song_id` int NOT NULL
@@ -51,6 +52,6 @@ ALTER TABLE `SongArtist` ADD FOREIGN KEY (`artist_id`) REFERENCES `Artist` (`id`
 
 ALTER TABLE `Song` ADD FOREIGN KEY (`album_id`) REFERENCES `Album` (`id`);
 
-ALTER TABLE `PlaylistSong` ADD FOREIGN KEY (`song_id`) REFERENCES `Song` (`id`);
+ALTER TABLE `SongPlaylist` ADD FOREIGN KEY (`song_id`) REFERENCES `Song` (`id`);
 
-ALTER TABLE `PlaylistSong` ADD FOREIGN KEY (`playlist_id`) REFERENCES `Playlist` (`id`);
+ALTER TABLE `SongPlaylist` ADD FOREIGN KEY (`playlist_id`) REFERENCES `Playlist` (`id`);
