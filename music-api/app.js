@@ -1,48 +1,87 @@
-'use strict';
 import http from 'http';
-import httpStatus from 'http-status-codes'
+import httpStatus from 'http-status-codes';
 
-import { Constants } from "./src/utils/constants.js";
+import { Constants } from './src/utils/constants.js';
 
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000;
 
-const reqListener = async (req, res) => {
-    if (req.method === 'OPTIONS') {
-        writeResponse(res, httpStatus.OK);
-    } else if(req.url === "/playlist"){
-        writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-    } else if(req.url === "/song") {
-        writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-    } else if(req.url === "/album") {
-        writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-    } else {
-        writeResponse(res, httpStatus.NOT_FOUND, null, Constants.responses.NOT_FOUND);
-    }
-};
-
 const writeResponse = (res, statusCode, headers, data, contentType = Constants.headers.CONTENT_TYPE) => {
-    if(!statusCode || !statusCode instanceof Number) {
-        const error = new Error("Invalid status code - Failed to write response");
-        res.writeHead(httpStatus.INTERNAL_SERVER_ERROR, httpStatus.getStatusText(500), contentType);
-        res.end(error.message);
-        throw error;
-    }
+  if (!statusCode || !statusCode instanceof Number) {
+    const error = new Error('Invalid status code - Failed to write response');
 
-    let responseHeaders = Constants.headers.CORS_CONFIG;
-    if(null !== headers && typeof headers === 'object') {
-        responseHeaders = [...responseHeaders, ...headers];
-    }
-    Object.keys(responseHeaders).map((key) => {
-        res.setHeader(key, responseHeaders[key]);
-    });
+    res.writeHead(httpStatus.INTERNAL_SERVER_ERROR, httpStatus.getStatusText(500), contentType);
+    res.end(error.message);
+    throw error;
+  }
 
-    res.writeHead(statusCode, httpStatus.getStatusText(statusCode), contentType);
+  let responseHeaders = Constants.headers.CORS_CONFIG;
 
-    if(null !== data && (Array.isArray(data) || typeof data === 'object')) {
-        res.write(JSON.stringify(data));
-    }
-    res.end();
+  if (headers !== null && typeof headers === 'object') {
+    responseHeaders = [...responseHeaders, ...headers];
+  }
+  Object.keys(responseHeaders).forEach((key) => {
+    res.setHeader(key, responseHeaders[key]);
+  });
+
+  res.writeHead(statusCode, httpStatus.getStatusText(statusCode), contentType);
+
+  if (data !== null && (Array.isArray(data) || typeof data === 'object')) {
+    res.write(JSON.stringify(data));
+  }
+  res.end();
 };
 
-const server = http.createServer(reqListener).listen(PORT);
-console.log(`Server running at port ${PORT}`);
+const returnNotFoundResponse = (res) => {
+  writeResponse(res, httpStatus.NOT_FOUND, null, Constants.responses.NOT_FOUND);
+};
+
+const reqListener = async (req, res) => {
+  switch (true) {
+    case (req.method === 'OPTIONS'):
+      writeResponse(res, httpStatus.OK);
+      break;
+    case (req.url === '/playlist' && req.method === 'GET'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/playlist' && req.method === 'POST'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/playlist' && req.method === 'PUT'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/playlist' && req.method === 'DELETE'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/song' && req.method === 'GET'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/song' && req.method === 'POST'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/song' && req.method === 'PUT'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/song' && req.method === 'DELETE'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/album' && req.method === 'GET'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/album' && req.method === 'PUT'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/artist' && req.method === 'GET'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    case (req.url === '/artist' && req.method === 'PUT'):
+      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      break;
+    default:
+      returnNotFoundResponse();
+  }
+};
+
+// eslint-disable-next-line no-unused-vars
+const server = http.createServer(await reqListener).listen(PORT);
+
