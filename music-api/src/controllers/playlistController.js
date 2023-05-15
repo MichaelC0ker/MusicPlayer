@@ -1,20 +1,23 @@
 import httpStatus from 'http-status-codes';
-import { authService } from '../services/authService.js';
+import { playlistService } from '../services/playlistService.js';
 import requestHelper from '../utils/requestHelper.js';
 
 export default async (req) => {
-  const isUrlContainsCodeParam = req.url.indexOf('code=') >= 0;
-
-  if (!isUrlContainsCodeParam) {
-    // TODO: Handle bad request
-    return {
-      ok: false
-    };
-  }
-
   const queryParameters = requestHelper.queryParamExtrator(req.url);
 
-  if (!queryParameters || !queryParameters.code) {
+  let isValidRequest = true;
+
+  if (Object.keys(queryParameters).length === 0 || !queryParameters.limit) {
+    isValidRequest = false;
+  } else if (queryParameters?.limit === 'none') {
+    // TODO: Implement retrieve all functionality
+  } else if (queryParameters?.limit === 1 && queryParameters.id) {
+    // TODO: Implement retrieve one playlist functionality
+  } else if ((queryParameters.criteria && queryParameters.limit > 1)) {
+    // TODO: Handle single song query
+  }
+
+  if (!isValidRequest) {
     return {
       status: httpStatus.BAD_REQUEST,
       data: 'Failed to get request token from request'
@@ -22,7 +25,7 @@ export default async (req) => {
   }
 
   try {
-    const response = await authService(queryParameters.code);
+    const response = await playlistService(requestToken);
 
     if (!response || !response.ok) {
       const status = response.data.error === 'bad_verification_code'

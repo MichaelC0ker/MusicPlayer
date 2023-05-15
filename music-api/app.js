@@ -2,7 +2,8 @@ import http from 'http';
 import httpStatus from 'http-status-codes';
 
 import { Constants } from './src/utils/constants.js';
-import * as authController from './src/controllers/authController.js';
+import authController from './src/controllers/authController.js';
+import playlistController from './src/controllers/playlistController.js';
 
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000;
@@ -38,29 +39,29 @@ const returnNotFoundResponse = (req, res) => {
 };
 
 const reqListener = async (req, res) => {
+  // TODO: Reduce complexity
   switch (true) {
     case (req.method === 'OPTIONS'):
       writeResponse(res, httpStatus.OK);
       break;
     case (req.url.startsWith('/auth/callback') && req.method === 'GET'): {
-      const result = await authController.handler(req);
+      const result = await authController(req);
 
       writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
       return;
     }
-    case (req.url === '/favicon.ico' && req.method === 'GET'):
-      writeResponse(res, httpStatus.NO_CONTENT);
-      break;
-    case (req.url === '/playlist' && req.method === 'GET'):
+    case (req.url.startsWith('/playlist/search?') && req.method === 'GET'):
+      const result = await playlistController(req);
+
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
-    case (req.url === '/playlist' && req.method === 'POST'):
+    case (req.url === '/playlist/new' && req.method === 'POST'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
-    case (req.url === '/playlist' && req.method === 'PUT'):
+    case (req.url === '/playlist/edit' && req.method === 'PUT'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
-    case (req.url === '/playlist' && req.method === 'DELETE'):
+    case (req.url === '/playlist/remove' && req.method === 'DELETE'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
     case (req.url === '/song' && req.method === 'GET'):
@@ -88,6 +89,7 @@ const reqListener = async (req, res) => {
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
     default:
+      // TODO: Improve error handling
       console.log(`${req.method} request failed: ${req.url}`);
       returnNotFoundResponse(req, res);
   }

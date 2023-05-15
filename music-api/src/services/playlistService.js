@@ -1,8 +1,6 @@
-import fetch from 'node-fetch';
-
 import config from '../resources/config.json' assert { type: 'json' };
 
-export const authService = async (requestToken) => {
+export const playlistService = async (requestToken) => {
   let url = 'https://github.com/login/oauth/access_token';
 
   url += `?client_id=${config.auth.client_id}`;
