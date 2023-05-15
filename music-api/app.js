@@ -19,7 +19,7 @@ const writeResponse = (res, statusCode, headers, data, contentType = Constants.h
 
   let responseHeaders = Constants.headers.CORS_CONFIG;
 
-  if (headers !== null && typeof headers === 'object') {
+  if (headers && typeof headers === 'object') {
     responseHeaders = { ...responseHeaders, ...headers };
   }
   Object.keys(responseHeaders).forEach((key) => {

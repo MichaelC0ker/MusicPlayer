@@ -25,15 +25,15 @@ export default async (req) => {
   }
 
   try {
-    const response = await playlistService(requestToken);
+    const response = await playlistService();
 
     if (!response || !response.ok) {
       const status = response.data.error === 'bad_verification_code'
-        ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR
+        ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
 
       return {
         ...response,
-        status: status
+        status: response.status ? response.status : status
       };
     }
 
