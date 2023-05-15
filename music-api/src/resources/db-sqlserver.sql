@@ -1,5 +1,15 @@
+USE master
+
+IF EXISTS(select * from sys.databases where name='MusicPlayerDB')
+DROP DATABASE MusicPlayerDB;
+
+CREATE DATABASE MusicPlayerDB;
+GO
+
+USE MusicPlayerDB;
+
 CREATE TABLE [Song] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL,
   [genre_id] int NOT NULL,
   [album_id] int NOT NULL,
@@ -12,26 +22,26 @@ CREATE TABLE [Song] (
 GO
 
 CREATE TABLE [Artist] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [name] VARCHAR(200) NOT NULL
 )
 GO
 
 CREATE TABLE [SongArtist] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [song_id] int NOT NULL,
   [artist_id] int NOT NULL
 )
 GO
 
 CREATE TABLE [Genre] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [name] varchar(100) NOT NULL
 )
 GO
 
 CREATE TABLE [Album] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL,
   [coverart_url] varchar(8000) NOT NULL,
   [release_date] date
@@ -39,19 +49,19 @@ CREATE TABLE [Album] (
 GO
 
 CREATE TABLE [Playlist] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL
 )
 GO
 
 CREATE TABLE [SongPlaylist] (
-  [id] int NOT NULL IDENTITY(1, 1),
+  [id] int PRIMARY KEY IDENTITY(1, 1),
   [playlist_id] int NOT NULL,
   [song_id] int NOT NULL
 )
 GO
 
-ALTER TABLE [Song] ADD FOREIGN KEY ([genre_id]) REFERENCES [Genre] ([id])
+ALTER TABLE [Song] ADD FOREIGN KEY ([genre_id]) REFERENCES [Genre]([id])
 GO
 
 ALTER TABLE [SongArtist] ADD FOREIGN KEY ([song_id]) REFERENCES [Song] ([id])
