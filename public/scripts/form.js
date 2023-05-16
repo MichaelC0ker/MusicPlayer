@@ -44,7 +44,6 @@ function  validateSongInput() {
 }
 
 function validatePlaylistInput() {
-
     let text = "";
 
     let playlistName = document.getElementById("playlist-name-input").value;
@@ -80,7 +79,6 @@ function onSubmitSong(){
    if(submit){
     console.log("we're moving");
     window.location.href = "index.html";
-
    }
 }
     
