@@ -51,11 +51,9 @@ header {
 }
 
 
-.playlist-list-item-details>p{
+#playlist-selection{
     text-decoration: none;
-
 }
-
 
 main {
     display: flex;

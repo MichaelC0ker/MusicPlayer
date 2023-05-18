@@ -81,6 +81,16 @@ function onSubmitSong(){
     window.location.href = "index.html";
    }
 }
+
+function onSubmitPlaylist(){
+    let submit = validatePlaylistInput();
+    if(submit){
+     console.log("we're moving");
+     window.location.href = "index.html";
+    }
+ }
+
+
     
 //add submit function for playlist
 
