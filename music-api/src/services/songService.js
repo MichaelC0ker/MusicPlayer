@@ -28,12 +28,11 @@ export const retrieveSongs = async(userId) => {
 
 export const addSong = async(songDetails) => {
     // change logic
+    const columns = Object.keys(songDetails);
+    const values = Object.values(songDetails);
     
-    let sql_query = 'INSERT INTO [Song](title, genre_id, album_id, user_id, song_url, bitrate, duration, plays, liked) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    const result = await pool.execute(sql_query, [songDetails],
-                    () => {
-
-                    });
+    let sql_query = `INSERT INTO [Song](${columns}) VALUES (${new Array(columns.length()).fill('?')})`;
+    const result = await pool.execute(sql_query, values);
     return result.recordset;
 }
 
