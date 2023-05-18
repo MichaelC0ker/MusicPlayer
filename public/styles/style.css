@@ -44,6 +44,8 @@ body{
     height: 70px;
     position: fixed;
     top: 0px;
+    left: 0px;
+    right: 0;
     padding: 0 30px;
 }
 
