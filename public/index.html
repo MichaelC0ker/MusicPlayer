@@ -3,30 +3,48 @@
 <html>
 
 <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Music Player</title>
-
+		<script src="Carousel.js"></script>
+		<script src="data.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+		
+		
 </head>
 
-<body>
-    <nav id="navbar">
-     
-            <a href="playing.html">Playing</a>
-            <a href="index.html">Playlists</a>
-            <a href="new.html">New</a>
-    </nav>
-    <main>
-        <a href="./list.html">
-            <article class="playlist-list-item">
-                <img src="./assets/default_playlist_cover.svg" alt="Cover" />
-                <summary class="playlist-list-item-details">
-                    <p>All Tracks</p>
-                    <p>Created 2023-04-01</p>
-                    <p>8 tracks</p>
-                </summary>
-            </article>
-        </a>
-    </main>
+<body onload="plusSlides(1)">
+
+		<header>
+
+			<nav id="navbar">
+			 
+				<a href="playing.html">Playing</a>
+				<a href="index.html">Playlists</a>
+				<a href="new.html">New</a>
+			</nav>
+		</header>
+		
+		<!-- Slideshow container -->
+	<section class="slideshow-container">
+
+		<a class="Back" onclick="plusSlides(-1)">&#10094;</a>
+		<h1 class="title">All Your Playlists</h1>
+		<p class="subtitle">Scroll to the right to see the next playlist...</p>
+
+		<!-- Full images with numbers and message Info -->
+		<section class="playlist-container">
+
+			<section class="carousel-cover">
+				<img src="C:\Users\bbdnet2741\Documents\Web Level-up\MusicPlayer\public\assets\track\jackboys.jpg">
+				<p class="Info">All Your Tracks</p>
+			</section>
+
+		</section>
+
+		<a class="forward" onclick="plusSlides(1)">&#10095;</a>
+	</section>
+
 </body>
 
 </html>
