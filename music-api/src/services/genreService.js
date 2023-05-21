@@ -24,8 +24,7 @@ export const addGenre = async(genre) => {
     const request = pool.request();
     for (let i = 0; i < values.length; i++)
         request.input(`param_${i}`, values[i]);
-    const result = await request
-                    // .input('name', sql.VarChar, genre)
-                    .query(sql_query);
+    const result = await request.query(sql_query);
+    
     return result.recordset;
 }
