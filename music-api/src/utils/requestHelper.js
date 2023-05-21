@@ -1,4 +1,4 @@
-const queryParamExtrator = (url) => {
+export default function queryParamExtrator(url)  {
   if (!url || url.indexOf('?') === -1) {
     // TODO:  Improve error handling to avoid unnecessary try blocks.
     // TODO:  Define errors for reusable error handling
@@ -10,7 +10,7 @@ const queryParamExtrator = (url) => {
   return Object.fromEntries(paramEntries ?? []);
 };
 
-const getPostData = (req) => {
+export const getPostData = (req) => {
   return new Promise((resolve, reject) => {
      try {
          let body = '';
@@ -29,6 +29,3 @@ const getPostData = (req) => {
 
 }
 
-export default {
-  queryParamExtrator, getPostData
-};
