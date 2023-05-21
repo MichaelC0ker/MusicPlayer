@@ -35,8 +35,8 @@ export const getArtistsOfSong = async(songId) => {
 export const addArtist = async(artistDetails) => {
     // change logic
     // const columns = Object.keys(artistDetails);
-    const values = Object.values(artistDetails);
-    
+    const values = [artistDetails];
+    console.log(values);
     let sql_query = `INSERT INTO [Artist](name) VALUES (${values.map((_,i) => `@param_${i}`)});
                     SELECT SCOPE_IDENTITY() AS id;`;
 

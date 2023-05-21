@@ -31,8 +31,13 @@ export const addSong = async(songDetails) => {
     const columns = Object.keys(songDetails);
     const values = Object.values(songDetails);
     
-    let sql_query = `INSERT INTO [Song](${columns}) VALUES (${new Array(columns.length()).fill('?')})`;
-    const result = await pool.execute(sql_query, values);
+    let sql_query = `INSERT INTO [Song](${columns}) VALUES (${values.map((_,i) => `@param_${i}`)}); 
+                    SELECT SCOPE_IDENTITY() AS id;`;
+    
+                    const request = pool.request();
+    for (let i = 0; i < values.length; i++)
+        request.input(`param_${i}`, values[i]);
+    const result = await request.query(sql_query);
     return result.recordset;
 }
 

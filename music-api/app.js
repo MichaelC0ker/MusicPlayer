@@ -1,9 +1,12 @@
 import http from 'http';
 import httpStatus from 'http-status-codes';
 
+import { getPostData } from './src/utils/requestHelper.js';
+
 import { Constants } from './src/utils/constants.js';
 import authController from './src/controllers/authController.js';
 import playlistController from './src/controllers/playlistController.js';
+import songController from './src/controllers/songController.js';
 
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000;
@@ -68,6 +71,8 @@ const reqListener = async (req, res) => {
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
     case (req.url === '/song' && req.method === 'POST'):
+      const body = await getPostData(req);
+      await songController(body)
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
     case (req.url === '/song' && req.method === 'PUT'):

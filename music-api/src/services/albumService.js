@@ -17,9 +17,10 @@ export const retrieveAlbumByName = async(albumName) => {
 
 export const addAlbum = async(albumDetails) => {
     const columns = Object.keys(albumDetails);
+    console.log(columns);
     const values = Object.values(albumDetails);
     
-    let sql_query = `INSERT INTO [Album](${columns}) VALUES (${new Array(columns.length()).fill('?')})
+    let sql_query = `INSERT INTO [Album](${columns}) VALUES (${values.map((_,i) => `@param_${i}`)});
                     SELECT SCOPE_IDENTITY() AS id;`;
     
     const request = pool.request();
