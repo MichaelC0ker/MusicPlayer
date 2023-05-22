@@ -1,9 +1,9 @@
 import httpStatus from 'http-status-codes';
 import { playlistService } from '../services/playlistService.js';
-import requestHelper from '../utils/requestHelper.js';
+import { queryParamExtrator } from '../utils/requestHelper.js';
 
 export default async (req) => {
-  const queryParameters = requestHelper.queryParamExtrator(req.url);
+  const queryParameters = queryParamExtrator(req.url);
 
   let isValidRequest = true;
 

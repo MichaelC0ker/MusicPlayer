@@ -1,12 +1,12 @@
 import http from 'http';
 import httpStatus from 'http-status-codes';
 
-import { getPostData } from './src/utils/requestHelper.js';
+import { getPostData, getIdParam } from './src/utils/requestHelper.js';
 
 import { Constants } from './src/utils/constants.js';
 import authController from './src/controllers/authController.js';
 import playlistController from './src/controllers/playlistController.js';
-import songController from './src/controllers/songController.js';
+import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
 
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000;
@@ -67,20 +67,33 @@ const reqListener = async (req, res) => {
     case (req.url === '/playlist/remove' && req.method === 'DELETE'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
-    case (req.url === '/song' && req.method === 'GET'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-      break;
-    case (req.url === '/song' && req.method === 'POST'):
+    case (req.url === '/song' && req.method === 'POST'): {
       const body = await getPostData(req);
-      await songController(body)
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      const response = await uploadSong(body);
+      writeResponse(res, response.status, null, response.data);
       break;
+    }
+    case (req.url.startsWith('/song/') && req.method === 'GET'): {
+      const param = getIdParam(req.url);
+      const response = await getSong(param);
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
+    case (req.url === '/song/all' && req.method === 'POST'): {
+      const body = await getPostData(req);
+      const response = await getAllSongs(body)
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
     case (req.url === '/song' && req.method === 'PUT'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
     case (req.url === '/song' && req.method === 'DELETE'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+      const param = getIdParam(req.url);
+      const response = await deleteSong(param);
+      writeResponse(res, response.status, null, response.data);
       break;
+    /*
     case (req.url === '/album' && req.method === 'GET'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
@@ -93,6 +106,7 @@ const reqListener = async (req, res) => {
     case (req.url === '/artist' && req.method === 'PUT'):
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
+    */
     default:
       // TODO: Improve error handling
       console.log(`${req.method} request failed: ${req.url}`);

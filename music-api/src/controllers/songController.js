@@ -2,9 +2,11 @@ import { retrieveUser } from "../services/userService.js";
 import { retrieveGenreByName, addGenre } from "../services/genreService.js";
 import { retrieveArtistByName, addArtist, addSongArtists } from "../services/artistService.js";
 import { addAlbum } from "../services/albumService.js";
-import { addSong } from "../services/songService.js";
+import { addSong, retrieveSongs, removeSong, retrieveSong } from "../services/songService.js";
 
-export default async (body) => {
+import httpStatus from 'http-status-codes';
+
+export const uploadSong = async (body) => {
     const data = JSON.parse(body);
     // console.log(data);
     let {username, title, genre, album, artist} = data;
@@ -55,5 +57,62 @@ export default async (body) => {
 
     // add album
 
-
+    return {
+        status: httpStatus.OK,
+        data: {
+            message: 'Song added successfully'
+        }
+    }
 } 
+
+export const getSong = async (param) => {
+
+    const song = await retrieveSong(param);
+
+    return {
+        status: httpStatus.OK,
+        data: {
+            song
+        }
+    };
+    
+
+}
+
+export const getAllSongs = async (body) => {
+    const data = JSON.parse(body);
+
+    let { username } = data;
+
+    const user = await retrieveUser(username);
+
+    const songs = await retrieveSongs(user[0].id);
+
+    return {
+        status: httpStatus.OK,
+        data: {
+            songs
+        }
+    };
+
+}
+
+export const deleteSong = async (param) => {
+
+    try {
+        await removeSong(param);
+        return {
+            status: httpStatus.OK,
+            data: {
+                message: 'Song deleted successfully'
+            }
+        };
+    } catch (error) {
+        return {
+            status: httpStatus.NOT_FOUND,
+            data: {
+                message: 'Song was not found'
+            }
+        };
+    }
+}

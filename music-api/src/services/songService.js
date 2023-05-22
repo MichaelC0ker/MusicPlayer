@@ -41,4 +41,19 @@ export const addSong = async(songDetails) => {
     return result.recordset;
 }
 
+export const removeSong = async(song_id) => {
+    let sql_query = `DELETE FROM SongArtist WHERE song_id = @song`;
+
+    let result = pool.request()
+                .input('song', sql.Int, song_id)
+                .query(sql_query);
+
+    sql_query = `DELETE FROM Song WHERE id = @song`;
+
+    result = pool.request()
+                .input('song', sql.Int, song_id)
+                .query(sql_query);
+    return result;
+} 
+
 
