@@ -2,7 +2,7 @@ import { retrieveUser } from "../services/userService.js";
 import { retrieveGenreByName, addGenre } from "../services/genreService.js";
 import { retrieveArtistByName, addArtist, addSongArtists, getArtistsOfSong, getArtistsSong } from "../services/artistService.js";
 import { addAlbum, retrieveAlbum } from "../services/albumService.js";
-import { addSong, retrieveSongs, removeSong, retrieveSong, doesSongExist } from "../services/songService.js";
+import { addSong, retrieveSongs, removeSong, retrieveSong } from "../services/songService.js";
 
 import httpStatus from 'http-status-codes';
 
