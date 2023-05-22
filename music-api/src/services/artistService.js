@@ -32,6 +32,18 @@ export const getArtistsOfSong = async(songId) => {
     return artistResult.recordset;
 }
 
+export const getArtistsSong = async (artistId) => {
+    let sql_query = `SELECT song_id, main_artist
+                        FROM [SongArtist] 
+                        WHERE artist_id = @artist`;
+
+    const result = await pool.request()
+                .input('artist', sql.Int, artistId)
+                .query(sql_query);
+
+    return result.recordset;
+}
+
 export const addArtist = async(artistDetails) => {
     // change logic
     // const columns = Object.keys(artistDetails);

@@ -10,8 +10,8 @@ USE MusicPlayerDB;
 
 CREATE TABLE [User] (
 	[id] int PRIMARY KEY IDENTITY(1, 1),
-  [username] varchar(100) NOT NULL UNIQUE,
-	[identifier] varchar(255) NOT NULL
+  [username] varchar(100) NOT NULL UNIQUE
+	-- [identifier] varchar(255) NOT NULL
 )
 GO
 
@@ -19,7 +19,7 @@ CREATE TABLE [Song] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL,
   [genre_id] int NOT NULL,
-  [album_id] int NOT NULL,
+  [album_id] int,
   [user_id] int NOT NULL,
   [song_url] varchar(8000) NOT NULL,
   [bitrate] int,
@@ -38,7 +38,8 @@ GO
 CREATE TABLE [SongArtist] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [song_id] int NOT NULL,
-  [artist_id] int NOT NULL
+  [artist_id] int NOT NULL,
+  [main_artist] bit NOT NULL
 )
 GO
 
@@ -51,8 +52,8 @@ GO
 CREATE TABLE [Album] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL,
-  [coverart_url] varchar(8000) NOT NULL,
-  [release_date] date
+  [coverart_url] varchar(8000),
+  [release_year] int
 )
 GO
 

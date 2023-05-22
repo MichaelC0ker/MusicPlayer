@@ -3,8 +3,19 @@ import databasePool from '../data/index.js'
 
 const pool = await databasePool;
 
+export const retrieveAlbum = async(albumId) => {
+    let sql_query = `SELECT id, title, coverart_url, release_year
+                        FROM [Album] 
+                        WHERE id = @album`;
+
+    const result = await pool.request()
+                    .input('album', sql.Int, albumId)
+                    .query(sql_query);
+
+    return result.recordset;
+}
 export const retrieveAlbumByName = async(albumName) => {
-    let sql_query = `SELECT id, title, coverart_url, release_date
+    let sql_query = `SELECT id, title, coverart_url, release_year
                         FROM [Album] 
                         WHERE title = @title`;
 

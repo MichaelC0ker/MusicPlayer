@@ -4,7 +4,7 @@ import databasePool from '../data/index.js'
 const pool = await databasePool;
 
 export const retrieveSong = async(songId) => {
-    let sql_query = `SELECT title, song_url, bitrate, duration, plays, liked
+    let sql_query = `SELECT title, song_url, genre_id, album_id, user_id, song_url, bitrate, duration, plays, liked
                         FROM [Song] 
                         WHERE id = @song_id`;
     const result = await pool.request()
@@ -55,5 +55,4 @@ export const removeSong = async(song_id) => {
                 .query(sql_query);
     return result;
 } 
-
 
