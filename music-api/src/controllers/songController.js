@@ -1,10 +1,11 @@
 import { retrieveUser } from "../services/userService.js";
 import { retrieveGenreByName, addGenre } from "../services/genreService.js";
-import { retrieveArtistByName, addArtist, addSongArtists } from "../services/artistService.js";
-import { addAlbum } from "../services/albumService.js";
-import { addSong, retrieveSongs, removeSong, retrieveSong } from "../services/songService.js";
+import { retrieveArtistByName, addArtist, addSongArtists, getArtistsOfSong, getArtistsSong } from "../services/artistService.js";
+import { addAlbum, retrieveAlbum } from "../services/albumService.js";
+import { addSong, retrieveSongs, removeSong, retrieveSong, doesSongExist } from "../services/songService.js";
 
 import httpStatus from 'http-status-codes';
+
 
 export const uploadSong = async (body) => {
     const data = JSON.parse(body);
@@ -12,6 +13,14 @@ export const uploadSong = async (body) => {
     let {username, title, genre, album, artist} = data;
 
     const user = await retrieveUser(username);
+
+    let song = {
+        title: title,
+        user_id: user[0].id,
+        song_url: title,
+        plays: 0,
+        liked: 0
+    }
     // add genre
     let genreResult = await retrieveGenreByName(genre);
     // let insertGenreResult = undefined;
@@ -19,44 +28,66 @@ export const uploadSong = async (body) => {
         genreResult = await addGenre(genre);
         console.log(genreResult);
     }
+    song['genre_id'] = genreResult[0].id;
 
     // add artist
     let artistResult = await retrieveArtistByName(artist);
     if (artistResult.length === 0) {
         // assume that album does not exist
         let albumResult = await addAlbum(album);
+        song['album_id'] = albumResult[0].id;
         console.log('Add artist')
         // add artist to Artist table
-        let artistResult = await addArtist(artist);
+        artistResult = await addArtist(artist);
         console.log('Add song')
         // add song to Song table
-        const song = {
-            title: title,
-            genre_id: genreResult[0].id,
-            album_id: albumResult[0].id,
-            user_id: user[0].id,
-            song_url: title,
-            plays: 0,
-            liked: 0
-        };
+        
+    } else {
+        // check if album exists
+        const artistSongs = await getArtistsSong(artistResult[0].id);
+        
+        // 1. C
 
-        const songResult = await addSong(song);
+        for (const key in artistSongs) {
+            const artist = artistSongs[key];
+            // console.log(artistSongs[key]);
+            
+            const existingSong = await retrieveSong(artist.song_id);
+            const albumResult = await retrieveAlbum(existingSong[0].album_id);
 
-        // add artist/s with SongArtist
-        let artists = {
-            song_id: songResult[0].id,
-            artist_id: artistResult[0].id,
-            main_artist: true
+            if (albumResult.length !== 0 ) {
+                // check if album is the same
+                if (albumResult[0].title === album.title) {
+                    // album exists
+                    if (user[0])
+                    song['album_id'] = albumResult[0].id;
+                    break;
+                }
+            }
+            
         }
 
-        await addSongArtists(artists);
+        if (song['album_id'] === undefined) {
+            // album does not exist, add
+            let albumResult = await addAlbum(album);
+            song['album_id'] = albumResult[0].id;
+        }
+        
+    }
+    
+    console.log(song);
+    // add song
+    const songResult = await addSong(song);
 
-    } else {
-        // album exists
+    // add artist/s with SongArtist
+    let artists = {
+        song_id: songResult[0].id,
+        artist_id: artistResult[0].id,
+        main_artist: true
     }
 
-    // add album
-
+    await addSongArtists(artists);
+    
     return {
         status: httpStatus.OK,
         data: {
