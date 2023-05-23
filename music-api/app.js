@@ -85,28 +85,13 @@ const reqListener = async (req, res) => {
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url === '/song' && req.method === 'PUT'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-      break;
-    case (req.url === '/song' && req.method === 'DELETE'):
+    case (req.url === '/song' && req.method === 'DELETE'): {
       const param = getIdParam(req.url);
       const response = await deleteSong(param);
       writeResponse(res, response.status, null, response.data);
       break;
-    /*
-    case (req.url === '/album' && req.method === 'GET'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-      break;
-    case (req.url === '/album' && req.method === 'PUT'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-      break;
-    case (req.url === '/artist' && req.method === 'GET'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-      break;
-    case (req.url === '/artist' && req.method === 'PUT'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
-      break;
-    */
+    }
+    
     default:
       // TODO: Improve error handling
       console.log(`${req.method} request failed: ${req.url}`);

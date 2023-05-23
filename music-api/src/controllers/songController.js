@@ -10,16 +10,21 @@ import httpStatus from 'http-status-codes';
 export const uploadSong = async (body) => {
     const data = JSON.parse(body);
     // console.log(data);
-    let {username, title, genre, album, artist} = data;
+    let {username, title, song_url, duration, genre, album, artist, coverart} = data;
 
     const user = await retrieveUser(username);
 
     let song = {
         title: title,
         user_id: user[0].id,
-        song_url: title,
+        song_url: song_url,
+        duration: duration,
         plays: 0,
         liked: 0
+    }
+
+    if (coverart !== undefined) {
+        song['coverart_url'] = coverart;
     }
     // add genre
     let genreResult = await retrieveGenreByName(genre);

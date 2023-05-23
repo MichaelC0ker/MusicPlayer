@@ -22,6 +22,7 @@ CREATE TABLE [Song] (
   [album_id] int,
   [user_id] int NOT NULL,
   [song_url] varchar(8000) NOT NULL,
+  [coverart_url] varchar(8000),
   [bitrate] int,
   [duration] int,
   [plays] int NOT NULL,
@@ -52,7 +53,6 @@ GO
 CREATE TABLE [Album] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL,
-  [coverart_url] varchar(8000),
   [release_year] int
 )
 GO
@@ -60,6 +60,7 @@ GO
 CREATE TABLE [Playlist] (
   [id] int PRIMARY KEY IDENTITY(1, 1),
   [title] varchar(200) NOT NULL,
+  [description] varchar(300),
   [user_id] int NOT NULL
 )
 GO
