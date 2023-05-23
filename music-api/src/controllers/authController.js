@@ -1,6 +1,6 @@
 import httpStatus from 'http-status-codes';
 import { authService } from '../services/authService.js';
-import requestHelper from '../utils/requestHelper.js';
+import { queryParamExtrator } from '../utils/requestHelper.js';
 
 export default async (req) => {
   const isUrlContainsCodeParam = req.url.indexOf('code=') >= 0;
@@ -12,7 +12,7 @@ export default async (req) => {
     };
   }
 
-  const queryParameters = requestHelper.queryParamExtrator(req.url);
+  const queryParameters = queryParamExtrator(req.url);
 
   if (!queryParameters || !queryParameters.code) {
     return {
