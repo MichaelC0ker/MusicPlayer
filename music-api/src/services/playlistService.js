@@ -27,9 +27,9 @@ export const retrievePlaylists = async(userId) => {
 }
 
 export const retrievePlaylistSongs = async(playlistId) => {
-  let sql_query = `SELECT id, song_id
+  let sql_query = `SELECT sp.id, sp.song_id
                       FROM [SongPlaylist] sp
-                      INNER JOIN [Playlist] p ON sp.playlist_id=s.p.id
+                      INNER JOIN [Playlist] p ON sp.playlist_id=p.id
                       WHERE p.id = @playlist_id`;
   const result = await pool.request()
                   .input('playlist_id', sql.Int, playlistId)

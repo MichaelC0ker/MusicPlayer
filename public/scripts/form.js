@@ -135,7 +135,7 @@ function onSubmitPlaylist(){
     let submit = validatePlaylistInput();
     if(submit){
      console.log("we're moving");
-    // window.location.href = "index.html";
+     //window.location.href = "index.html";
     }
  }
 
