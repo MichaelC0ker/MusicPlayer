@@ -6,31 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles/form.css" />
-  <script src="scripts/form.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
   <title>Add Song</title>
 </head>
 
 <body>
-  <nav id="navbar">
-    <a href="playing.html">Playing</a>
-    <a href="index.html">Playlists</a>
-    <a href="new.html">New</a>
-</nav>
-<main>
   <article id="song-input-container">
     <form id="song-form" onsubmit="return false;">
-      <input type="text" class="song-input-item" placeholder="Song Name" id="song-name-input" />
-      <input type="text" class="song-input-item" placeholder="Artist Name" id="artist-name-input" />
       <input type="text" class="song-input-item" placeholder="Song Path" id="song-path-input" />
-      <input type="text" class="song-input-item" placeholder="Cover Path" id="cover-path-input" />
-
+      <input type="file" id="song-file-input" accept=".mp3, .wav" required/>
       <button id="add-song-btn" onclick="onSubmitSong()" >Add Song</button>
     </form>
   </article>
   <article id="validation-toast" class="hide"></article>
-
-</main>
 </body>
+
+<script src="scripts/form.js"></script>
+
 
 </html>

@@ -1,22 +1,16 @@
-function  validateSongInput() {
-    let text = "";
 
-    let songName = document.getElementById("song-name-input").value;
-    let songArtist = document.getElementById("artist-name-input").value;
+
+
+function validateSongInput() {
+    let text = "";
     let songURL = document.getElementById("song-path-input").value;
-    let coverURL = document.getElementById("cover-path-input").value;
+
 
 
 
     //simple validation on user input
     let valid = true;
-    if (songName === "") {
-        text = "Input song name";
-        valid = false;
-    } else if (songArtist === "") {
-        text = "Input artist name";
-        valid = false;
-    } else if (songURL === "") {
+    if (songURL === "") {
         text = "Input song path";
         valid = false;
     } else if (!songURL.includes("\\")) {
@@ -24,13 +18,7 @@ function  validateSongInput() {
         console.log(songURL);
         text = "Input valid song path";
         valid = false;
-    } else if (coverURL === "") {
-        text = "Input cover path";
-        valid = false;
-    } else if (!coverURL.includes("\\")) {
-        text = "Input valid cover path";
-        valid = false;
-    }
+    } 
 
     //display error message for invalid input
     if (!valid) {
@@ -47,7 +35,6 @@ function validatePlaylistInput() {
     let text = "";
 
     let playlistName = document.getElementById("playlist-name-input").value;
-    let coverPath = document.getElementById("cover-path-input").value;
 
     //simple validation on user input
     let valid = true;
@@ -74,19 +61,75 @@ function validatePlaylistInput() {
     return valid;
 }
 
+
+function storeSongData(){
+   // let coverPath = document.getElementById("cover-path-input").value;
+
+    const song = document.getElementById("song-file-input").files[0]
+ 
+    jsmediatags.read(song, {
+      onSuccess: function (tag) {
+        console.log(tag)
+        // Array buffer to base64
+        const data = tag.tags.picture.data
+        const format = tag.tags.picture.format
+        let base64String = ""
+        for (let i = 0; i < data.length; i++) {
+          base64String += String.fromCharCode(data[i])
+        }
+        // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
+        picture = `data:${format};base64,${window.btoa(base64String)}`
+        picture = base64String
+        songTitle = tag.tags.title
+        artist = tag.tags.artist
+        albumName = tag.tags.album
+        genre = tag.tags.genre
+        
+         //inserting into database
+         fetch("http://localhost:5000/song", {
+            method: "POST",
+            body: JSON.stringify({
+              "username": "Michael",
+              "title": songTitle,
+              "song_url": "C:\\Users\\Documents\\MusicPlayer\public\assets\music",
+              "duration": 3000,
+              "genre": genre,
+              "album": {
+                "title": albumName,
+                "release_year": 2020
+              },
+              "artist": artist,
+              "coverart": "picture"
+  
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            }
+          })
+            .then((response) => console.log(response.json()))
+      },
+      onError: function (error) {
+        console.log(error)
+      }
+    })
+  
+}
 function onSubmitSong(){
    let submit = validateSongInput();
    if(submit){
     console.log("we're moving");
+    storeSongData();
     window.location.href = "index.html";
    }
 }
+
+
 
 function onSubmitPlaylist(){
     let submit = validatePlaylistInput();
     if(submit){
      console.log("we're moving");
-     window.location.href = "index.html";
+    // window.location.href = "index.html";
     }
  }
 

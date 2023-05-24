@@ -95,7 +95,7 @@ body {
 }
 
 .song-input-item,
-.playlist-input-item {
+.playlist-input-item,#song-file-input {
     border-radius: 5px;
     margin-bottom: 5px;
     height: 30px;
