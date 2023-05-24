@@ -34,7 +34,7 @@ export const addSong = async(songDetails) => {
     let sql_query = `INSERT INTO [Song](${columns}) VALUES (${values.map((_,i) => `@param_${i}`)}); 
                     SELECT SCOPE_IDENTITY() AS id;`;
     
-                    const request = pool.request();
+    const request = pool.request();
     for (let i = 0; i < values.length; i++)
         request.input(`param_${i}`, values[i]);
     const result = await request.query(sql_query);
