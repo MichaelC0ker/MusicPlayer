@@ -85,7 +85,7 @@ const reqListener = async (req, res) => {
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url === '/song' && req.method === 'DELETE'): {
+    case (req.url.startsWith('/song') && req.method === 'DELETE'): {
       const param = getIdParam(req.url);
       const response = await deleteSong(param);
       writeResponse(res, response.status, null, response.data);
