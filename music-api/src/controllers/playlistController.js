@@ -72,7 +72,6 @@ export const getPlaylist = async (param) => {
   const playlistSongs = await retrievePlaylistSongs(playlist.id);
 
   playlist.songs = playlistSongs;
-  console.log(playlist);
   return {
     status: httpStatus.OK,
     data: {
