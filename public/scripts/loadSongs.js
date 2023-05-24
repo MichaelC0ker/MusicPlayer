@@ -1,11 +1,11 @@
 
-const setPlaylist = () => {
+const setSongs = () => {
 	
-	for(const i of playlists){
+	for(const i of songs){
 
-		let playlist = i;
+		let song = i;
 		
-		const lists = document.querySelector('.playlists');
+		const lists = document.querySelector('.playlist-screen');
 		
 		//created elements
 		const newSection = document.createElement('SECTION');
@@ -15,11 +15,11 @@ const setPlaylist = () => {
 		newArticle.className = 'playlist-cover';
 		
 		const newCover = document.createElement('IMG');
-		newCover.src = playlist.cover;
+		newCover.src = song.cover;
 
 		const newP = document.createElement('P');
 		newP.className = 'playlist-name';
-		newP.innerText = playlist.name;
+		newP.innerText = song.name;
 
 		//Appending Elements
 		lists.appendChild(newSection);
