@@ -67,8 +67,9 @@
           })
             .then((response) => console.log(response.json()))
     </script> -->
+
 <!--<script>
-    //getting song from database
+    //getting all songs from database
     fetch("http://localhost:5000/song/all", {
         method: "POST",
         body: JSON.stringify({
@@ -79,12 +80,27 @@
         }
     })
         .then((response) => console.log(response.json()))
-</script>--> 
+</script>-->
 
 <!--<script>
-        //getting song from database
+        //deleting a song from the database 
         fetch("http://localhost:5000/song/5", {
         method: "DELETE",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => console.log(response.json()))
+</script>-->
+
+<!--<script>
+    fetch("http://localhost:5000/playlist", {
+        method: "POST",
+        body: JSON.stringify({
+            "title": "G stuff",
+            "description": "Great playlist, I promise",
+            "username": "Michael"
+        }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
