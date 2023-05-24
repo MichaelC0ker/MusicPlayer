@@ -84,14 +84,18 @@ function storeSongData(){
         artist = tag.tags.artist
         albumName = tag.tags.album
         genre = tag.tags.genre
-        
+        songURL ="C:\Users\Documents\MusicPlayer\public\assets\music"
+       // test = songURL.replaceAll("\\","\\\\")
+        test2 = songURL.replace(/\\/g, "/");
+        console.log(test2)
+
          //inserting into database
          fetch("http://localhost:5000/song", {
             method: "POST",
             body: JSON.stringify({
               "username": "Michael",
               "title": songTitle,
-              "song_url": "C:\\Users\\Documents\\MusicPlayer\public\assets\music",
+              "song_url": "C:\Users\\Documents\\MusicPlayer\public\assets\music",
               "duration": 3000,
               "genre": genre,
               "album": {
@@ -116,6 +120,8 @@ function storeSongData(){
 }
 function onSubmitSong(){
    let submit = validateSongInput();
+   storeSongData();
+
    if(submit){
     console.log("we're moving");
     storeSongData();
