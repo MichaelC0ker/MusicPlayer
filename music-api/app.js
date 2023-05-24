@@ -5,7 +5,7 @@ import { getPostData, getIdParam } from './src/utils/requestHelper.js';
 
 import { Constants } from './src/utils/constants.js';
 import authController from './src/controllers/authController.js';
-import playlistController from './src/controllers/playlistController.js';
+import {createPlaylist, addSongToPlaylist} from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
 
 // eslint-disable-next-line no-undef
@@ -54,7 +54,7 @@ const reqListener = async (req, res) => {
       return;
     }
     case (req.url.startsWith('/playlist/search?') && req.method === 'GET'):
-      const result = await playlistController(req);
+      
 
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
