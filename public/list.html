@@ -1,488 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="./styles/list.css" />
-    </head>
-    <body>
-        <header>
-            <nav id="navbar">
-                <a href="playing.html">playing</a>
-                <a href="index.html">playlists</a>
-                <a href="new.html">new</a>
-            </nav>
-        </header>
 
-        <main id="playlist-view-main">
-            <section id="heading-section">
-                <figure class="heading-thumb">
-                    <img src="./assets/images/AfterHours.jpg" alt=""/>
+<head>
+    <link rel="stylesheet" type="text/css" href="./styles/list.css" />
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <a href="playing.html">playing</a>
+            <a href="index.html">playlists</a>
+            <a href="new.html">new</a>
+        </nav>
+    </header>
+
+    <main id="playlist-view-main">
+        <section id="heading-section">
+            <figure class="heading-thumb">
+                <img src="./assets/images/AfterHours.jpg" alt="" />
+            </figure>
+            <summary class="heading-details">
+                <p>Playlist Name</p>
+                <p>Playlist Description</p>
+                <section class="subtle-details">
+                    <p>Created date</p>
+                    <p># Songs</p>
+                </section>
+            </summary>
+        </section>
+
+        <hr />
+
+        <section id="track-list">
+            <article class="track-list-item">
+                <figure class="track-list-item-thumb">
+                    <img src="#" alt="" />
                 </figure>
-                <summary class="heading-details">
-                    <p>Playlist Name</p>
-                    <p>Playlist Description</p>
-                    <section class="subtle-details">
-                        <p>Created date</p>
-                        <p># Songs</p>
-                    </section>
+                <summary class="track-list-item-details">
+                    <p>Track Name</p>
+                    <p>Track Artist</p>
                 </summary>
-            </section>
+            </article>
+            <article class="track-list-item">
+                <figure class="track-list-item-thumb">
+                    <img src="#" alt="" />
+                </figure>
+                <summary class="track-list-item-details">
+                    <p>Track Name</p>
+                    <p>Track Artist</p>
+                </summary>
+            </article>
+        </section>
+        <button id="add-song-to-playlist-btn">Add Playlist</button> <!--create addSongToPlaylist-->
 
-            <hr />
-            
-            <section id="track-list">
-                <article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article>
-                <article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article><article class="track-list-item">
-                    <figure class="track-list-item-thumb">
-                        <img src="#" alt="" />
-                    </figure>
-                    <summary class="track-list-item-details">
-                        <p>Track Name</p>
-                        <p>Track Artist</p>
-                    </summary>
-                </article>
-            </section>
+    </main>
 
-        </main>
+</body>
 
-    </body>
+<!-- <script>
+         //getting song from database
+         fetch("http://localhost:5000/song/2", {
+            method: "GET",
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            }
+          })
+            .then((response) => console.log(response.json()))
+    </script> -->
+<script>
+    //getting song from database
+    fetch("http://localhost:5000/song/all", {
+        method: "POST",
+        body: JSON.stringify({
+              "username": "Michael",  
+            }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => console.log(response.json()))
+</script>
+
 </html>
