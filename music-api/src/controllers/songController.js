@@ -9,41 +9,39 @@ import httpStatus from 'http-status-codes';
 
 export const uploadSong = async (body) => {
     const data = JSON.parse(body);
-    // console.log(data);
-    let {username, title, song_url, duration, genre, album, artist, coverart} = data;
 
-    const user = await retrieveUser(username);
+    const user = await retrieveUser(data.username);
 
     let song = {
-        title: title,
+        title: data.title,
         user_id: user[0].id,
-        song_url: song_url,
-        duration: duration,
+        song_url: data.song_url,
+        duration: data.duration,
         plays: 0,
         liked: 0
     }
 
-    if (coverart !== undefined) {
-        song['coverart_url'] = coverart;
+    if (data.coverart !== undefined) {
+        song['coverart_url'] = data.coverart;
     }
     // add genre
-    let genreResult = await retrieveGenreByName(genre);
+    let genreResult = await retrieveGenreByName(data.genre);
     // let insertGenreResult = undefined;
     if (genreResult.length === 0) {
-        genreResult = await addGenre(genre);
+        genreResult = await addGenre(data.genre);
         console.log(genreResult);
     }
     song['genre_id'] = genreResult[0].id;
 
     // add artist
-    let artistResult = await retrieveArtistByName(artist);
+    let artistResult = await retrieveArtistByName(data.artist);
     if (artistResult.length === 0) {
         // assume that album does not exist
-        let albumResult = await addAlbum(album);
+        let albumResult = await addAlbum(data.album);
         song['album_id'] = albumResult[0].id;
         console.log('Add artist')
         // add artist to Artist table
-        artistResult = await addArtist(artist);
+        artistResult = await addArtist(data.artist);
         console.log('Add song')
         // add song to Song table
         
@@ -62,7 +60,7 @@ export const uploadSong = async (body) => {
 
             if (albumResult.length !== 0 ) {
                 // check if album is the same
-                if (albumResult[0].title === album.title) {
+                if (albumResult[0].title === data.album.title) {
                     // album exists
                     if (user[0])
                     song['album_id'] = albumResult[0].id;
@@ -74,7 +72,7 @@ export const uploadSong = async (body) => {
 
         if (song['album_id'] === undefined) {
             // album does not exist, add
-            let albumResult = await addAlbum(album);
+            let albumResult = await addAlbum(data.album);
             song['album_id'] = albumResult[0].id;
         }
         

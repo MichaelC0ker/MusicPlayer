@@ -4,7 +4,7 @@ import databasePool from '../data/index.js'
 const pool = await databasePool;
 
 export const retrieveAlbum = async(albumId) => {
-    let sql_query = `SELECT id, title, coverart_url, release_year
+    let sql_query = `SELECT id, title, release_year
                         FROM [Album] 
                         WHERE id = @album`;
 
@@ -15,7 +15,7 @@ export const retrieveAlbum = async(albumId) => {
     return result.recordset;
 }
 export const retrieveAlbumByName = async(albumName) => {
-    let sql_query = `SELECT id, title, coverart_url, release_year
+    let sql_query = `SELECT id, title, release_year
                         FROM [Album] 
                         WHERE title = @title`;
 
