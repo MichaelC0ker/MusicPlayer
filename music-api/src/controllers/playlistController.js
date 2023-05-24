@@ -1,54 +1,114 @@
+import { addPlaylist, addPlaylistSong, retrievePlaylists, retrievePlaylist, retrievePlaylistSongs, removePlaylist, removeSongFromPlaylist, updatePlaylistDetails } from '../services/playlistService.js';
+
 import httpStatus from 'http-status-codes';
-import { playlistService } from '../services/playlistService.js';
-import { queryParamExtrator } from '../utils/requestHelper.js';
 
-export default async (req) => {
-  const queryParameters = queryParamExtrator(req.url);
 
-  let isValidRequest = true;
+export const createPlaylist = async(body) => {
+    const data = JSON.parse(body);
 
-  if (Object.keys(queryParameters).length === 0 || !queryParameters.limit) {
-    isValidRequest = false;
-  } else if (queryParameters?.limit === 'none') {
-    // TODO: Implement retrieve all functionality
-  } else if (queryParameters?.limit === 1 && queryParameters.id) {
-    // TODO: Implement retrieve one playlist functionality
-  } else if ((queryParameters.criteria && queryParameters.limit > 1)) {
-    // TODO: Handle single song query
-  }
+    const user = await retrieveUser(data.username);
 
-  if (!isValidRequest) {
-    return {
-      status: httpStatus.BAD_REQUEST,
-      data: 'Failed to get request token from request'
-    };
-  }
+    let playlist = {
+        title: data.title,
+        description: data.description,
+        user_id: user[0].id
+    }
 
-  try {
-    const response = await playlistService();
+    const playlistResult = await addPlaylist(playlist);
 
-    if (!response || !response.ok) {
-      const status = response.data.error === 'bad_verification_code'
-        ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
+    for (const songId in data.songs) {
+        const playlistSong = {
+          playlist_id: playlistResult[0].id,
+          song_id: songId
+        }
 
-      return {
-        ...response,
-        status: response.status ? response.status : status
-      };
+        await addPlaylistSong(playlistSong);
     }
 
     return {
-      ok: true,
-      headers: {
-        token: response.data.token
-      }
-    };
-  } catch (err) {
+        status: httpStatus.OK,
+        data: {
+            message: 'Playlist added successfully'
+        }
+    }
+}
+
+export const addSongToPlaylist = async(body) => {
+    const data = JSON.parse(body);
+    await addPlaylistSong(data);
+
     return {
-      ok: false,
-      data: {
-        error: err.message ?? 'No error description found'
-      }
+        status: httpStatus.OK,
+        data: {
+            message: 'Song added to playlist successfully'
+        }
+    }
+}
+
+export const getAllPlaylists = async(body) => {
+    const data = JSON.parse(body);
+
+    let { username } = data;
+
+    const user = await retrieveUser(username);
+
+    const playlists = await retrievePlaylists(user[0].id);
+
+    return {
+        status: httpStatus.OK,
+        data: {
+            playlists
+        }
     };
+}
+
+export const getPlaylist = async(param) => {
+    const playlist = await retrievePlaylist(param);
+
+    const playlistSongs = await retrievePlaylistSongs(playlist[0].id);
+
+    playlist['songs'] = playlistSongs;
+
+    return {
+        status: httpStatus.OK,
+        data: {
+            playlist
+        }
+    };
+
+}
+
+export const updatePlaylistInfo = async (body) => {
+    const data = JSON.parse(body);
+
+    await updatePlaylistDetails(data.field, data.value);
+
+    return {
+        status: httpStatus.OK,
+        data: {
+            message: 'Update playlist successfully'
+        }
+    }
+}
+
+export const deletePlaylist = async(param) => {
+    await removePlaylist(param);
+
+    return {
+      status: httpStatus.OK,
+      data: {
+          message: 'Playlist deleted successfully'
+      }
   }
-};
+}
+
+export const removeSong = async(param) => {
+    await removeSongFromPlaylist(param);
+
+    return {
+      status: httpStatus.OK,
+      data: {
+          message: 'Song removed successfully from playlist'
+      }
+  }
+}
