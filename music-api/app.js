@@ -5,7 +5,7 @@ import { getPostData, getIdParam } from './src/utils/requestHelper.js';
 
 import { Constants } from './src/utils/constants.js';
 import authController from './src/controllers/authController.js';
-import {createPlaylist, addSongToPlaylist} from './src/controllers/playlistController.js';
+import { createPlaylist, addSongToPlaylist, getPlaylist, getAllPlaylists, updatePlaylistInfo, deletePlaylist, removeSong } from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
 
 // eslint-disable-next-line no-undef
@@ -54,19 +54,51 @@ const reqListener = async (req, res) => {
       return;
     }
     case (req.url.startsWith('/playlist/search?') && req.method === 'GET'):
-      
 
       writeResponse(res, httpStatus.NOT_IMPLEMENTED);
       break;
-    case (req.url === '/playlist/new' && req.method === 'POST'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+    case (req.url === '/playlist' && req.method === 'POST'): {
+      const body = await getPostData(req);
+      const response = await createPlaylist(body);
+      writeResponse(res, response.status, null, response.data);
       break;
-    case (req.url === '/playlist/edit' && req.method === 'PUT'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+    }
+    case (req.url === '/playlist/song' && req.method === 'POST'): {
+      const body = await getPostData(req);
+      const response = await addSongToPlaylist(body);
+      writeResponse(res, response.status, null, response.data);
       break;
-    case (req.url === '/playlist/remove' && req.method === 'DELETE'):
-      writeResponse(res, httpStatus.NOT_IMPLEMENTED);
+    }
+    case (req.url.startsWith('/playlist/') && req.method === 'POST'): {
+      const body = await getPostData(req);
+      const response = await getAllPlaylists(body);
+      writeResponse(res, response.status, null, response.data);
       break;
+    }
+    case (req.url === ('/playlist/') && req.method === 'GET'): {
+      const param = await getIdParam(req.url);
+      const response = await addSongToPlaylist(param);
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
+    case (req.url === ('/playlist') && req.method === 'PUT'): {
+      const body = await getPostData(req);
+      const response = await updatePlaylistInfo(body);
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
+    case (req.url === '/playlist' && req.method === 'DELETE'): {
+      const param = await getIdParam(req.url);
+      const response = await deletePlaylist(param);
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
+    case (req.url === '/playlist/song' && req.method === 'DELETE'): {
+      const param = await getIdParam(req.url);
+      const response = await removeSong(param);
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
     case (req.url === '/song' && req.method === 'POST'): {
       const body = await getPostData(req);
       const response = await uploadSong(body);

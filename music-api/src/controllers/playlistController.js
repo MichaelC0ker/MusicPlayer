@@ -1,8 +1,7 @@
-import httpStatus from 'http-status-codes';
 import { addPlaylist, addPlaylistSong, retrievePlaylists, retrievePlaylist, retrievePlaylistSongs, removePlaylist, removeSongFromPlaylist, updatePlaylistDetails } from '../services/playlistService.js';
-import { queryParamExtrator } from '../utils/requestHelper.js';
 
 import httpStatus from 'http-status-codes';
+
 
 export const createPlaylist = async(body) => {
     const data = JSON.parse(body);
@@ -103,7 +102,7 @@ export const deletePlaylist = async(param) => {
   }
 }
 
-export const removeSongFromPlaylist = async(param) => {
+export const removeSong = async(param) => {
     await removeSongFromPlaylist(param);
 
     return {
