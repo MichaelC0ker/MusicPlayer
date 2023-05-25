@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
     "dotenv": "^16.0.3",
     "eslint": "^8.40.0",
     "fs": "^0.0.1-security",
