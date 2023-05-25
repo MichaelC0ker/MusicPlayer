@@ -2,6 +2,7 @@ import httpStatus from 'http-status-codes';
 import btoa from 'btoa';
 import * as AuthService from '../services/authService.js';
 import { queryParamExtrator } from '../utils/requestHelper.js';
+import { addUser } from '../services/userService.js';
 
 export const getAccessToken = async (req) => {
   const queryParameters = queryParamExtrator(req.url);
@@ -74,6 +75,8 @@ export const getUserData = async (req) => {
         status: status
       };
     }
+
+    addUser(response.data.id);
 
     return {
       ok: true,

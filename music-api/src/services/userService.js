@@ -14,12 +14,19 @@ export const retrieveUser = async(username) => {
     return result.recordset;
 }
 
-export const addUser = async(newUser) => {    
-    let sql_query = `INSERT INTO [User](name) VALUES (@username)`;
-   
-    const result = await pool.request()
-                    .input('username', sql.VarChar, newUser)
-                    .query(sql_query);
+export const addUser = async (profile_id) => {
+    const sql_query = `BEGIN
+   IF NOT EXISTS (SELECT * FROM User 
+                   WHERE id = @username)
+   BEGIN
+       INSERT INTO [User]('name') VALUES (@username); 
+       SELECT SCOPE_IDENTITY() AS id;
+   END
+END`;
+
+    const request = pool.request()
+      .input('username', sql.VarChar, profile_id)
+      .query(sql_query);
 
     return result.recordset;
-}
+};
