@@ -431,6 +431,16 @@ header {
 }
 
 .list .playlist-name{
-	font-size: 22px;
+	font-size: 2.5vh;
 	text-transform: capitalize;
+}
+
+.heading-details p{
+	font-size: 3vh;
+}
+
+@media screen and (max-device-width: 768px){
+	.heading-details p{
+		font-size: 2vh;
+	}
 }

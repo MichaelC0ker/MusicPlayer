@@ -1,3 +1,37 @@
+//store data on front end
+//display data on next screen
+
+songs = []
+const playlistCard = document.querySelector('.playlist-card')
+playlistCard.addEventListener('click',moveToPlaylist)
+
+//loading songs from database to sonss array
+function getAllSongs(){
+	fetch("http://localhost:5000/song/all", {
+        method: "POST",
+        body: JSON.stringify({
+              "username": "Michael",  
+            }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+        .then((response) => {
+			console.log(response.json())
+			songs = response
+			console.log(songs)
+		})
+}
+
+function moveToPlaylist(){
+	getAllSongs()
+	console.log("Songs: " + songs)
+	setSongs()
+	//Windows.href = ""
+}
+
+
+
 let songs = [
 	{
 		  name: 'Alone Again',

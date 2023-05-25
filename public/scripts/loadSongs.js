@@ -1,4 +1,4 @@
-
+//load all songs to the frontend 
 const setSongs = () => {
 	
 	for(const i of songs){
@@ -10,6 +10,7 @@ const setSongs = () => {
 		//created elements
 		const newSection = document.createElement('SECTION');
 		newSection.className = 'list';
+		newSection.id = song.id;
 
 		const newArticle = document.createElement('ARTICLE');
 		newArticle.className = 'playlist-cover';
