@@ -58,7 +58,9 @@ main {
     width: 80%;
     height: 70vh;
     margin: 16px;
+    margin-top: 6rem;
     padding: 16px;
+    position: fixed;
 }
 
 #playlist-view-main{
@@ -132,14 +134,12 @@ hr {
 .track-list-item {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 50em;
+    justify-content: space-around;
+    width: 52em;
     margin-bottom:2em;
     height:5em;
     border-radius:5px;
     align-items: center;
-    padding-left: 2em;
-
 }
 
 .track-list-item-thumb {
@@ -158,4 +158,20 @@ hr {
     flex-direction: column;
     justify-content: space-around;
     width: 360px;
+}
+
+#add-song-btn {
+    outline: none;
+    border: none;
+    position: absolute;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 2.5rem;
+    bottom: 2.5rem;
+    right: 2.5rem;
+}
+
+#add-song-btn i {
+    font-size: 3rem;
+    color: #222222;
 }
