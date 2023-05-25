@@ -2,42 +2,43 @@
 
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<title>Music player</title>
-		<script src="scripts/loadSongs.js"></script>
-		<script src="scripts/data.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-		<link rel="stylesheet" href="styles/style.css">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Music player</title>
+	<script type="module" src="scripts/loadSongs.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link rel="stylesheet" href="styles/style.css">
+</head>
 
-<body onload="setSongs()">
+<body onload="setSongs">
 
 	<header>
 		<nav id="navbar">
-		 
+
 			<a href="playing.html">Playing</a>
 			<a href="index.html">Playlists</a>
 			<a href="new.html">New</a>
 		</nav>
 	</header>
-	
+
 	<section class="playlist-screen">
-		
+
 		<section id="heading-section">
 			<figure class="heading-thumb">
-					<img src="assets/images/AfterHours.jpg" alt=""/>
+				<img src="assets/images/AfterHours.jpg" alt="" />
 			</figure>
 			<summary class="heading-details">
-					<p>Playlist Name</p>
-					<p>Playlist Description</p>
-					<p>Created date</p>
-					<p># Songs</p>
+				<p>Playlist Name</p>
+				<p>Playlist Description</p>
+				<p>Created date</p>
+				<p># Songs</p>
 			</summary>
-    </section>
-		
+		</section>
+
 	</section>
 </body>
+<!-- <script src="scripts/loadSongs.js"></script> -->
+<script type="module" src="scripts/data.js"></script>
 
 </html>
