@@ -14,6 +14,17 @@ export const retrieveGenreByName = async(genre) => {
     return result.recordset;
 }
 
+export const retrieveGenreById = async(genreId) => {
+    let sql_query = `SELECT id, name
+                        FROM [Genre] 
+                        WHERE id = @genre`;
+    const result = await pool.request()
+                    .input('genre', sql.Int, genreId)
+                    .query(sql_query);
+
+    return result.recordset;
+}
+
 export const addGenre = async(genre) => {
     // change logic
     const values = [genre];
