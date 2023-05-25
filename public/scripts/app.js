@@ -47,10 +47,10 @@ const setMusic = (i) => {
 	let song = songs[i]
 	currentMusic = i;
 	
-	music.src = song.path;
-	songName.innerHTML = song.name;
-	artistName.innerHTML = song.artist;
-	coverImage.src = song.cover;
+	music.src = song.song_url	;
+	songName.innerHTML = song.title;
+	artistName.innerHTML = 'The Weeknd'/*song.artist*/;
+	coverImage.src = song.coverart_url;
 	
 	setTimeout(() => {
 		seekBar.max = music.duration;

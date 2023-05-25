@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const URL = process.env.NODE_ENV === "development"
-                    ? "http://localhost:5000"
-                    : "http://ec2-54-155-180-111.eu-west-1.compute.amazonaws.com:5000"
+                    ? "http://localhost:5500"
+                    : "https://main.d2m0czas1vg68p.amplifyapp.com/"
 
 export const Constants = {
     responses: {
