@@ -2,7 +2,7 @@ import { retrieveUser } from '../services/userService.js';
 import { retrieveGenreByName, addGenre } from '../services/genreService.js';
 import { retrieveArtistByName, addArtist, addSongArtists, getArtistsOfSong, getArtistsSong } from '../services/artistService.js';
 import { addAlbum, retrieveAlbum } from '../services/albumService.js';
-import { addSong, retrieveSongs, removeSong, retrieveSong } from '../services/songService.js';
+import { addSong, retrieveSongs, removeSong, retrieveSong, getFullSongDetails } from '../services/songService.js';
 
 import httpStatus from 'http-status-codes';
 
@@ -104,7 +104,7 @@ export const uploadSong = async (body) => {
 
 export const getSong = async (param) => {
 
-  const song = await retrieveSong(param);
+  const song = await getFullSongDetails(param);
 
   return {
     status: httpStatus.OK,
