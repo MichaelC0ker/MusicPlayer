@@ -7,21 +7,53 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('../assets/images/backdrop.png');
 }
 
+
+
 header {
-    background-color: white;
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;
+    height: 4em;
     width: 100vw;
 }
 
-nav {
-    width: 720px;
+
+/*styling for navbar*/
+#navbar {
     display: flex;
+    align-items: center;
     justify-content: space-around;
+    background-color: #333;
+    color: #fff;
+    opacity: 0.8;
+    width: 100%;
+    height: 4em;
+    position: fixed;
+    top: 0px;
+    right:0;
+    padding: 0 30px;
+}
+
+#navbar a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.3em;
+    margin: 0 5px;
+}
+
+
+
+#navbar a:hover{
+    color: black;
+}
+
+
+#playlist-selection{
+    text-decoration: none;
 }
 
 main {
@@ -29,10 +61,13 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    width: 720px;
-    height: 860px;
-    margin: 16px;
+    width: 80em;
+    margin-top:5em;
+    height: 100%;
+    margin-top: 13em;
     padding: 16px;
+    background-color: #888;
+    border-radius: 5px;
 }
 
 .playlist-list-item {
@@ -55,4 +90,9 @@ main {
 
 .playlist-list-item-details {
     width: 360px;
+}
+
+summary p{ 
+    color: black;
+    font-size:1.5em;
 }

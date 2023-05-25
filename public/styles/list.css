@@ -7,32 +7,67 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url('../assets/images/backdrop.png');
+
+
 }
 
 header {
-    background-color: white;
+    background-color: black;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80px;
+    height: 4em;
     width: 100vw;
 }
 
-nav {
-    width: 720px;
+
+
+#navbar {
     display: flex;
+    align-items: center;
     justify-content: space-around;
+    background-color: #333;
+    color: #fff;
+    opacity: 0.8;
+    width: 100%;
+    height: 4em;
+    position: fixed;
+    top: 0px;
+    padding: 0 30px;
 }
+
+#navbar a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.3em;
+    margin: 0 5px;
+}
+
+#navbar a:hover{
+    color: black;
+}
+
+
 
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    width: 720px;
-    height: 860px;
+    width: 80%;
+    height: 70vh;
     margin: 16px;
     padding: 16px;
+}
+
+#playlist-view-main{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #777;
+    border-radius: 10px;
+    width: 60vw;
 }
 
 #heading-section {
@@ -40,8 +75,21 @@ main {
     flex-direction: row;
     align-items: end;
     justify-content: space-between;
-    width: 480px;
-    height: 120px;
+    width: 50em;
+    height: 15em;
+    background-color:#333;
+    border-radius: 5px;
+    align-items: center;
+    padding: 1em;
+
+}
+
+.track-list-item:nth-child(2n){
+    background-color: #222;
+}
+
+.track-list-item:nth-child(2n+1){
+    background-color: #888;
 }
 
 .heading-thumb {
@@ -49,10 +97,11 @@ main {
     width: 120px;
     display: flex;
     justify-content: center;
-    border-color: grey;
+    border-color: white;
     border-width: 2px;
     border-style: solid;
     border-radius: 4px;
+
 }
 
 .heading-details {
@@ -68,16 +117,29 @@ main {
 }
 
 hr {
-    width: 480px;
+    width: 53em;
     margin-top: 16px;
     margin-bottom: 16px;
 }
+
+#track-list{
+    overflow:scroll;
+    height:80vh;
+}
+
+#track-list::-webkit-scrollbar { width: 0 }
 
 .track-list-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 480px;
+    width: 50em;
+    margin-bottom:2em;
+    height:5em;
+    border-radius:5px;
+    align-items: center;
+    padding-left: 2em;
+
 }
 
 .track-list-item-thumb {
