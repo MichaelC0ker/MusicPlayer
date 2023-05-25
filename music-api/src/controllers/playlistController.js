@@ -19,7 +19,6 @@ export const createPlaylist = async (body) => {
 
   console.log(data.songs);
   for (const songId of data.songs) {
-    console.log(songId);
     const playlistSong = {
       playlist_id: playlistResult[0].id,
       song_id: songId
