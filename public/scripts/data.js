@@ -1,13 +1,7 @@
 //store data on front end
 //display data on next screen
-import { setSongs } from './loadSongs.js'
 let songs = [];
-let playlistCard = document.querySelector('.playlist-card')
-
-console.log(playlistCard)
-//loading songs from database to sonss array
-//let songss = []
-
+const playlistCard = document.querySelector('.playlist-card')
 
 async function getAllSongs(){
 	const response = await fetch("http://localhost:5000/song/all", {
@@ -21,18 +15,8 @@ async function getAllSongs(){
 });
 
 songs = (await response.json()).songs;
-// console.log(songss)
-}
-
-export function moveToPlaylist(){
-	
-	getAllSongs()
-	//console.log("Songs: " + songs)
-	window.location.href = "Playlists.html"
-	setSongs()
-	
-
-	
+console.log(songs)
+setSongs()
 }
 
 

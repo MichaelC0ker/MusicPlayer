@@ -43,6 +43,11 @@ header {
 	width: 100%;
 }
 
+a{
+  text-decoration: none;
+  color: white;
+}
+
 /*styling for navbar*/
 #navbar {
 	display: flex;
@@ -160,7 +165,7 @@ header {
 }
 
 /***Playlist screen***/
-.playlist-screen{
+#playlist-screen{
 	display: flex;
 	flex-direction: column;
 	width: 100%;

@@ -1,17 +1,23 @@
-import { moveToPlaylist } from "./data.js";
+// import { moveToPlaylist } from "./data.js";
+
 //load all songs to the frontend 
-export const setSongs = () => {
+ const setSongs = () => {
 	console.log("kk")
+	console.log(songs)
 	for(const i of songs){
 		console.log(i)
 		let song = i;
 		
-		const lists = document.getElementsByClassName ('playlist-screen');
+		const playlist = document.getElementById('playlist-screen');
+		console.log(typeof playlist);
+		console.log(playlist);
+
+		
 		
 		//created elements
 		const newSection = document.createElement('SECTION');
 		newSection.className = 'list';
-		//newSection.setAttribute("id", song.id);
+		newSection.setAttribute("id", `song${song.id}`);
 
 		const newArticle = document.createElement('ARTICLE');
 		newArticle.className = 'playlist-cover';
@@ -24,22 +30,24 @@ export const setSongs = () => {
 		newP.innerText = song.title;
 
 		//Appending Elements
-		lists.appendChild(newSection);
+		playlist.appendChild(newSection);
 		newSection.appendChild(newArticle);
 		newArticle.appendChild(newCover);
 		newSection.appendChild(newP);
 	}
 };
 
-let playlistCard = document.querySelector('.playlist-card')
-console.log(playlistCard)
-window.addEventListener("DOMContentLoaded", (event) =>{
-	let playlistCard = document.querySelector('.playlist-card')
-	if(playlistCard){
-		console.log("addedEventListener")
-		playlistCard.addEventListener('click',() => {moveToPlaylist()})
-	}else{
-		console.log("didn't add event listener")
-	}
 
-})
+
+// let playlistCard = document.querySelector('.playlist-card')
+// console.log(playlistCard)
+// window.addEventListener("DOMContentLoaded", (event) =>{
+// 	let playlistCard = document.querySelector('.playlist-card')
+// 	if(playlistCard){
+// 		console.log("addedEventListener")
+// 		playlistCard.addEventListener('click',() => {moveToPlaylist()})
+// 	}else{
+// 		console.log("didn't add event listener")
+// 	}
+
+// })

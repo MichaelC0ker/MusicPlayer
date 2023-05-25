@@ -21,9 +21,9 @@
 </header>
   <article id="song-input-container">
     <form id="song-form" onsubmit="return false;">
-      <h1>Add music folder</h1>
-      <input type="file" id="song-file-input" webkitdirectory="" directory="" required>
-      <button id="add-song-btn" onclick="onSubmitSong()" >Add Song Folder</button>
+      <input type="text" class="song-input-item" placeholder="Song Path" id="song-path-input" />
+      <input type="file" class="song-input-item" placeholder="Input file" id="song-file-input"/>
+      <button id="add-song-btn" onclick="onSubmitSong()">Add Song</button>
     </form>
   </article>
   <article id="validation-toast" class="hide"></article>
