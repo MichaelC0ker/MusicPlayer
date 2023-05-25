@@ -123,7 +123,15 @@ export const getAllSongs = async (body) => {
 
   const user = await retrieveUser(username);
 
-  const songs = await retrieveSongs(user[0].id);
+  const minimal_songs = await retrieveSongs(user[0].id);
+
+  const songs = []
+
+  for (const key in minimal_songs) {
+    const song = minimal_songs[key];
+    const result = await getFullSongDetails(song.id)
+    songs.push(result[0]);
+  }
 
   return {
     status: httpStatus.OK,
