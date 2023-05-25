@@ -2,7 +2,7 @@
 const setSongs = () => {
 	
 	for(const i of songs){
-
+		console.log(songs)
 		let song = i;
 		
 		const lists = document.querySelector('.playlist-screen');
@@ -10,7 +10,7 @@ const setSongs = () => {
 		//created elements
 		const newSection = document.createElement('SECTION');
 		newSection.className = 'list';
-		newSection.id = song.id;
+		//newSection.setAttribute("id", song.id);
 
 		const newArticle = document.createElement('ARTICLE');
 		newArticle.className = 'playlist-cover';
