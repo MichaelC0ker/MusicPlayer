@@ -27,10 +27,30 @@ function validateSongInput() {
   return valid;
 }
 
+function addPlaylistToDatabase(playlistName,playlistDescription,username){
+  fetch("http://localhost:5000/playlist", {
+      method: "POST",
+      body: JSON.stringify({
+        "title": playlistName,
+        "description": playlistDescription,
+        "username": "Michael",
+        "songs": []
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then((response) => console.log(response.json()))
+}
+
 function validatePlaylistInput() {
   let text = "";
 
   let playlistName = document.getElementById("playlist-name-input").value;
+
+  let playlistDescription = document.getElementById("playlist-description").value;
+
+
 
   //simple validation on user input
   let valid = true;
@@ -38,11 +58,8 @@ function validatePlaylistInput() {
   if (playlistName === "") {
     text = "Input playlist name";
     valid = false;
-  } else if (coverPath === "") {
-    text = "Input path to playlist cover";
-    valid = false;
-  } else if (!coverPath.includes("\\")) {
-    text = "Input valid cover path";
+  }else if(playlistDescription === ""){
+    text = "Input playlist description";
     valid = false;
   }
 
@@ -52,6 +69,8 @@ function validatePlaylistInput() {
     toast.className = "show";
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
+  }else{
+    addPlaylistToDatabase(playlistName,playlistDescription,"Michael")
   }
 
   return valid;
@@ -132,11 +151,11 @@ function onSubmitSong() {
 
 
 
+
 function onSubmitPlaylist() {
   let submit = validatePlaylistInput();
   if (submit) {
-    console.log("we're moving");
-    //window.location.href = "index.html";
+    window.location.href = "index.html";
   }
 }
 
