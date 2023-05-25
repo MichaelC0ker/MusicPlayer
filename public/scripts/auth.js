@@ -19,17 +19,14 @@ function toggleAuthOverlay(event) {
 const getAccessToken = async () => {
     const currentURL = new URL(window.location.href);
     const searchParams = new URLSearchParams(currentURL);
-    console.log(searchParams.code ?? searchParams);
-    const requestToken = searchParams.code;
+    console.log(window.location.search ?? 'no window.location.search value');
 
     let url = 'http://ec2-52-212-165-138.eu-west-1.compute.amazonaws.com:5000/auth/callback';
 
-    url += `?client_id=${config.auth.client_id}`;
-    url += `&client_secret=${config.auth.client_secret}`;
-    url += `&code=${requestToken}`;
+    url += window.location.search;
 
     const options = {
-        method: 'POST',
+        method: 'GET',
         headers: {
             Accept: 'application/json'
         }
@@ -42,8 +39,26 @@ const getAccessToken = async () => {
         console.log("error");
     }
 
-    window.alert(data.data.email);
+    console.log(getUserId(data.headers.token));
 };
+
+const getUserId = async (accessToken) => {
+    let url = 'http://ec2-52-212-165-138.eu-west-1.compute.amazonaws.com:5000/auth/user';
+
+    url += window.location.search;
+
+    const options = {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            token: atob(accessToken)
+        }
+    };
+
+    const fetchResponse = await fetch(url, options);
+    const data = await fetchResponse.json();
+    console.log(data)
+}
 
 getAccessToken();
 
