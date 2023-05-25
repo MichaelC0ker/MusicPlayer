@@ -7,7 +7,7 @@ import { getArtistsOfSong } from './artistService.js';
 const pool = await databasePool;
 
 export const retrieveSong = async(songId) => {
-    let sql_query = `SELECT title, genre_id, album_id, user_id, song_url, bitrate, duration, plays, liked
+    let sql_query = `SELECT title, genre_id, coverart_url, album_id, user_id, song_url, bitrate, duration, plays, liked
                         FROM [Song] 
                         WHERE id = @song_id`;
   const result = await pool.request()
