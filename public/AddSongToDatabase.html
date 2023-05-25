@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="song-file-input" accept=".mp3, .wav" />
+</body>
+
+<script>
+  document.querySelector("#song-file-input").addEventListener("change", (event) => {
+
+    const song = event.target.files[0]
+    jsmediatags.read(song, {
+      onSuccess: function (tag) {
+        console.log(tag)
+        // Array buffer to base64
+        const data = tag.tags.picture.data
+        const format = tag.tags.picture.format
+        let base64String = ""
+        for (let i = 0; i < data.length; i++) {
+          base64String += String.fromCharCode(data[i])
+        }
+        // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
+        picture = `data:${format};base64,${window.btoa(base64String)}`
+        picture = base64String
+        songTitle = tag.tags.title
+        artist = tag.tags.artist
+        albumName = tag.tags.album
+        genre = tag.tags.genre
+
+        //inserting into database
+        fetch("http://localhost:5000/song", {
+          method: "POST",
+          body: JSON.stringify({
+            "username": "Michael",
+            "title": songTitle,
+            "song_url": "C:\\Users\\Documents\\MusicPlayer\public\assets\music",
+            "duration": 3000,
+            "genre": genre,
+            "album": {
+              "title": albumName,
+              "release_year": 2020
+            },
+            "artist": artist,
+            "coverart": "picture"
+
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+          .then((response) => console.log(response.json()))
+      },
+      onError: function (error) {
+        console.log(error)
+      }
+    })
+  })
+</script>
+
+</html>

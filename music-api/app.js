@@ -60,66 +60,77 @@ const reqListener = async (req, res) => {
     case (req.url === '/playlist' && req.method === 'POST'): {
       const body = await getPostData(req);
       const response = await createPlaylist(body);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
     case (req.url === '/playlist/song' && req.method === 'POST'): {
       const body = await getPostData(req);
       const response = await addSongToPlaylist(body);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url.startsWith('/playlist/') && req.method === 'POST'): {
+    case (req.url === ('/playlist/all') && req.method === 'POST'): {
       const body = await getPostData(req);
       const response = await getAllPlaylists(body);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url === ('/playlist/') && req.method === 'GET'): {
+    case (req.url.startsWith('/playlist/') && req.method === 'GET'): {
       const param = await getIdParam(req.url);
-      const response = await addSongToPlaylist(param);
+      const response = await getPlaylist(param);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
     case (req.url === ('/playlist') && req.method === 'PUT'): {
       const body = await getPostData(req);
       const response = await updatePlaylistInfo(body);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url === '/playlist' && req.method === 'DELETE'): {
-      const param = await getIdParam(req.url);
-      const response = await deletePlaylist(param);
-      writeResponse(res, response.status, null, response.data);
-      break;
-    }
-    case (req.url === '/playlist/song' && req.method === 'DELETE'): {
+    case (req.url.startsWith('/playlist/song/') && req.method === 'DELETE'): {
       const param = await getIdParam(req.url);
       const response = await removeSong(param);
+
+      writeResponse(res, response.status, null, response.data);
+      break;
+    }
+    case (req.url.startsWith('/playlist/') && req.method === 'DELETE'): {
+      const param = await getIdParam(req.url);
+      const response = await deletePlaylist(param);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
     case (req.url === '/song' && req.method === 'POST'): {
       const body = await getPostData(req);
       const response = await uploadSong(body);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
     case (req.url.startsWith('/song/') && req.method === 'GET'): {
       const param = getIdParam(req.url);
       const response = await getSong(param);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
     case (req.url === '/song/all' && req.method === 'POST'): {
       const body = await getPostData(req);
-      const response = await getAllSongs(body)
+      const response = await getAllSongs(body);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
     case (req.url.startsWith('/song') && req.method === 'DELETE'): {
       const param = getIdParam(req.url);
       const response = await deleteSong(param);
+
       writeResponse(res, response.status, null, response.data);
       break;
     }
