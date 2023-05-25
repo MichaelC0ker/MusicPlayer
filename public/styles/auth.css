@@ -1,0 +1,34 @@
+@import url("auth.css");
+
+#auth-overlay-popup a {
+    text-decoration: none;
+    color: #ababab;
+}
+
+#auth-overlay-popup img {
+    text-decoration: none;
+    color: #ababab;
+    width: 350px;
+    height: 150px;
+    border-radius: 15px;
+    z-index:2;
+}
+
+#auth-overlay-popup {
+    z-index:2;
+    margin: auto;
+    position: absolute;
+    /*width: 350px;*/
+    /*height: 150px;*/
+    /*border-radius: 15px;*/
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color:black;
+}
+
+#auth-overlay-popup ~ * {
+    filter: grayscale(25%) blur(7px);
+    pointer-events: none;
+}
