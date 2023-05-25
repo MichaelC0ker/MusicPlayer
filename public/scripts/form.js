@@ -83,30 +83,30 @@ const id3Handlers = {
 
     urlElement = document.getElementById("song-path-input")
     songURL = urlElement.value
-   
 
-     //inserting into database
-     fetch("http://localhost:5000/song", {
-        method: "POST",
-        body: JSON.stringify({
-          "username": "Michael",
-          "title": songTitle,
-          "song_url": songURL,
-          "duration": 3000,
-          "genre": genre,
-          "album": {
-            "title": albumName,
-            "release_year": 2020
-          },
-          "artist": artist,
-          "coverart": picture
 
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      })
-        .then((response) => console.log(response.json()))
+    //inserting into database
+    fetch("http://localhost:5000/song", {
+      method: "POST",
+      body: JSON.stringify({
+        "username": "Michael",
+        "title": songTitle,
+        "song_url": songURL,
+        "duration": 3000,
+        "genre": genre,
+        "album": {
+          "title": albumName,
+          "release_year": 2020
+        },
+        "artist": artist,
+        "coverart": picture
+
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then((response) => console.log(response.json()))
   },
   onError: function (error) {
     console.log(error)
@@ -114,20 +114,20 @@ const id3Handlers = {
 };
 
 
-function storeSongData(){
-    const song = document.getElementById("song-file-input").files[0]
-    jsmediatags.read(song, id3Handlers)
+function storeSongData() {
+  const song = document.getElementById("song-file-input").files[0]
+  jsmediatags.read(song, id3Handlers)
 }
 
-function onSubmitSong(){
-   let submit = validateSongInput();
+function onSubmitSong() {
+  let submit = validateSongInput();
 
-   if(submit){
+  if (submit) {
     storeSongData();
     console.log("we're moving");
-    storeSongData();
-   // window.location.href = "index.html";
-   }
+    // storeSongData();
+    window.location.href = "index.html";
+  }
 }
 
 
