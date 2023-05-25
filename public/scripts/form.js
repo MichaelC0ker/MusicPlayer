@@ -126,7 +126,7 @@ function onSubmitSong() {
     storeSongData();
     console.log("we're moving");
     // storeSongData();
-    window.location.href = "index.html";
+   // window.location.href = "index.html";
   }
 }
 

@@ -23,7 +23,7 @@
 		newArticle.className = 'playlist-cover';
 		
 		const newCover = document.createElement('IMG');
-		newCover.src = 'assets/images/AfterHours.jpg';
+		newCover.src = song.coverart_url;
 
 		const newP = document.createElement('P');
 		newP.className = 'playlist-name';
