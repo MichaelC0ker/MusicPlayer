@@ -3,6 +3,8 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="./styles/list.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/dropdown.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -40,6 +42,13 @@
                     <p>Track Name</p>
                     <p>Track Artist</p>
                 </summary>
+                <div class="dropdown">
+                    <i onclick="toggleDropdown()" class="fa fa-ellipsis-v dropbtn"></iclass></i>
+                    <div id="dropdown-content" class="dropdown-content">
+                        <a href="#">Add to Playlist</a>
+                        <a href="#">Remove from Playlist</a>
+                    </div>
+                </div>
             </article>
             <article class="track-list-item">
                 <figure class="track-list-item-thumb">
@@ -49,13 +58,15 @@
                     <p>Track Name</p>
                     <p>Track Artist</p>
                 </summary>
+                <i class="fa fa-ellipsis-v"></iclass></i>
             </article>
         </section>
-        <button id="add-song-to-playlist-btn">Add Playlist</button> <!--create addSongToPlaylist-->
+        <button id="add-song-btn"><i class="fa fa-plus"></i></button> <!--create addSongToPlaylist-->
 
     </main>
 
     <script src="scripts/ListPage.js"></script>
+    <script src="scripts/dropdown.js"></script>
 </body>
 
 <!-- <script>
