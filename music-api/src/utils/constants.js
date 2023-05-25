@@ -4,7 +4,7 @@ dotenv.config();
 
 export const URL = process.env.NODE_ENV === "development"
                     ? "http://127.0.0.1:5500"
-                    : "http://ec2-54-155-180-111.eu-west-1.compute.amazonaws.com:5000"
+                    : "https://main.d2m0czas1vg68p.amplifyapp.com/"
 
 export const Constants = {
     responses: {
