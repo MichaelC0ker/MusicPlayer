@@ -98,16 +98,16 @@ const reqListener = async (req, res) => {
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url.startsWith('/playlist/') && req.method === 'DELETE'): {
+    case (req.url.startsWith('/playlist/song/') && req.method === 'DELETE'): {
       const param = await getIdParam(req.url);
-      const response = await deletePlaylist(param);
+      const response = await removeSong(param);
 
       writeResponse(res, response.status, null, response.data);
       break;
     }
-    case (req.url.startsWith('/playlist/song/') && req.method === 'DELETE'): {
+    case (req.url.startsWith('/playlist/') && req.method === 'DELETE'): {
       const param = await getIdParam(req.url);
-      const response = await removeSong(param);
+      const response = await deletePlaylist(param);
 
       writeResponse(res, response.status, null, response.data);
       break;

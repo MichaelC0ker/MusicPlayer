@@ -22,7 +22,7 @@ CREATE TABLE [Song] (
   [album_id] int,
   [user_id] int NOT NULL,
   [song_url] varchar(8000) NOT NULL,
-  [coverart_url] varchar(8000),
+  [coverart_url] varchar(max),
   [bitrate] int,
   [duration] int,
   [plays] int NOT NULL,
