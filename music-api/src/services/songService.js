@@ -26,6 +26,7 @@ export const getFullSongDetails = async (songId) => {
     return {
         title: songResult['title'],
         song_url: songResult['song_url'],
+        coverart_url: songResult['coverart_url'],
         genre: genreResult['name'],
         album: {
             title: albumResult['title'],
