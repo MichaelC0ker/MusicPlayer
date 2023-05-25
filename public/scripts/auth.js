@@ -61,3 +61,5 @@ const getAccessToken = async () => {
     window.alert(data.data.email);
 };
 
+getAccessToken();
+
