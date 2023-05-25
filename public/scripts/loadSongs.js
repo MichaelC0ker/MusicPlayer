@@ -1,4 +1,3 @@
-// import { moveToPlaylist } from "./data.js";
 
 //load all songs to the frontend 
  const setSongs = () => {
@@ -18,6 +17,9 @@
 		const newSection = document.createElement('SECTION');
 		newSection.className = 'list';
 		newSection.setAttribute("id", `song${song.id}`);
+		newSection.addEventListener('click', () => {
+			console.log(newSection.id)
+	    })
 
 		const newArticle = document.createElement('ARTICLE');
 		newArticle.className = 'playlist-cover';
@@ -36,18 +38,3 @@
 		newSection.appendChild(newP);
 	}
 };
-
-
-
-// let playlistCard = document.querySelector('.playlist-card')
-// console.log(playlistCard)
-// window.addEventListener("DOMContentLoaded", (event) =>{
-// 	let playlistCard = document.querySelector('.playlist-card')
-// 	if(playlistCard){
-// 		console.log("addedEventListener")
-// 		playlistCard.addEventListener('click',() => {moveToPlaylist()})
-// 	}else{
-// 		console.log("didn't add event listener")
-// 	}
-
-// })

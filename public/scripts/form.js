@@ -85,21 +85,21 @@ const id3Handlers = {
     songURL = urlElement.value
 
 
-    //inserting into database
-    fetch("http://localhost:5000/song", {
-      method: "POST",
-      body: JSON.stringify({
-        "username": "Michael",
-        "title": songTitle,
-        "song_url": songURL,
-        "duration": 3000,
-        "genre": genre,
-        "album": {
-          "title": albumName,
-          "release_year": 2020
-        },
-        "artist": artist,
-        "coverart": picture
+     //inserting into database
+     fetch("http://localhost:5000/song", {
+        method: "POST",
+        body: JSON.stringify({
+          "username": "Tsepo",
+          "title": songTitle,
+          "song_url": songURL,
+          "duration": 3000,
+          "genre": genre,
+          "album": {
+            "title": albumName,
+            "release_year": 2020
+          },
+          "artist": artist,
+          "coverart": picture
 
       }),
       headers: {
@@ -126,7 +126,7 @@ function onSubmitSong() {
     storeSongData();
     console.log("we're moving");
     // storeSongData();
-   // window.location.href = "index.html";
+    //window.location.href = "index.html";
   }
 }
 
