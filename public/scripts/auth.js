@@ -19,10 +19,10 @@ function toggleAuthOverlay(event) {
 const getAccessToken = async () => {
     const currentURL = new URL(window.location.href);
     const searchParams = new URLSearchParams(currentURL);
-    console.log(searchParams.code);
+    console.log(searchParams.code ?? searchParams);
     const requestToken = searchParams.code;
 
-    let url = 'https://github.com/login/oauth/access_token';
+    let url = 'http://ec2-52-212-165-138.eu-west-1.compute.amazonaws.com:5000/auth/callback';
 
     url += `?client_id=${config.auth.client_id}`;
     url += `&client_secret=${config.auth.client_secret}`;
@@ -36,22 +36,6 @@ const getAccessToken = async () => {
     };
 
     const fetchResponse = await fetch(url, options);
-    const data = await fetchResponse.json();
-    const accessToken = data.access_token;
-
-    if (!accessToken) {
-        return {
-            ok: false,
-            data: {
-                error: data.error ?? 'Failed to get access token',
-                reason: data.error_description ?? 'No description available'
-            },
-            status: 500
-        };
-    }
-
-    const userDataResponse = await fetch('http://ec2-52-212-165-138.eu-west-1.compute.amazonaws.com:5000/auth/user',
-        {headers: {token: accessToken}});
     const data = await fetchResponse.json();
 
     if(!data) {
