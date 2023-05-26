@@ -1,4 +1,4 @@
-
+import { api_endpoint } from "./constants";
 
 
 function validateSongInput() {
@@ -28,7 +28,7 @@ function validateSongInput() {
 }
 
 function addPlaylistToDatabase(playlistName,playlistDescription,username){
-  fetch("http://localhost:5000/playlist", {
+  fetch(api_endpoint+"/playlist", {
       method: "POST",
       body: JSON.stringify({
         "title": playlistName,
@@ -105,10 +105,10 @@ const id3Handlers = {
 
 
      //inserting into database
-     fetch("http://localhost:5000/song", {
+     fetch(api_endpoint+"/song", {
         method: "POST",
         body: JSON.stringify({
-          "username": "Tsepo",
+          "username": "tlholo",
           "title": songTitle,
           "song_url": songURL,
           "duration": 3000,

@@ -1,8 +1,41 @@
 import fetch from 'node-fetch';
 
 import config from '../resources/config.json' assert { type: 'json' };
+import { addUser } from './userService.js';
 
-export const authService = async (requestToken) => {
+export const getUserData = async (accessToken) => {
+  const url = 'https://api.github.com/user';
+
+  const options = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-GitHub-Api-Version': '2022-11-28'
+    }
+  };
+
+  const fetchResponse = await fetch(url, options);
+  const data = await fetchResponse.json();
+
+  if (fetchResponse.status !== 200) {
+    return {
+      ok: false,
+      data: data
+    };
+  }
+
+  addUser(data.email);
+
+  return {
+    ok: true,
+    data: {
+      email: data.email
+    }
+  };
+};
+
+export const getAccessToken = async (requestToken) => {
   let url = 'https://github.com/login/oauth/access_token';
 
   url += `?client_id=${config.auth.client_id}`;
@@ -11,16 +44,14 @@ export const authService = async (requestToken) => {
 
   const options = {
     method: 'POST',
-    // mode: 'cors',
     headers: {
-      // 'Content-Type': 'application/json;charset=UTF-8',
       Accept: 'application/json'
     }
   };
 
   const fetchResponse = await fetch(url, options);
   const data = await fetchResponse.json();
-  const accessToken = data['access_token'];
+  const accessToken = data.access_token;
 
   if (!accessToken) {
     return {
@@ -35,8 +66,6 @@ export const authService = async (requestToken) => {
 
   return {
     ok: true,
-    data: {
-      token: accessToken
-    }
+    data: await getUserData(accessToken)
   };
 };
