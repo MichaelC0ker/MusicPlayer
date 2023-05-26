@@ -18,15 +18,15 @@ export const getArtistsOfSong = async(songId) => {
                         FROM [SongArtist] 
                         WHERE song_id = @song`;
     const result = await pool.request()
-            .input('song', sql.VarChar, songId)
+            .input('song', sql.Int, songId)
             .query(sql_query);
     
     sql_query = `SELECT id, name
                     FROM [Artist] 
-                    WHERE id IN @artists`;
+                    WHERE id = @artists`;
 
     const artistResult = await pool.request()
-            .input('artists', result)
+            .input('artists', sql.Int,result.recordset[0].artist_id)
             .query(sql_query);
 
     return artistResult.recordset;
