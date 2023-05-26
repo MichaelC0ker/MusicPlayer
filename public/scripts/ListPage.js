@@ -1,5 +1,7 @@
+import { api_endpoint } from "./constants";
+
 const fetchAllSongs = () => {
-  fetch("http://localhost:5000/song/all", {
+  fetch(api_endpoint+"/song/all", {
     method: "POST",
     body: JSON.stringify({
         "username": "admin",

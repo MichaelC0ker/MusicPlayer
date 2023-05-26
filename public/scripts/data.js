@@ -1,10 +1,11 @@
 //store data on front end
 //display data on next screen
+import { api_endpoint } from "./constants";
 let songs = [];
 const playlistCard = document.querySelector('.playlist-card')
 
 async function getAllSongs(){
-	const response = await fetch("http://localhost:5000/song/all", {
+	const response = await fetch(api_endpoint+"/song/all", {
     method: "POST",
     body: JSON.stringify({
           "username": "Tsepo",  
