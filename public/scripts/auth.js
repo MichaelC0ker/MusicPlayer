@@ -58,7 +58,31 @@ const getUserId = async (accessToken) => {
     const fetchResponse = await fetch(url, options);
     const data = await fetchResponse.json();
     console.log(data)
-}
+};
 
-getAccessToken();
+const addUser = () => {
+    const username = document.getElementById('auth-user');
+
+    const url = 'https://34.244.5.94.nip.io:5000/auth/user';
+
+    const options = {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            user: username
+        }
+    };
+
+    const fetchResponse = await fetch(url, options);
+    const data = await fetchResponse.json();
+
+    if(data.ok) {
+        sessionStorage.setItem('username', username);
+    } else {
+        
+    }
+};
+
+
+// getAccessToken();
 
