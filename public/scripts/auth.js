@@ -60,7 +60,7 @@ const getUserId = async (accessToken) => {
     console.log(data)
 };
 
-const addUser = () => {
+function addUser(event) {
     const username = document.getElementById('auth-user');
 
     const url = 'https://34.244.5.94.nip.io:5000/auth/user';
@@ -73,15 +73,15 @@ const addUser = () => {
         }
     };
 
-    const fetchResponse = await fetch(url, options);
-    const data = await fetchResponse.json();
+    let fetchResponse = fetch(url, options).then(response => fetchResponse = response);
+    let data = Promise.fetchResponse.json();
 
+    console.log(data);
     if(data.ok) {
         sessionStorage.setItem('username', username);
-    } else {
-        
     }
-};
+    window.location.href = 'new.html';
+}
 
 
 // getAccessToken();
