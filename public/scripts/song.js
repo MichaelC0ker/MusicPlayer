@@ -1,7 +1,7 @@
-import { api_endpoint } from "./constants"
+
 
 const fetchSong = (songId) => {
-  fetch(api_endpoint+"/song/" + songId, {
+  fetch("https://34.244.5.94/"+"/song/" + songId, {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8"
@@ -11,7 +11,7 @@ const fetchSong = (songId) => {
 }
 
 const deleteSong = (songId) => {
-  fetch(api_endpoint+"/song/5", {
+  fetch("https://34.244.5.94/"+"/song/5", {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8"
