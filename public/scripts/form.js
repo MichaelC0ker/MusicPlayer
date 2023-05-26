@@ -1,6 +1,3 @@
-import { api_endpoint } from "./constants";
-
-
 function validateSongInput() {
   let text = "";
   let songURL = document.getElementById("song-path-input").value;
@@ -28,7 +25,7 @@ function validateSongInput() {
 }
 
 function addPlaylistToDatabase(playlistName,playlistDescription,username){
-  fetch(api_endpoint+"/playlist", {
+  fetch("https://34.244.5.94/"+"/playlist", {
       method: "POST",
       body: JSON.stringify({
         "title": playlistName,
@@ -105,7 +102,7 @@ const id3Handlers = {
 
 
      //inserting into database
-     fetch(api_endpoint+"/song", {
+     fetch("https://34.244.5.94/"+"/song", {
         method: "POST",
         body: JSON.stringify({
           "username": "tlholo",
