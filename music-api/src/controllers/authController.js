@@ -1,18 +1,16 @@
 import httpStatus from 'http-status-codes';
-import btoa from 'btoa';
 import * as AuthService from '../services/authService.js';
 import { queryParamExtrator } from '../utils/requestHelper.js';
-import { addUser } from '../services/userService.js';
 
 export const getUserData = async (req) => {
   const headers = req.headers;
 
-  let token;
+  let username;
 
-  let isValidRequest = !headers || !headers.token || headers.token === '';
+  let isValidRequest = !headers || !headers.user || headers.user === '';
 
   try {
-    token = btoa(headers.token);
+    username = headers.user;
   } catch {
     isValidRequest = false;
   }
@@ -24,35 +22,24 @@ export const getUserData = async (req) => {
     };
   }
 
-  try {
-    const response = await AuthService.getUserData(token);
+  const response = await AuthService.getUserData(username);
 
-    if (!response || !response.ok) {
-      const status = response.data.error === 'bad_verification_code'
-        ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
-
-      return {
-        ...response,
-        status: status
-      };
-    }
-
-    addUser(response.data.id);
+  if (!response || !response.ok) {
+    const status = response.data.error === 'bad_verification_code'
+      ? httpStatus.BAD_REQUEST : httpStatus.INTERNAL_SERVER_ERROR;
 
     return {
-      ok: true,
-      headers: {
-        token: response.data.token
-      }
-    };
-  } catch (err) {
-    return {
-      ok: false,
-      data: {
-        error: err.message ?? 'No error description found'
-      }
+      ...response,
+      status: status
     };
   }
+
+  return {
+    ok: true,
+    headers: {
+      user: response.data.token
+    }
+  };
 };
 
 export const getAccessToken = async (req) => {
