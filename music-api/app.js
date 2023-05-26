@@ -4,7 +4,7 @@ import httpStatus from 'http-status-codes';
 import { getPostData, getIdParam } from './src/utils/requestHelper.js';
 
 import { Constants } from './src/utils/constants.js';
-import authController from './src/controllers/authController.js';
+import * as Auth from './src/controllers/authController.js';
 import { createPlaylist, addSongToPlaylist, getPlaylist, getAllPlaylists, updatePlaylistInfo, deletePlaylist, removeSong } from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
 
@@ -42,13 +42,18 @@ const returnNotFoundResponse = (req, res) => {
 };
 
 const reqListener = async (req, res) => {
-  // TODO: Reduce complexity
   switch (true) {
     case (req.method === 'OPTIONS'):
       writeResponse(res, httpStatus.OK);
       break;
     case (req.url.startsWith('/auth/callback') && req.method === 'GET'): {
-      const result = await authController(req);
+      const result = await Auth.getAccessToken(req);
+
+      writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
+      return;
+    }
+    case (req.url.startsWith('/auth/user') && req.method === 'GET'): {
+      const result = await Auth.getUserData(req);
 
       writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
       return;
@@ -136,8 +141,6 @@ const reqListener = async (req, res) => {
     }
     
     default:
-      // TODO: Improve error handling
-      console.log(`${req.method} request failed: ${req.url}`);
       returnNotFoundResponse(req, res);
   }
 };
