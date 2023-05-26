@@ -21,7 +21,7 @@ const getAccessToken = async () => {
     const searchParams = new URLSearchParams(currentURL);
     console.log(window.location.search ?? 'no window.location.search value');
 
-    let url = 'http://ec2-52-212-165-138.eu-west-1.compute.amazonaws.com:5000/auth/callback';
+    let url = 'https://34.244.5.94.nip.io:5000/auth/user';
 
     url += window.location.search;
 
