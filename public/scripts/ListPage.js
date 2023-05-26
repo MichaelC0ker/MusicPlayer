@@ -1,5 +1,5 @@
 const fetchAllSongs = () => {
-  fetch("http://localhost:5000/song/all", {
+  fetch("https://34.244.5.94.nip.io:5000/song/all", {
     method: "POST",
     body: JSON.stringify({
         "username": "admin",

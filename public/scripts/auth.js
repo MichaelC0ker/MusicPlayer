@@ -43,7 +43,7 @@ const getAccessToken = async () => {
 };
 
 const getUserId = async (accessToken) => {
-    let url = 'http://ec2-52-212-165-138.eu-west-1.compute.amazonaws.com:5000/auth/user';
+    let url = 'https://34.244.5.94.nip.io:5000/auth/user';
 
     url += window.location.search;
 
