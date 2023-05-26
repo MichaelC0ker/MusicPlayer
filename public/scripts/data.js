@@ -24,7 +24,7 @@ setSongs()
 }
 
 async function getAllPlaylists(){
-    const response = await fetch("http://localhost:5000/playlist/all", {
+    const response = await fetch(api_endpoint+"/playlist/all", {
     method: "POST",
     body: JSON.stringify({
           "username": "Michael"  
