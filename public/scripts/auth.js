@@ -60,7 +60,7 @@ const getUserId = async (accessToken) => {
     console.log(data)
 };
 
-const addUser = () => {
+const addUser = async() => {
     const username = document.getElementById('auth-user');
 
     const url = 'https://34.244.5.94.nip.io:5000/auth/user';
