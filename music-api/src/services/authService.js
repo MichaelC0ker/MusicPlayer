@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 import config from '../resources/config.json' assert { type: 'json' };
-import { addUser } from '../data/client';
+import { addUser } from './userService.js';
 
 export const getUserData = async (accessToken) => {
   const url = 'https://api.github.com/user';
@@ -25,7 +25,7 @@ export const getUserData = async (accessToken) => {
     };
   }
 
-  addUser(data.id, data.email, data.name);
+  addUser(data.email);
 
   return {
     ok: true,
