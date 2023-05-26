@@ -1,7 +1,7 @@
-import { api_endpoint } from "./constants";
+
 
 const fetchAllSongs = () => {
-  fetch(api_endpoint+"/song/all", {
+  fetch("https://34.244.5.94/"+"/song/all", {
     method: "POST",
     body: JSON.stringify({
         "username": "admin",

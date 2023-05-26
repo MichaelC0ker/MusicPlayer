@@ -1,6 +1,6 @@
 //store data on front end
 //display data on next screen
-import { api_endpoint } from "./constants";
+
 let songs = [];
 let playlists =[];
 let playlistSongs = [];
@@ -8,7 +8,7 @@ let playlistSongs = [];
 //const playlistCard = document.querySelector('.playlist-card')
 
 async function getAllSongs(){
-	const response = await fetch(api_endpoint+"/song/all", {
+	const response = await fetch("https://34.244.5.94/"+"/song/all", {
     method: "POST",
     body: JSON.stringify({
           "username": "Michael",  
@@ -24,7 +24,7 @@ setSongs()
 }
 
 async function getAllPlaylists(){
-    const response = await fetch(api_endpoint+"/playlist/all", {
+    const response = await fetch("https://34.244.5.94/"+"/playlist/all", {
     method: "POST",
     body: JSON.stringify({
           "username": "Michael"  
@@ -43,7 +43,7 @@ setPlaylist()
 
 
 async function getSinglePlaylist(playlist_id){
-    const response = await fetch(api_endpoint+ "/playlist/" + playlist_id , {
+    const response = await fetch("https://34.244.5.94/"+ "/playlist/" + playlist_id , {
     method: "GET",
     headers: {
         "Content-type": "application/json; charset=UTF-8"
