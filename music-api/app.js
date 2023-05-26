@@ -42,7 +42,6 @@ const returnNotFoundResponse = (req, res) => {
 };
 
 const reqListener = async (req, res) => {
-  // TODO: Reduce complexity
   switch (true) {
     case (req.method === 'OPTIONS'):
       writeResponse(res, httpStatus.OK);
