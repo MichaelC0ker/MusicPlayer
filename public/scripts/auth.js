@@ -78,6 +78,7 @@ const addUser = async() => {
 
     if(data.ok) {
         sessionStorage.setItem('username', username);
+        window.location.href="index.html"
     } else {
         
     }
