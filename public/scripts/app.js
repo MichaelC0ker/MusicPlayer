@@ -139,7 +139,7 @@ volumeSlider.addEventListener('input', () => {
 
 //Load Your Playlist
 /*const setPlaylist = () => {
-	let playlist = playlists[0];console.log('kkk')
+	let playlist = playlists[0];console.log('k')
 	
 	const lists = document.querySelector('.playlists');
 	

@@ -130,7 +130,7 @@ export const getAllSongs = async (body) => {
   for (const key in minimal_songs) {
     const song = minimal_songs[key];
     const result = await getFullSongDetails(song.id)
-    songs.push(result[0]);
+    songs.push(result);
   }
 
   return {
