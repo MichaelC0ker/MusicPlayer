@@ -3,36 +3,25 @@ import fetch from 'node-fetch';
 import config from '../resources/config.json' assert { type: 'json' };
 import { addUser } from './userService.js';
 
-export const getUserData = async (accessToken) => {
-  const url = 'https://api.github.com/user';
+export const getUserData = async (email) => {
+  try {
+    const userId = addUser(email);
 
-  const options = {
-    method: 'GET',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${accessToken}`,
-      'X-GitHub-Api-Version': '2022-11-28'
-    }
-  };
-
-  const fetchResponse = await fetch(url, options);
-  const data = await fetchResponse.json();
-
-  if (fetchResponse.status !== 200) {
+    return {
+      ok: true,
+      data: {
+        id: userId
+      }
+    };
+  } catch (e) {
     return {
       ok: false,
-      data: data
+      data: {
+        message: 'could not authenticate user',
+        error: e.message
+      }
     };
   }
-
-  addUser(data.email);
-
-  return {
-    ok: true,
-    data: {
-      email: data.email
-    }
-  };
 };
 
 export const getAccessToken = async (requestToken) => {
