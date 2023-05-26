@@ -1,5 +1,5 @@
 const fetchSong = (songId) => {
-  fetch("http://localhost:5000/song/" + songId, {
+  fetch("https://34.244.5.94.nip.io:5000/song/" + songId, {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8"
@@ -9,7 +9,7 @@ const fetchSong = (songId) => {
 }
 
 const deleteSong = (songId) => {
-  fetch("http://localhost:5000/song/5", {
+  fetch("https://34.244.5.94.nip.io:5000/song/5", {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8"

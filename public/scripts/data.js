@@ -4,7 +4,7 @@ let songs = [];
 const playlistCard = document.querySelector('.playlist-card')
 
 async function getAllSongs(){
-	const response = await fetch("http://localhost:5000/song/all", {
+	const response = await fetch("https://34.244.5.94.nip.io:5000/song/all", {
     method: "POST",
     body: JSON.stringify({
           "username": "Tsepo",  

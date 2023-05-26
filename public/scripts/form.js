@@ -28,7 +28,7 @@ function validateSongInput() {
 }
 
 function addPlaylistToDatabase(playlistName,playlistDescription,username){
-  fetch("http://localhost:5000/playlist", {
+  fetch("https://34.244.5.94.nip.io:5000/playlist", {
       method: "POST",
       body: JSON.stringify({
         "title": playlistName,
@@ -105,7 +105,7 @@ const id3Handlers = {
 
 
      //inserting into database
-     fetch("http://localhost:5000/song", {
+     fetch("https://34.244.5.94.nip.io:5000/song", {
         method: "POST",
         body: JSON.stringify({
           "username": "Tsepo",
