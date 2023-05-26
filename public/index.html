@@ -8,11 +8,10 @@
 	<title>Music player</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="styles/style.css">
-	<script src="scripts/loadplaylists.js"></script>
-	<script src="scripts/data.js"></script>
+
 </head>
 
-<body onload = "getAllPlaylists()">
+<body onload="getAllPlaylists()">
 
 	<header>
 		<nav id="navbar">
@@ -44,17 +43,21 @@
 
 			<section class="playlist-card">
 				<a href="Playlists.html"><img src="assets/images/AfterHours.jpg" class="playlist-card-cover" alt=""></a>
-				<a href="Playlists.html"><p class="playlist-card-name">All tracks</p></a>
+				<a href="Playlists.html">
+					<p class="playlist-card-name">All tracks</p>
+				</a>
 			</section>
 
 		</section>
 
 		<h1 class="heading">All Your Playlists</h1>
-		<section class="playlists-group" id="all-playlists-group">
+		<section class="playlists-group" id="all-playlists-group" >
 
 		</section>
 	</section>
 </body>
-<script type="module" src="scripts/loadSongs.js" ></script>
+<script src="scripts/loadplaylists.js"></script>
+<script src="scripts/data.js"></script>
+<script type="module" src="scripts/loadSongs.js"></script>
 
 </html>

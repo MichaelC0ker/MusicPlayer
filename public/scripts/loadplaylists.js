@@ -6,12 +6,12 @@ const setPlaylist = () => {
 		let playlist = i;
 		
 		const lists = document.getElementById('all-playlists-group');
-		var a = document.createElement('a'); 
-		a.href = ViewPlaylist.html
 		//a.onclick = 
 		//created elements
 		const newSection = document.createElement('SECTION');
 		newSection.className ='playlist-card';
+		newSection.id = playlist.id;
+		newSection.onclick = "navigateToPlaylist(this.id)";
 		
 		const newCover = document.createElement('IMG');
 		newCover.className = 'playlist-card-cover'
@@ -29,4 +29,12 @@ const setPlaylist = () => {
 		
 	}
 };
+
+const setPlaylistSelection = (playlistId)  =>{
+	sessionStorage.setItem("playlistId", playlistId);
+}
+
+document.("myBtn").addEventListener("click", displayDate);
+
+
 
