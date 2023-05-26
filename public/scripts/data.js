@@ -18,3 +18,27 @@ songs = (await response.json()).songs;
 console.log(songs)
 setSongs()
 }
+<<<<<<< HEAD
+=======
+
+async function getAllPlaylists(){
+    const response = await fetch("http://localhost:5000/playlist/all", {
+    method: "POST",
+    body: JSON.stringify({
+          "username": "Michael"  
+        }),
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+});
+playlists = (await response.json()).playlists;
+console.log(playlists)
+setPlaylist()
+//playlist = (await response.json()).songs;
+//console.log(songs)
+//setSongs()
+}
+
+
+
+>>>>>>> 83cf5f4 (starting to add individual playlist screen)

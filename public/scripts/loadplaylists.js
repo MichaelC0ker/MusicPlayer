@@ -5,6 +5,7 @@ const setPlaylist = () => {
 
 		let playlist = i;
 		
+<<<<<<< HEAD
 		const lists = document.querySelector('.playlists');
 		
 		//created elements
@@ -13,6 +14,15 @@ const setPlaylist = () => {
 
 		const newArticle = document.createElement('ARTICLE');
 		newArticle.className = 'playlist-cover';
+=======
+		const lists = document.getElementById('all-playlists-group');
+		//a.onclick = 
+		//created elements
+		const newSection = document.createElement('SECTION');
+		newSection.className ='playlist-card';
+		newSection.id = playlist.id;
+		newSection.onclick = "navigateToPlaylist(this.id)";
+>>>>>>> 83cf5f4 (starting to add individual playlist screen)
 		
 		const newCover = document.createElement('IMG');
 		newCover.src = playlist.cover;
@@ -28,3 +38,15 @@ const setPlaylist = () => {
 		newSection.appendChild(newP);
 	}
 };
+<<<<<<< HEAD
+=======
+
+const setPlaylistSelection = (playlistId)  =>{
+	sessionStorage.setItem("playlistId", playlistId);
+}
+
+document.("myBtn").addEventListener("click", displayDate);
+
+
+
+>>>>>>> 83cf5f4 (starting to add individual playlist screen)
