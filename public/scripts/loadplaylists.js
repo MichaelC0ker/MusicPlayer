@@ -34,7 +34,11 @@ const setPlaylistSelection = (playlistId)  =>{
 	sessionStorage.setItem("playlistId", playlistId);
 }
 
-document.("myBtn").addEventListener("click", displayDate);
+const navigateToPlaylist =(playlistId) =>{
+	sessionStorage.setItem("playlistId", playlistId);
+	windows.href.location = "viewPlaylist.html"
+}
+
 
 
 
