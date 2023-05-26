@@ -2,6 +2,7 @@
 //display data on next screen
 let songs = [];
 let playlists =[];
+let viewPlaylist = [];
 
 //const playlistCard = document.querySelector('.playlist-card')
 
@@ -38,3 +39,5 @@ setPlaylist()
 //console.log(songs)
 //setSongs()
 }
+
+

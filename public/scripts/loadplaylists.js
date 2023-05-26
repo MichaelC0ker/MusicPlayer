@@ -6,7 +6,9 @@ const setPlaylist = () => {
 		let playlist = i;
 		
 		const lists = document.getElementById('all-playlists-group');
-		
+		var a = document.createElement('a'); 
+		a.href = ViewPlaylist.html
+		//a.onclick = 
 		//created elements
 		const newSection = document.createElement('SECTION');
 		newSection.className ='playlist-card';
@@ -27,3 +29,4 @@ const setPlaylist = () => {
 		
 	}
 };
+
