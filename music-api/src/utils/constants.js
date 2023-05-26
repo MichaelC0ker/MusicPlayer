@@ -24,6 +24,7 @@ export const Constants = {
             'Access-Control-Request-Method': '*',
             'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
             'Access-Control-Allow-Headers': '*'
-        }
+        },
+        'Cache-Control': 'max-age'
     }
 }
