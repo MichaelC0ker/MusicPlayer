@@ -1,5 +1,3 @@
-const apiBaseUrl = 'https://34.255.93.84:5000';
-
 function toggleAuthOverlay(event) {
     const overlay = document.getElementById('auth-overlay-popup');
 
@@ -23,7 +21,7 @@ const getAccessToken = async () => {
     const searchParams = new URLSearchParams(currentURL);
     console.log(window.location.search ?? 'no window.location.search value');
 
-    let url = `${apiBaseUrl}/auth/user`;
+    let url = api_endpoint + '/auth/user';
 
     url += window.location.search;
 
@@ -45,7 +43,7 @@ const getAccessToken = async () => {
 };
 
 const getUserId = async (accessToken) => {
-    let url = `${apiBaseUrl}/auth/user`;
+    let url = api_endpoint+'/auth/user';
 
     url += window.location.search;
 
@@ -65,7 +63,7 @@ const getUserId = async (accessToken) => {
 const addUser = async() => {
     const username = document.getElementById('auth-user');
 
-    const url = `${apiBaseUrl}/auth/user`;
+    const url = api_endpoint+'/auth/user';
 
     const options = {
         method: 'GET',
@@ -151,7 +149,7 @@ const checkUserAuthStatus = async () => {
             console.log('bad url');
             return;
         }
-        let url = `${apiBaseUrl}/auth/magic`;
+        let url = api_endpoint+'/auth/magic';
 
         const options = {
             method: 'GET',
