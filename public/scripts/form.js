@@ -1,9 +1,10 @@
+const apiBaseUrl = 'https://34.255.93.84:5000';
 
 
 function addPlaylistToDatabase(playlistName, playlistDescription, username) {
 
   //adding file details to database
-  fetch("http://localhost:5000" + "/playlist", {
+  fetch(apiBaseUrl + "/playlist", {
     method: "POST",
     body: JSON.stringify({
       "title": playlistName,
@@ -82,7 +83,7 @@ const id3Handlers = {
 
 
     //inserting  song into database
-    fetch("http://localhost:5000" + "/song", {
+    fetch(apiBaseUrl + "/song", {
       method: "POST",
       body: JSON.stringify({
         "username": "Tsepo",
@@ -173,7 +174,7 @@ function storeSongData() {
           songURL = urlPrefix + encodeURIComponent(filePath)
 
         //inserting  song into database
-        fetch("http://localhost:5000" + "/song", {
+        fetch(apiBaseUrl + "/song", {
           method: "POST",
           body: JSON.stringify({
             "username": "Michael",
