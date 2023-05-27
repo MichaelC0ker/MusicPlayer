@@ -1,44 +1,27 @@
 
-const setPlaylist = () => {
-	
+/*const setPlaylist = () => {
+
 	for(const i of playlists){
 
 		let playlist = i;
 		
-		const lists = document.getElementById('all-playlists-group');
-		//a.onclick = 
+		const playlistGroup = document.getElementById('all-playlists-group');
+		
 		//created elements
-		const newSection = document.createElement('SECTION');
-		newSection.className ='playlist-card';
-		newSection.id = playlist.id;
-		newSection.onclick = "navigateToPlaylist(this.id)";
+		const playlist_Card = document.createElement('SECTION');
+		playlist_Card.className = 'playlist-card';
 		
 		const newCover = document.createElement('IMG');
-		newCover.className = 'playlist-card-cover'
-		newCover.src = "https://media.istockphoto.com/id/1141495869/photo/3d-render-blue-pink-neon-round-frame-circle-ring-shape-empty-space-ultraviolet-light-80s.jpg?s=612x612&w=0&k=20&c=s_k3XrnKy9qRzTR2vdLg_BC6smrY1WymKpBsBfAvLNU=";
+		newCover.className = 'playlist-card-cover';
+		newCover.src = 'assets/images/banner2.jpg';
 
-		const newP = document.createElement('P');
-		newP.className = 'playlist-card-name';
-		newP.innerText = playlist.title;
+		const playlist_name = document.createElement('P');
+		playlist_name.className = 'playlist-card-name';
+		playlist_name.innerText = playlist.title;
 
 		//Appending Elements
-		lists.appendChild(newSection);
-		newSection.appendChild(newCover);
-		newSection.appendChild(newP);
-
-		
+		playlistGroup.appendChild(playlist_Card);
+		playlist_Card.appendChild(newCover);
+		playlist_Card.appendChild(playlist_name);
 	}
-};
-
-const setPlaylistSelection = (playlistId)  =>{
-	sessionStorage.setItem("playlistId", playlistId);
-}
-
-const navigateToPlaylist =(playlistId) =>{
-	sessionStorage.setItem("playlistId", playlistId);
-	windows.href.location = "viewPlaylist.html"
-}
-
-
-
-
+};*/

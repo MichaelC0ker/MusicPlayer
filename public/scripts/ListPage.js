@@ -1,7 +1,7 @@
 
 
 const fetchAllSongs = () => {
-  fetch("https://34.244.5.94/"+"/song/all", {
+  fetch("http://localhost:5000"+"/song/all", {
     method: "POST",
     body: JSON.stringify({
         "username": "admin",

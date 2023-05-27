@@ -7,32 +7,32 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>Music player</title>
 	<script src="scripts/data.js"></script>
-	<script  src="scripts/loadSongs.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="styles/style.css">
 </head>
 
-<body onload="getAllSongs()">
+<body onload="setSongs()">
+
 	<header>
 		<nav id="navbar">
 
 			<a href="playing.html">Playing</a>
-			<a href="Playlists.html">Playlists</a>
+			<a href="index.html">Home</a>
 			<a href="new.html">New</a>
 			<a href="authForm.html">Login</a>
 		</nav>
 	</header>
+
 	<section id="playlist-screen">
 
 		<section id="heading-section">
 			<figure class="heading-thumb">
-				<img src="assets/images/AfterHours.jpg" alt="" />
+				<img src="assets/images/banner2.jpg" alt="" />
 			</figure>
 			<summary class="heading-details">
-				<p>Playlist Name</p>
-				<p>Playlist Description</p>
-				<p>Created date</p>
-				<p># Songs</p>
+				<p id="playistName">All Tracks</p>
+				<p id="playlistDescription">This is a list of all your tracks.</p>
+				<p id="songCount"># Songs</p>
 			</summary>
 		</section>
 

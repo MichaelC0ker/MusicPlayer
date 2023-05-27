@@ -43,15 +43,20 @@ pauseBtn.addEventListener('click', () => {
 
 //Function for setting music up
 const setMusic = (i) => {
+	let song
 	seekBar.value = 0;
-	let song = songs[i]
+
+	if(localStorage.getItem('song') !== null){
+        song = JSON.parse(localStorage.getItem('song'));
+        localStorage.clear();
+    }
+	console.log(song);
 	currentMusic = i;
 	
-	music.src = song.song_url	;
+	music.src = song.song_url;
 	songName.innerHTML = song.title;
-	artistName.innerHTML = 'The Weeknd'/*song.artist*/;
-	coverImage.src = song.coverart_url;
-	
+	artistName.innerHTML = song.artistResult;
+	coverImage.src = "assets/images/banner2.jpg";
 	setTimeout(() => {
 		seekBar.max = music.duration;
 		musicDuration.innerHTML = formatTime(music.duration);
@@ -61,7 +66,7 @@ const setMusic = (i) => {
 	
 }
 
-setMusic(0);
+//setMusic(0);
 
 //format time
 const formatTime = (time) => {
