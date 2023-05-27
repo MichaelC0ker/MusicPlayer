@@ -1,3 +1,5 @@
+const apiBaseUrl = 'https://34.255.93.84:5000';
+
 function toggleAuthOverlay(event) {
     const overlay = document.getElementById('auth-overlay-popup');
 
@@ -21,7 +23,7 @@ const getAccessToken = async () => {
     const searchParams = new URLSearchParams(currentURL);
     console.log(window.location.search ?? 'no window.location.search value');
 
-    let url = 'https://34.244.5.94.nip.io:5000/auth/user';
+    let url = `${apiBaseUrl}/auth/user`;
 
     url += window.location.search;
 
@@ -43,7 +45,7 @@ const getAccessToken = async () => {
 };
 
 const getUserId = async (accessToken) => {
-    let url = 'https://34.244.5.94.nip.io:5000/auth/user';
+    let url = `${apiBaseUrl}/auth/user`;
 
     url += window.location.search;
 
@@ -63,7 +65,7 @@ const getUserId = async (accessToken) => {
 const addUser = async() => {
     const username = document.getElementById('auth-user');
 
-    const url = 'https://34.244.5.94.nip.io:5000/auth/user';
+    const url = `${apiBaseUrl}/auth/user`;
 
     const options = {
         method: 'GET',
@@ -149,7 +151,7 @@ const checkUserAuthStatus = async () => {
             console.log('bad url');
             return;
         }
-        let url = 'http://localhost:5000/auth/magic';
+        let url = `${apiBaseUrl}/auth/magic`;
 
         const options = {
             method: 'GET',

@@ -4,7 +4,7 @@ import databasePool from '../data/index.js';
 const pool = await databasePool;
 
 export const retrieveUser = async (profileId) => {
-  const sqlQuery = `SELECT id, username
+  const sql_query = `SELECT id, username
                         FROM [User] 
                         WHERE id = @profile_id`;
   const result = await pool.request()
@@ -14,18 +14,18 @@ export const retrieveUser = async (profileId) => {
   return result.recordset;
 };
 
-export const addUser = async (profile_id) => {
+export const addUser = async (username) => {
   const sql_query = `BEGIN
    IF NOT EXISTS (SELECT * FROM User 
-                   WHERE id = @username)
+                   WHERE username = @username)
    BEGIN
-       INSERT INTO [User]('name') VALUES (@username); 
+       INSERT INTO [User]('username') VALUES (@username); 
        SELECT SCOPE_IDENTITY() AS id;
    END
 END`;
 
   const result = pool.request()
-    .input('username', sql.VarChar, profile_id)
+    .input('username', sql.VarChar, username)
     .query(sql_query);
 
   return result?.recordset ?? {

@@ -1,7 +1,7 @@
-
+const apiBaseUrl = 'https://34.255.93.84:5000';
 
 const fetchAllSongs = () => {
-  fetch("http://localhost:5000"+"/song/all", {
+  fetch(apiBaseUrl + "/song/all", {
     method: "POST",
     body: JSON.stringify({
         "username": "admin",
