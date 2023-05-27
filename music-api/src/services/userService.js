@@ -1,21 +1,21 @@
-import sql  from "mssql";
-import databasePool from '../data/index.js'
+import sql from 'mssql';
+import databasePool from '../data/index.js';
 
 const pool = await databasePool;
 
-export const retrieveUser = async(username) => {
-    let sql_query = `SELECT id, username
+export const retrieveUser = async (profileId) => {
+  const sqlQuery = `SELECT id, username
                         FROM [User] 
-                        WHERE username = @username`;
-    const result = await pool.request()
-                    .input('username', sql.VarChar, username)
-                    .query(sql_query);
+                        WHERE id = @profile_id`;
+  const result = await pool.request()
+    .input('profile_id', sql.VarChar, profileId)
+    .query(sql_query);
 
-    return result.recordset;
-}
+  return result.recordset;
+};
 
 export const addUser = async (profile_id) => {
-    const sql_query = `BEGIN
+  const sql_query = `BEGIN
    IF NOT EXISTS (SELECT * FROM User 
                    WHERE id = @username)
    BEGIN
@@ -24,9 +24,11 @@ export const addUser = async (profile_id) => {
    END
 END`;
 
-    const request = pool.request()
-      .input('username', sql.VarChar, profile_id)
-      .query(sql_query);
+  const result = pool.request()
+    .input('username', sql.VarChar, profile_id)
+    .query(sql_query);
 
-    return result.recordset;
+  return result?.recordset ?? {
+    ok: false
+  };
 };
