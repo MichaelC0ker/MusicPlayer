@@ -186,7 +186,7 @@ function storeSongData() {
               "release_year": 2020
             },
             "artist": artist,
-            "coverart": "test"
+            "coverart": picture
 
           }),
           headers: {
