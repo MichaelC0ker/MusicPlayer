@@ -30,11 +30,11 @@ const setSongs = () => {
 		//console.log(playlist);
 
 		//created elements
-		const newSection = document.createElement('SECTION');
-		newSection.className = 'list';
-		newSection.setAttribute("id", `song${song.id}`);
-		newSection.addEventListener('click', () => {
-			console.log(newSection.id)
+		const playlistItem = document.createElement('SECTION');
+		playlistItem.className = 'list';
+		playlistItem.addEventListener('click', () => {
+			localStorage.setItem('song',JSON.stringify(song))
+            window.location.href = 'playing.html';
 	    })
 
 		const newArticle = document.createElement('ARTICLE');
@@ -48,10 +48,10 @@ const setSongs = () => {
 		newP.innerText = song.title;
 
 		//Appending Elements
-		playlist.appendChild(newSection);
-		newSection.appendChild(newArticle);
+		playlist.appendChild(playlistItem);
+		playlistItem.appendChild(newArticle);
 		newArticle.appendChild(newCover);
-		newSection.appendChild(newP);
+		playlistItem.appendChild(newP);
 	}
 };
 
@@ -60,7 +60,7 @@ const setPlaylist = () => {
 	for(const i of playlists){
 
 		let playlist = i;
-        //console.log(playlist);
+        console.log(playlist);
 
 		
 		const playlistGroup = document.getElementById('all-playlists-group');
