@@ -94,7 +94,7 @@ async function getAllSongs(){
 	const response = await fetch("http://localhost:5000"+"/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Michael",
+            "username": "Tsepo",
         }),
     headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -108,7 +108,7 @@ async function getPlaylists(){
 	const response = await fetch("http://localhost:5000/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Michael",  
+            "username": "Tsepo",  
             }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"

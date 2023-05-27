@@ -33,7 +33,7 @@ function addPlaylistToDatabase(playlistName, playlistDescription, username) {
     body: JSON.stringify({
       "title": playlistName,
       "description": playlistDescription,
-      "username": "Michael",
+      "username": "Tsepo",
       "songs": []
     }),
     headers: {
@@ -72,7 +72,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription, "Michael")
+    addPlaylistToDatabase(playlistName, playlistDescription, "Tsepo")
   }
 
   return valid;
@@ -110,7 +110,7 @@ const id3Handlers = {
     fetch("http://localhost:5000" + "/song", {
       method: "POST",
       body: JSON.stringify({
-        "username": "Michael",
+        "username": "Tsepo",
         "title": songTitle,
         "song_url": "test",
         "duration": 3000,
@@ -201,7 +201,7 @@ function storeSongData() {
         fetch("http://localhost:5000" + "/song", {
           method: "POST",
           body: JSON.stringify({
-            "username": "Michael",
+            "username": "Tsepo",
             "title": songTitle,
             "song_url": songURL,
             "duration": 3000,
