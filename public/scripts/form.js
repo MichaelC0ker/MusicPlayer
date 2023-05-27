@@ -1,29 +1,4 @@
 
-function validateSongInput() {
-  let text = "";
-  let songURL = document.getElementById("song-path-input").value;
-
-
-  //simple validation on user input
-  let valid = true;
-  if (songURL === "") {
-    text = "Input song path";
-    valid = false;
-  } else if (!songURL.includes("\\")) {
-    text = "Input valid song path";
-    valid = false;
-  }
-
-  //display error message for invalid input
-  if (!valid) {
-    var toast = document.getElementById("validation-toast");
-    toast.className = "show";
-    toast.innerHTML = text
-    setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
-  }
-
-  return valid;
-}
 
 function addPlaylistToDatabase(playlistName, playlistDescription, username) {
 
@@ -232,7 +207,7 @@ function storeSongData() {
 }
 
 function onSubmitSong() {
-  let submit = validateSongInput();
+//  let submit = validateSongInput();
 
   if (submit) {
     storeSongData();
