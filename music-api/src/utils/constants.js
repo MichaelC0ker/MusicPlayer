@@ -20,7 +20,7 @@ export const Constants = {
             'Content-Type': 'application/json'
         },
         CORS_CONFIG: {
-            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Origin': '*',  //may wanna change this to particular urls 
             'Access-Control-Request-Method': '*',
             'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, PATCH, OPTIONS',
             'Access-Control-Allow-Headers': '*'

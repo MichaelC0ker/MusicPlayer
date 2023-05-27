@@ -1,3 +1,4 @@
+
 function validateSongInput() {
   let text = "";
   let songURL = document.getElementById("song-path-input").value;
@@ -24,20 +25,24 @@ function validateSongInput() {
   return valid;
 }
 
-function addPlaylistToDatabase(playlistName,playlistDescription,username){
-  fetch("https://34.244.5.94/"+"/playlist", {
-      method: "POST",
-      body: JSON.stringify({
-        "title": playlistName,
-        "description": playlistDescription,
-        "username": "Michael",
-        "songs": []
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
-      }
-    })
-      .then((response) => console.log(response.json()))
+function addPlaylistToDatabase(playlistName, playlistDescription, username) {
+
+  //adding file details to database
+  fetch("http://localhost:5000" + "/playlist", {
+    method: "POST",
+    body: JSON.stringify({
+      "title": playlistName,
+      "description": playlistDescription,
+      "username": "Michael",
+      "songs": []
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+    .then((response) => console.log(response.json()))
+
+
 }
 
 function validatePlaylistInput() {
@@ -55,7 +60,7 @@ function validatePlaylistInput() {
   if (playlistName === "") {
     text = "Input playlist name";
     valid = false;
-  }else if(playlistDescription === ""){
+  } else if (playlistDescription === "") {
     text = "Input playlist description";
     valid = false;
   }
@@ -66,8 +71,8 @@ function validatePlaylistInput() {
     toast.className = "show";
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
-  }else{
-    addPlaylistToDatabase(playlistName,playlistDescription,"Michael")
+  } else {
+    addPlaylistToDatabase(playlistName, playlistDescription, "Michael")
   }
 
   return valid;
@@ -101,21 +106,21 @@ const id3Handlers = {
     songURL = urlElement.value
 
 
-     //inserting into database
-     fetch("https://34.244.5.94/"+"/song", {
-        method: "POST",
-        body: JSON.stringify({
-          "username": "tlholo",
-          "title": songTitle,
-          "song_url": songURL,
-          "duration": 3000,
-          "genre": genre,
-          "album": {
-            "title": albumName,
-            "release_year": 2020
-          },
-          "artist": artist,
-          "coverart": picture
+    //inserting  song into database
+    fetch("http://localhost:5000" + "/song", {
+      method: "POST",
+      body: JSON.stringify({
+        "username": "Michael",
+        "title": songTitle,
+        "song_url": "test",
+        "duration": 3000,
+        "genre": genre,
+        "album": {
+          "title": albumName,
+          "release_year": 2020
+        },
+        "artist": artist,
+        "coverart": "test"
 
       }),
       headers: {
@@ -132,7 +137,98 @@ const id3Handlers = {
 
 function storeSongData() {
   const song = document.getElementById("song-file-input").files[0]
-  jsmediatags.read(song, id3Handlers)
+
+  //storing song into database
+
+
+  //storing song file into s3 bucket
+  //adding song file to s3 bucket
+
+
+
+  if (song) {
+    REGION = 'eu-west-1'
+    ACCESSKEYID = 'AKIAYR4ZEX3ARXNYWYX5'
+    SECRETACCESSKEY = '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'
+    let file = song;
+    let fileName = file.name;
+    let userID = "22"
+    let filePath = 'music/' + userID +"#"+fileName; //we create a music folder and seperate them by usernames 
+    const urlPrefix =   "https://music-player-web-app.s3.eu-west-1.amazonaws.com/"
+    let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
+
+    var s3 = new AWS.S3({
+      region: REGION,
+      accessKeyId: ACCESSKEYID,
+      secretAccessKey: SECRETACCESSKEY,
+      apiVersion: '2008-10-17',
+      params: { Bucket: "music-player-web-app" }
+    });
+
+    s3.upload({
+      Key: filePath,
+      Body: file
+    }, function (err, data) {
+      if (err) {
+        console.log(err)
+        reject('error');
+      }
+      console.log(data)
+      alert('Successfully Uploaded!');
+    });
+
+
+    jsmediatags.read(song, {
+      onSuccess: function (tag) {
+        console.log(tag)
+        // Array buffer to base64
+        const data = tag.tags.picture.data
+        const format = tag.tags.picture.format
+        let base64String = ""
+        for (let i = 0; i < data.length; i++) {
+          base64String += String.fromCharCode(data[i])
+        }
+        // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
+        picture = String.raw`data:${format};base64,${window.btoa(base64String)}`
+        songTitle = tag.tags.title
+        artist = tag.tags.artist
+        albumName = tag.tags.album
+        genre = tag.tags.genre
+
+        songURL = urlPrefix + encodeURIComponent(filePath)
+
+        //inserting  song into database
+        fetch("http://localhost:5000" + "/song", {
+          method: "POST",
+          body: JSON.stringify({
+            "username": "Michael",
+            "title": songTitle,
+            "song_url": songURL,
+            "duration": 3000,
+            "genre": genre,
+            "album": {
+              "title": albumName,
+              "release_year": 2020
+            },
+            "artist": artist,
+            "coverart": "test"
+
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+          .then((response) => {
+            console.log(response.json())
+            window.location.href = "index.html";
+          })
+      },
+      onError: function (error) {
+        console.log(error)
+      }
+    })
+  }
+
 }
 
 function onSubmitSong() {
@@ -142,7 +238,6 @@ function onSubmitSong() {
     storeSongData();
     console.log("we're moving");
     // storeSongData();
-    //window.location.href = "index.html";
   }
 }
 
