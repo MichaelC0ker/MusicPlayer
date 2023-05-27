@@ -18,15 +18,15 @@
   <header>
     <nav id="navbar">
       <a href="playing.html">Playing</a>
-      <a href="Playlists.html">Playlists</a>
+      <a href="index.html">Home</a>
       <a href="new.html">New</a>
       <a href="authForm.html">Login</a>
     </nav>
   </header>
   <article id="song-input-container">
     <form id="song-form" onsubmit="return false;">
-      <input type="file" class="song-input-item" placeholder="Input file" id="song-file-input"/>
-      <button id="add-song-btn" onclick="onSubmitSong()">Add Song</button>
+      <input type="file" class="song-input-item" placeholder="Input file" id="song-file-input" required multiple/>
+      <button id="add-song-btn" onclick="onSubmitSong()" >Add Song</button>
     </form>
   </article>
   <article id="validation-toast" class="hide"></article>
