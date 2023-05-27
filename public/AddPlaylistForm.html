@@ -4,19 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles/form.css" />
+    <link rel="stylesheet" type="text/css" href="styles/Form.css" />
     <script src="scripts/form.js"></script>
 
     <title>Add playlist</title>
 </head>
 <body>
-    <article id="playlist-input-container">
-        <form id="playlist-form" onsubmit="return false;">
-          <input type="text" class = "playlist-input-item" placeholder="Enter playlist name" id="playlist-name-input" />
-          <input type="text" class = "playlist-input-item" placeholder="Enter playlist cover path " id="cover-path-input" />
-          <button id="add-playlist-btn"  onclick="validatePlaylistInput()">Add Playlist</button>
-        </form>
-      </article>
-   <article id="validation-toast" class="hide" ></article>
+<header>
+    <nav id="navbar">
+
+        <a href="playing.html">Playing</a>
+        <a href="Playlists.html">Playlists</a>
+        <a href="new.html">New</a>
+        <a href="authForm.html">Login</a>
+    </nav>
+</header>
+<main>
+  <article id="playlist-input-container">
+    <form id="playlist-form" onsubmit="return false;">
+      <input type="text" class = "playlist-input-item" placeholder="Enter playlist name" id="playlist-name-input" />
+      <input type="text" class = "playlist-input-item" placeholder="Enter playlist description" id="playlist-description" />
+      <button id="add-playlist-btn"  onclick="onSubmitPlaylist()">Add Playlist</button>
+    </form>
+  </article>
+<article id="validation-toast" class="hide" ></article>
+</main>
 </body>
 </html>

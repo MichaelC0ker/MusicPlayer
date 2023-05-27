@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export const URL = process.env.NODE_ENV === "development"
-                    ? "http://localhost:5500"
+                    ? "http://127.0.0.1:5500"
                     : "https://main.d2m0czas1vg68p.amplifyapp.com/"
 
 export const Constants = {

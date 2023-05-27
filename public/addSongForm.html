@@ -5,24 +5,32 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="styles/form.css" />
-  <script src="scripts/form.js"></script>
-
+  <link rel="stylesheet" type="text/css" href="styles/Form.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <title>Add Song</title>
 </head>
 
 <body>
+  <header>
+    <nav id="navbar">
+      <a href="playing.html">Playing</a>
+      <a href="Playlists.html">Playlists</a>
+      <a href="new.html">New</a>
+      <a href="authForm.html">Login</a>
+    </nav>
+  </header>
   <article id="song-input-container">
     <form id="song-form" onsubmit="return false;">
-      <input type="text" class="song-input-item" placeholder="Song Name" id="song-name-input" />
-      <input type="text" class="song-input-item" placeholder="Artist Name" id="artist-name-input" />
       <input type="text" class="song-input-item" placeholder="Song Path" id="song-path-input" />
-      <input type="text" class="song-input-item" placeholder="Cover Path" id="cover-path-input" />
-
-      <button id="add-song-btn" onclick="onSubmitSong()" >Add Song</button>
+      <input type="file" class="song-input-item" placeholder="Input file" id="song-file-input"/>
+      <button id="add-song-btn" onclick="onSubmitSong()">Add Song</button>
     </form>
   </article>
   <article id="validation-toast" class="hide"></article>
 </body>
+
+<script src="scripts/form.js"></script>
+
 
 </html>
