@@ -46,7 +46,7 @@ const reqListener = async (req, res) => {
     case (req.method === 'OPTIONS'):
       writeResponse(res, httpStatus.OK);
       break;
-    case (req.url.startsWith('/auth/callback') && req.method === 'GET'): {
+    case (req.url.startsWith('/auth/magic') && req.method === 'GET'): {
       const result = await Auth.getAccessToken(req);
 
       writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
