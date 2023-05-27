@@ -108,7 +108,7 @@ async function getPlaylists(){
 	const response = await fetch("http://localhost:5000/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Tsepo",  
+            "username": "Michael",  
             }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
