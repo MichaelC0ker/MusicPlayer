@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<script src="scripts/data.js"></script>
+	<script type="module" src="scripts/loadplaylists.js"></script>
 	<title>Music player</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="styles/style.css">
@@ -14,13 +15,13 @@
 
 </head>
 
-<body onload="getAllPlaylists()">
+<body onload="getPlaylists()">
 
 	<header>
 		<nav id="navbar">
 
 			<a href="playing.html">Playing</a>
-			<a href="Playlists.html">Playlists</a>
+			<a href="index.html">Home</a>
 			<a href="new.html">New</a>
 			<a href="authForm.html">Login</a>
 		</nav>
@@ -30,13 +31,13 @@
 
 		<section class="heading-section">
 			<figure class="heading-thumb">
-				<img src="assets/images/AfterHours.jpg" alt="" />
+				<img src="assets/images/banner2.jpg" alt="" />
 			</figure>
 			<summary class="heading-details">
 				<h1>Welcome To Our Music Player<h1>
-						<p class="playlist-card-name">I think we can add what ever text we want to add here that about
-							our music
-							and/or what we want to achieve with this music player.</p>
+				<p class="heading-card-text">I think we can add what ever text we want to add here that about
+					our music
+					and/or what we want to achieve with this music player.</p>
 			</summary>
 		</section>
 
@@ -44,11 +45,9 @@
 		<h1 class="heading">All Your Tracks</h1>
 		<section class="playlists-group">
 
-			<section class="playlist-card">
-				<a href="Playlists.html"><img src="assets/images/AfterHours.jpg" class="playlist-card-cover" alt=""></a>
-				<a href="Playlists.html">
-					<p class="playlist-card-name">All tracks</p>
-				</a>
+			<section onclick="loadAllTracks()" class="playlist-card" id="all-tracks">
+				<img src="assets/images/banner2.jpg" class="playlist-card-cover" alt="">
+				<p class="playlist-card-name">All tracks</p>
 			</section>
 
 		</section>
@@ -59,8 +58,5 @@
 		</section>
 	</section>
 </body>
-<script src="scripts/loadplaylists.js"></script>
-<script type="module" src="scripts/constants.js"></script>
-<script type="module" src="scripts/loadSongs.js"></script>
 
 </html>
