@@ -1,7 +1,5 @@
-const apiBaseUrl = 'https://34.255.93.84:5000';
-
 const fetchSong = (songId) => {
-  fetch(apiBaseUrl+"/song/" + songId, {
+  fetch(api_endpoint + "/song/" + songId, {
     method: "GET",
     headers: {
       "Content-type": "application/json; charset=UTF-8"
@@ -11,7 +9,7 @@ const fetchSong = (songId) => {
 }
 
 const deleteSong = (songId) => {
-  fetch(apiBaseUrl+"/song/5", {
+  fetch(api_endpoint + "/song/" + songId, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json; charset=UTF-8"

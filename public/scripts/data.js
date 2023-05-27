@@ -1,7 +1,5 @@
 //display data on next screen
 
-const apiBaseUrl = 'https://34.255.93.84:5000';
-
 let songs = [];
 let playlists = [];
 let playlist_id = -1 ;
@@ -93,10 +91,10 @@ const setPlaylist = () => {
 };
 
 async function getAllSongs(){
-	const response = await fetch(apiBaseUrl + "/song/all", {
+	const response = await fetch(api_endpoint + "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Tsepo",
+            "username": sessionStorage.getItem("username"),
         }),
     headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -107,10 +105,10 @@ async function getAllSongs(){
 }
 
 async function getPlaylists(){
-	const response = await fetch(apiBaseUrl + '/playlist/all', {
+	const response = await fetch(api_endpoint + "/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Tsepo",  
+            "username": sessionStorage.getItem("username"),  
             }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -125,7 +123,7 @@ async function getPlaylists(){
 
 async function getSinglePlaylist(playlist_id){
 
-    const response = await fetch(apiBaseUrl + "/playlist/" + playlist_id , {
+    const response = await fetch(api_endpoint + "/playlist/" + playlist_id , {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"

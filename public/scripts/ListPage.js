@@ -1,10 +1,8 @@
-const apiBaseUrl = 'https://34.255.93.84:5000';
-
 const fetchAllSongs = () => {
-  fetch(apiBaseUrl + "/song/all", {
+  fetch(api_endpoint + "/song/all", {
     method: "POST",
     body: JSON.stringify({
-        "username": "admin",
+        "username": sessionStorage.getItem("username"),
     }),
     headers: {
       "Content-type": "application/json; charset=UTF-8"

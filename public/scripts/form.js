@@ -1,6 +1,3 @@
-const apiBaseUrl = 'https://34.255.93.84:5000';
-
-
 function addPlaylistToDatabase(playlistName, playlistDescription, username) {
 
   //adding file details to database
@@ -9,7 +6,7 @@ function addPlaylistToDatabase(playlistName, playlistDescription, username) {
     body: JSON.stringify({
       "title": playlistName,
       "description": playlistDescription,
-      "username": "Tsepo",
+      "username": sessionStorage.getItem("username"),
       "songs": []
     }),
     headers: {
@@ -83,10 +80,10 @@ const id3Handlers = {
 
 
     //inserting  song into database
-    fetch(apiBaseUrl + "/song", {
+    fetch(api_endpoint + "/song", {
       method: "POST",
       body: JSON.stringify({
-        "username": "Tsepo",
+        "username": sessionStorage.getItem("username"),
         "title": songTitle,
         "song_url": "test",
         "duration": 3000,
@@ -111,7 +108,7 @@ const id3Handlers = {
 };
 
 
-function storeSongData() {
+async function storeSongData() {
   const songs = document.getElementById("song-file-input").files
 
   //storing song into database
@@ -123,20 +120,27 @@ function storeSongData() {
   for(let song of songs){
 
     if (song) {
-      REGION = ''
-      ACCESSKEYID = ''
-      SECRETACCESSKEY = ''
+      
+      const request = {
+        method: "GET",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        }
+      const aws_cred_req = await fetch(api_endpoint + "/credentials");
+      const aws_cred_json = await aws_cred_req.json();
+
       let file = song;
       let fileName = file.name;
-      let userID = "22"
+      let userID = sessionStorage.getItem("username", request);
       let filePath = 'music/' + userID +"#"+fileName; //we create a music folder and seperate them by usernames 
       const urlPrefix =   "https://music-player-web-app.s3.eu-west-1.amazonaws.com/"
-      let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
+      // let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
 
       var s3 = new AWS.S3({
-        region: REGION,
-        accessKeyId: ACCESSKEYID,
-        secretAccessKey: SECRETACCESSKEY,
+        region: aws_cred_json.AWS_REGION,
+        accessKeyId: aws_cred_json.AWS_ACCESS_KEY,
+        secretAccessKey: aws_cred_json.AWS_SECRET_ACCESS_KEY,
         apiVersion: '2008-10-17',
         params: { Bucket: "music-player-web-app" }
       });
@@ -152,7 +156,6 @@ function storeSongData() {
         console.log(data)
         alert('Successfully Uploaded!');
       });
-
 
       jsmediatags.read(song, {
         onSuccess: function (tag) {
@@ -174,10 +177,10 @@ function storeSongData() {
           songURL = urlPrefix + encodeURIComponent(filePath)
 
         //inserting  song into database
-        fetch(apiBaseUrl + "/song", {
+        fetch(api_endpoint + "/song", {
           method: "POST",
           body: JSON.stringify({
-            "username": "Michael",
+            "username": sessionStorage.getItem("username"),
             "title": songTitle,
             "song_url": songURL,
             "duration": 3000,
@@ -203,6 +206,8 @@ function storeSongData() {
           console.log(error)
         }
       })
+
+      
     }
   }
 
