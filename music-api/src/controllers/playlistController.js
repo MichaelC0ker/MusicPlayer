@@ -57,6 +57,14 @@ export const getAllPlaylists = async (body) => {
 
   const playlists = await retrievePlaylists(user[0].id);
 
+  for (const key in playlists) {
+    const playlist = playlists[key];
+
+    const playlistSongs = await retrievePlaylistSongs(playlist.id);
+    
+    playlist.songs = playlistSongs;
+  }
+
   return {
     status: httpStatus.OK,
     data: {
