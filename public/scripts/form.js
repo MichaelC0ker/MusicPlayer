@@ -33,7 +33,7 @@ function addPlaylistToDatabase(playlistName,playlistDescription,username){
       body: JSON.stringify({
         "title": playlistName,
         "description": playlistDescription,
-        "username": "Michael",
+        "username": "Tsepo",
         "songs": []
       }),
       headers: {
@@ -70,7 +70,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   }else{
-    addPlaylistToDatabase(playlistName,playlistDescription,"Michael")
+    addPlaylistToDatabase(playlistName,playlistDescription,"Tsepo")
   }
 
   return valid;

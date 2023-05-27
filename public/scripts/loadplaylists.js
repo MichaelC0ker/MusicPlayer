@@ -1,30 +1,27 @@
 
 const setPlaylist = () => {
-	
+
 	for(const i of playlists){
 
 		let playlist = i;
 		
-		const lists = document.querySelector('.playlists');
+		const playlistGroup = document.getElementById('all-playlists-group');
 		
 		//created elements
-		const newSection = document.createElement('SECTION');
-		newSection.className = 'list';
-
-		const newArticle = document.createElement('ARTICLE');
-		newArticle.className = 'playlist-cover';
+		const playlist_Card = document.createElement('SECTION');
+		playlist_Card.className = 'playlist-card';
 		
 		const newCover = document.createElement('IMG');
-		newCover.src = playlist.cover;
+		newCover.className = 'playlist-card-cover';
+		newCover.src = 'assets/images/banner2.jpg';
 
-		const newP = document.createElement('P');
-		newP.className = 'playlist-name';
-		newP.innerText = playlist.name;
+		const playlist_name = document.createElement('P');
+		playlist_name.className = 'playlist-card-name';
+		playlist_name.innerText = playlist.title;
 
 		//Appending Elements
-		lists.appendChild(newSection);
-		newSection.appendChild(newArticle);
-		newArticle.appendChild(newCover);
-		newSection.appendChild(newP);
+		playlistGroup.appendChild(playlist_Card);
+		playlist_Card.appendChild(newCover);
+		playlist_Card.appendChild(playlist_name);
 	}
 };
