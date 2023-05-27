@@ -25,16 +25,15 @@ export const getUserData = async (accessToken) => {
     };
   }
 
-  // try {
-  //   addUser(data.id);
-  // } catch (e) {
-  //   console.log(e);
-  //   // return {
-  //   //   ok: false,
-  //   //   message: 'error(s) occurred during data save on auth journey',
-  //   //   error: e
-  //   // };
-  // }
+  try {
+    addUser(data.id);
+  } catch (e) {
+    return {
+      ok: false,
+      message: 'error(s) occurred during data save on auth journey',
+      error: e
+    };
+  }
 
   return {
     ok: true,
