@@ -84,6 +84,86 @@ const addUser = async() => {
     }
 };
 
+const processErrorResponse = (e) => {
+    sessionStorage.removeItem('user');
 
-// getAccessToken();
+    const main = document.getElementById('main-content');
+    const loader = document.getElementById('animated-loader');
+    const failureHeading = document.createElement('h1');
+    const failureText = document.createElement('p');
+
+    failureHeading.innerText = 'Failed to authenticate';
+    failureText.innerText = e?.reason ?? 'Please try refreshing the page';
+
+    main.removeChild(loader);
+    main.appendChild(failureHeading);
+    main.appendChild(failureText);
+};
+
+const processSuccessResponse = (response) => {
+    if(!response.id) {
+        processErrorResponse(response);
+        return;
+    }
+
+    console.log(`Successfully logged in as ${response?.id}`);
+    sessionStorage.setItem('user', response.id);
+
+    const main = document.getElementById('main-content');
+    const loader = document.getElementById('animated-loader');
+    const successHeading = document.createElement('h1');
+    const successText = document.createElement('p');
+
+    successHeading.innerText = 'Successfully authenticated';
+    successText.innerText = `Your login id is ${response.id}<br />You will be redirected automatically in 5 seconds`;
+
+    main.removeChild(loader);
+    main.appendChild(successHeading);
+    main.appendChild(successText);
+
+    setTimeout(() => window.location.href = 'new.html', 5000);
+};
+
+const checkUserAuthStatus = async () => {
+    let queryParams = window.location.search;
+
+    if(!queryParams) {
+        const signInButton = document.createElement('a');
+        signInButton.setAttribute('href',
+            'https://github.com/login/oauth/authorize?scope=user:email&client_id=17e6997fb89710dce3dd');
+        signInButton.innerHTML = '<img id="sign-in-image" src="assets/images/gitAuth.png" />';
+
+        const main = document.getElementById('main-content');
+        const loader = document.getElementById('animated-loader');
+
+        main.removeChild(loader);
+        main.appendChild(signInButton);
+    } else {
+        const requestCode = queryParams
+            .substring(1)
+            .split('&')
+            .filter(param => param.startsWith('code'))[0]
+            ?.split('=')[1];
+
+        if(!requestCode) {
+            console.log('bad url');
+            return;
+        }
+        let url = 'http://localhost:5000/auth/magic';
+
+        const options = {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                code: requestCode
+            }
+        };
+
+        const fetchResponse = await fetch(url, options);
+        console.log(`fetch response: ${JSON.stringify(fetchResponse)}`);
+        fetchResponse.json()
+            .then(processSuccessResponse)
+            .catch(processErrorResponse);
+    }
+};
 

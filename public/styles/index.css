@@ -56,19 +56,19 @@ header {
     text-decoration: none;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 80em;
-    margin-top:5em;
-    height: 100%;
-    margin-top: 13em;
-    padding: 16px;
-    background-color: #888;
-    border-radius: 5px;
-}
+/*main {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    justify-content: start;*/
+/*    width: 80em;*/
+/*    margin-top:5em;*/
+/*    height: 100%;*/
+/*    margin-top: 13em;*/
+/*    padding: 16px;*/
+/*    background-color: #888;*/
+/*    border-radius: 5px;*/
+/*}*/
 
 .playlist-list-item {
     display: flex;

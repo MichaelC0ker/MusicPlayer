@@ -3,25 +3,45 @@ import fetch from 'node-fetch';
 import config from '../resources/config.json' assert { type: 'json' };
 import { addUser } from './userService.js';
 
-export const getUserData = async (email) => {
-  try {
-    const userId = addUser(email);
+export const getUserData = async (accessToken) => {
+  const url = 'https://api.github.com/user';
 
-    return {
-      ok: true,
-      data: {
-        id: userId
-      }
-    };
-  } catch (e) {
+  const options = {
+    method: 'GET',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${accessToken}`,
+      'X-GitHub-Api-Version': '2022-11-28'
+    }
+  };
+
+  const fetchResponse = await fetch(url, options);
+  const data = await fetchResponse.json();
+
+  if (fetchResponse.status !== 200) {
     return {
       ok: false,
-      data: {
-        message: 'could not authenticate user',
-        error: e.message
-      }
+      data: data
     };
   }
+
+  // try {
+  //   addUser(data.id);
+  // } catch (e) {
+  //   console.log(e);
+  //   // return {
+  //   //   ok: false,
+  //   //   message: 'error(s) occurred during data save on auth journey',
+  //   //   error: e
+  //   // };
+  // }
+
+  return {
+    ok: true,
+    data: {
+      id: data.id
+    }
+  };
 };
 
 export const getAccessToken = async (requestToken) => {
@@ -40,7 +60,7 @@ export const getAccessToken = async (requestToken) => {
 
   const fetchResponse = await fetch(url, options);
   const data = await fetchResponse.json();
-  const accessToken = data.access_token;
+  const accessToken = data?.access_token;
 
   if (!accessToken) {
     return {
@@ -53,8 +73,5 @@ export const getAccessToken = async (requestToken) => {
     };
   }
 
-  return {
-    ok: true,
-    data: await getUserData(accessToken)
-  };
+  return await getUserData(accessToken);
 };
