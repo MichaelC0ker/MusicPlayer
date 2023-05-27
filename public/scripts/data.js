@@ -4,6 +4,20 @@ let playlists = [];
 let playlist_id = -1 ;
 
 const setSongs = () => {
+
+    if(localStorage.getItem('songs') !== null){
+        songs = JSON.parse(localStorage.getItem('songs'));
+        songCount(songs);
+        localStorage.clear();
+    }
+
+    if(localStorage.getItem('Playlist') !== null){
+        let currenPlaylist = JSON.parse(localStorage.getItem('Playlist'));
+        songs = currenPlaylist.songs
+        setPlaylistDetails(currenPlaylist);
+        localStorage.clear();
+    }
+
 	console.log("kk")
 	console.log('songs: ',songs)
 	for(const i of songs){
@@ -11,11 +25,9 @@ const setSongs = () => {
 		let song = i;
 		
 		const playlist = document.getElementById('playlist-screen');
-		console.log(typeof playlist);
-		console.log(playlist);
+		//console.log(typeof playlist);
+		//console.log(playlist);
 
-		
-		
 		//created elements
 		const newSection = document.createElement('SECTION');
 		newSection.className = 'list';
@@ -47,7 +59,7 @@ const setPlaylist = () => {
 	for(const i of playlists){
 
 		let playlist = i;
-        console.log(playlist);
+        //console.log(playlist);
 
 		
 		const playlistGroup = document.getElementById('all-playlists-group');
@@ -57,7 +69,8 @@ const setPlaylist = () => {
 		playlist_Card.className = 'playlist-card';
 
         playlist_Card.addEventListener('click', () => {
-            songs = playlist.songs
+            //songs = playlist.songs;
+            localStorage.setItem('Playlist',JSON.stringify(playlist))
             window.location.href = 'Playlists.html';
         })
 		
@@ -88,8 +101,6 @@ async function getAllSongs(){
     });
 
     songs = (await response.json()).songs;
-    console.log(songs)
-    setSongs()
 }
 
 async function getPlaylists(){
@@ -104,7 +115,7 @@ async function getPlaylists(){
     });
 
     playlists = (await response.json()).playlists;
-    console.log(playlists)
+    //console.log(playlists)
     setPlaylist();
 }
 
@@ -120,10 +131,34 @@ async function getSinglePlaylist(playlist_id){
     });
 
     songs = (await response.json()).songs;
-    console.log(songs);
+    //console.log(songs);
     setSongs();
 }
 
+async function loadAllTracks(){
+    await getAllSongs();
+    localStorage.setItem('songs',JSON.stringify(songs));
+    window.location.href = 'Playlists.html';
+}
+
+function setPlaylistDetails( playlist){
+    const playistName = document.getElementById('playistName');
+    const playlistDescription = document.getElementById('playlistDescription');
+
+    playistName.innerText = playlist.title;
+    playlistDescription.innerText = playlist.description;
+    songCount(playlist.songs.length);
+}
+
+function songCount(songs){
+    const songCount = document.getElementById('songCount');
+
+    if(songs.length !== undefined){
+        songCount.innerText = songs.length + ' songs';
+        return;
+    }
+    songCount.innerText = '0 songs';
+}
 
 
 

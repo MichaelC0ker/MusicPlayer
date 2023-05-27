@@ -1,5 +1,5 @@
 
-const setPlaylist = () => {
+/*const setPlaylist = () => {
 
 	for(const i of playlists){
 
@@ -24,4 +24,4 @@ const setPlaylist = () => {
 		playlist_Card.appendChild(newCover);
 		playlist_Card.appendChild(playlist_name);
 	}
-};
+};*/
