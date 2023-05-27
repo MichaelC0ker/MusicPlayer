@@ -15,6 +15,7 @@ export const createPlaylist = async (body) => {
     user_id: user[0].id
   };
 
+  console.log(playlist);
   const playlistResult = await addPlaylist(playlist);
 
   console.log(data.songs);
@@ -56,6 +57,12 @@ export const getAllPlaylists = async (body) => {
   const user = await retrieveUser(username);
 
   const playlists = await retrievePlaylists(user[0].id);
+  
+  for (const key in playlists) {
+    const playlist = playlists[key];
+    const playlistSongs = await retrievePlaylistSongs(playlist.id);
+    playlist.songs = playlistSongs;
+  }
 
   return {
     status: httpStatus.OK,
