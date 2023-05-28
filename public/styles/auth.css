@@ -1,5 +1,50 @@
 @import url("index.css");
 
+#animated-loader {
+    width: 100px;
+    height: 100px;
+    z-index:2;
+    margin: auto;
+    position: absolute;
+    /*width: 350px;*/
+    /*height: 150px;*/
+    border-radius: 50%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color:black;
+    box-shadow: #FFF;
+    animation: pulse 2s infinite;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-box-shadow: 0 0 0 0 rgba(200,200,200, 0.4);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 50px rgba(200,200,200, 0);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 rgba(200,200,200, 0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(200,200,200, 0.4);
+        box-shadow: 0 0 0 0 rgba(200,200,200, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 50px rgba(200,200,200, 0);
+        box-shadow: 0 0 0 50px rgba(200,200,200, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(200,200,200, 0);
+        box-shadow: 0 0 0 0 rgba(200,200,200, 0);
+    }
+}
+
 #auth-overlay-popup a {
     text-decoration: none;
     color: #ababab;
@@ -33,35 +78,18 @@
     pointer-events: none;
 }
 
-#auth-form {
-    padding: 10px;
+#main-content h1 {
+    font-size: 25px;
+    color: #ffffff;
 }
 
-#auth-form input {
-    /*text-align: center;*/
+#main-content p {
+    font-size: 16px;
+    color: #bababa;
 }
 
-#auth-user {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-#submit-btn {
-    font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
-    outline: 0;
-    background: #393939;
-    width: 100%;
-    border: 0;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    cursor: pointer;
+#sign-in-image {
+    border-radius: 10px;
+    width: 300px;
+    max-width: 100%;
 }

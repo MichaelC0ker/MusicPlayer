@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
-
+  <script src="scripts/constants.js"></script>
   <title>Document</title>
 </head>
 
@@ -37,7 +37,7 @@
         genre = tag.tags.genre
 
         //inserting into database
-        fetch("https://34.244.5.94.nip.io:5000/song", {
+        fetch(api_endpoint + '/song', {
           method: "POST",
           body: JSON.stringify({
             "username": "Michael",

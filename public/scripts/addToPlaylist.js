@@ -46,10 +46,27 @@ function displayAllSongs(){
 
     }
 }
-function addSongToPlaylist(id) {
+
+async function addSongToPlaylist(id) {
     
     var x = document.getElementById(id);
    console.log("selected song with id " + x.id )
+//    endpoint: /playlist/song
+// method: POST
+// body: {
+//     "playlist_id": string,
+//     "song_id": string
+// }
+   const response = await fetch("http://localhost:5000" + "/playlist/song", {
+        method: "POST",
+        body: JSON.stringify({
+            "username": "Michael",
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+
 }
 
 

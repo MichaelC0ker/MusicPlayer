@@ -93,11 +93,11 @@ const setPlaylist = () => {
     }
 };
 
-async function getAllSongs() {
-    const response = await fetch("http://localhost:5000" + "/song/all", {
+async function getAllSongs(){
+	const response = await fetch(api_endpoint + "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Michael",
+            "username": sessionStorage.getItem("username"),
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -107,12 +107,12 @@ async function getAllSongs() {
     songs = (await response.json()).songs;
 }
 
-async function getPlaylists() {
-    const response = await fetch("http://localhost:5000/playlist/all", {
+async function getPlaylists(){
+	const response = await fetch(api_endpoint + "/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Michael",
-        }),
+            "username": sessionStorage.getItem("username"),  
+            }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
@@ -126,7 +126,7 @@ async function getPlaylists() {
 
 async function getSinglePlaylist(playlist_id) {
 
-    const response = await fetch("http://localhost:5000/playlist/" + playlist_id, {
+    const response = await fetch(api_endpoint + "/playlist/" + playlist_id , {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
