@@ -25,7 +25,7 @@ html{
 body{
 	width: 100%;
 	height: 100vh;
-	position: relative;
+	position: fixed;
 	background: var(--background);
 	font-family: 'roboto', sans-serif;
 	color: var(--text-color);
@@ -190,9 +190,18 @@ a{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: space-around;
+	justify-content: space-around;
 	width: auto;
 	height: auto;
 	background-image: linear-gradient(rgba(128,128,128,0.2),rgba(128,128,128,0.4));
+
+}
+
+#playlist-details{
+	display:flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .heading-thumb {
@@ -261,7 +270,7 @@ a{
 	font-size: 30px;
 }
 
-.controls span{
+.controls article{
 	display: none;
 	opacity: 0;
 	transition: 1s;
@@ -271,13 +280,13 @@ a{
   justify-content: space-between;
 }
 
-.music-player.active .controls span{
+.music-player.active .controls article{
 	font-size: 25px;
 	display: block;
 	opacity: 0.5;
 }
 
-.music-player.active .controls span.active{
+.music-player.active .controls article.active{
 	color: #0096FF;
 	opacity: 1;
 }
@@ -454,8 +463,108 @@ a{
 	font-size: 3vh;
 }
 
-@media screen and (max-device-width: 768px){
+#add-to-playlist-section{
+	width: 20vh;
+	height: 20vh;
+	padding: 0;
+}
+	
+#add-to-playlist-box{
+	background-color: transparent;
+	height: 100%;
+	width: 100%;
+	display:none;
+}
+
+#add-to-playlist-btn{
+	width: 100%;
+	height: 20%;
+	display:flex;
+	align-items: center;
+	color: white;
+	background-color: #444;
+	border: 1px;
+	border-radius: 2px;
+	align-items: center;
+	justify-content: space-around; 
+}
+	
+#song-option-list{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	list-style: none;
+	overflow: hidden;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	background-color: #333;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.song-option-li{
+	display: flex;
+	width: 100%;
+	height:150%;
+	margin: 0.1vh;
+	font-size: 1.5vh;
+	align-items: center;
+	border-bottom: 0.1vh solid white;
+}
+
+.song-option-li:hover{
+	background-color: #1888;
+}
+@media screen and (min-device-width: 755px){
 	.heading-details p{
-		font-size: 2vh;
+		font-size: 2.5vh;
 	}
 }
+
+#add-to-playlist-section{
+	width: 20vh;
+	height: 20vh;
+	padding: 0;
+  }
+  #add-to-playlist-box{
+	background-color:none;
+	height: 80%;
+	width: 100%;
+	display:none;
+	overflow: scroll;
+	padding: 0;
+	margin: 0;
+
+  }
+  
+  #add-to-playlist-btn{
+	width: 100%;
+	height: 20%;
+	display:flex;
+	align-items: center;
+	color: white;
+    background-color: #444;
+    border: 1px;
+    border-radius: 2px;
+	align-items: center;
+    justify-content: space-around;	
+  }
+  #song-option-list{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .song-option-li{
+	display: flex;
+	width: 100%;
+	height:20%;
+	margin: 0;
+	align-items: center;
+	background-color: #888;
+	
+  }

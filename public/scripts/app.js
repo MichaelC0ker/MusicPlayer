@@ -17,8 +17,8 @@ const forwardBtn = document.querySelector('i.fa-forward');
 const backwardBtn = document.querySelector('i.fa-backward');
 const playBtn = document.querySelector('i.fa-play');
 const pauseBtn = document.querySelector('i.fa-pause');
-const repeatBtn = document.querySelector('span.fa-redo');
-const volumeBtn = document.querySelector('span.fa-volume-up');
+const repeatBtn = document.querySelector('article.fa-redo');
+const volumeBtn = document.querySelector('article.fa-volume-up');
 const volumeSlider = document.querySelector('.volume-slider');
 const backBtn = document.querySelector('.music-player .back-btn');
 

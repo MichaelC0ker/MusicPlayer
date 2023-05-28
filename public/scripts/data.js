@@ -2,21 +2,20 @@
 
 let songs = [];
 let playlists = [];
-let playlist_id = -1 ;
+let currentPlaylist;
 
 const setSongs = () => {
-
+console.log('storage',localStorage);
     if(localStorage.getItem('songs') !== null){
         songs = JSON.parse(localStorage.getItem('songs'));
         songCount(songs);
-        localStorage.clear();
     }
 
     if(localStorage.getItem('Playlist') !== null){
-        let currenPlaylist = JSON.parse(localStorage.getItem('Playlist'));
-        songs = currenPlaylist.songs
-        setPlaylistDetails(currenPlaylist);
-        localStorage.clear();
+        currentPlaylist = JSON.parse(localStorage.getItem('Playlist'));
+        songs = currentPlaylist.songs
+        setPlaylistDetails(currentPlaylist);
+        console.log('curerent: ',currentPlaylist)
     }
 
 	console.log("kk")
@@ -26,42 +25,40 @@ const setSongs = () => {
 		let song = i;
 		
 		const playlist = document.getElementById('playlist-screen');
-		//console.log(typeof playlist);
-		//console.log(playlist);
 
 		//created elements
 		const playlistItem = document.createElement('SECTION');
 		playlistItem.className = 'list';
 		playlistItem.addEventListener('click', () => {
+            localStorage.removeItem('song');
 			localStorage.setItem('song',JSON.stringify(song))
             window.location.href = 'playing.html';
-	    })
+        })
 
-		const newArticle = document.createElement('ARTICLE');
-		newArticle.className = 'playlist-cover';
-		
-		const newCover = document.createElement('IMG');
-		newCover.src = 'assets/images/banner2.jpg';
+        const newArticle = document.createElement('ARTICLE');
+        newArticle.className = 'playlist-cover';
 
-		const newP = document.createElement('P');
-		newP.className = 'playlist-name';
-		newP.innerText = song.title;
+        const newCover = document.createElement('IMG');
+        newCover.src = 'assets/images/banner2.jpg';
 
-		//Appending Elements
-		playlist.appendChild(playlistItem);
-		playlistItem.appendChild(newArticle);
-		newArticle.appendChild(newCover);
-		playlistItem.appendChild(newP);
-	}
+        const newP = document.createElement('P');
+        newP.className = 'playlist-name';
+        newP.innerText = song.title;
+
+        //Appending Elements
+        playlist.appendChild(playlistItem);
+        playlistItem.appendChild(newArticle);
+        newArticle.appendChild(newCover);
+        playlistItem.appendChild(newP);
+    }
 };
 
 const setPlaylist = () => {
 
-	for(const i of playlists){
+    for (const i of playlists) {
 
-		let playlist = i;
+        let playlist = i;
         console.log(playlist);
-
 		
 		const playlistGroup = document.getElementById('all-playlists-group');
 		
@@ -70,24 +67,24 @@ const setPlaylist = () => {
 		playlist_Card.className = 'playlist-card';
 
         playlist_Card.addEventListener('click', () => {
-            //songs = playlist.songs;
+            localStorage.clear();
             localStorage.setItem('Playlist',JSON.stringify(playlist))
             window.location.href = 'Playlists.html';
         })
-		
-		const newCover = document.createElement('IMG');
-		newCover.className = 'playlist-card-cover';
-		newCover.src = 'assets/images/banner2.jpg';
+        
+        const newCover = document.createElement('IMG');
+        newCover.className = 'playlist-card-cover';
+        newCover.src = 'assets/images/banner2.jpg';
 
-		const playlist_name = document.createElement('P');
-		playlist_name.className = 'playlist-card-name';
-		playlist_name.innerText = playlist.title;
+        const playlist_name = document.createElement('P');
+        playlist_name.className = 'playlist-card-name';
+        playlist_name.innerText = playlist.title;
 
-		//Appending Elements
-		playlistGroup.appendChild(playlist_Card);
-		playlist_Card.appendChild(newCover);
-		playlist_Card.appendChild(playlist_name);
-	}
+        //Appending Elements
+        playlistGroup.appendChild(playlist_Card);
+        playlist_Card.appendChild(newCover);
+        playlist_Card.appendChild(playlist_name);
+    }
 };
 
 async function getAllSongs(){
@@ -96,9 +93,9 @@ async function getAllSongs(){
         body: JSON.stringify({
             "username": sessionStorage.getItem("username"),
         }),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
     });
 
     songs = (await response.json()).songs;
@@ -121,7 +118,7 @@ async function getPlaylists(){
 }
 
 
-async function getSinglePlaylist(playlist_id){
+async function getSinglePlaylist(playlist_id) {
 
     const response = await fetch(api_endpoint + "/playlist/" + playlist_id , {
         method: "GET",
@@ -137,12 +134,17 @@ async function getSinglePlaylist(playlist_id){
 }
 
 async function loadAllTracks(){
-    await getAllSongs();
-    localStorage.setItem('songs',JSON.stringify(songs));
-    window.location.href = 'Playlists.html';
+    const playistName = document.getElementById('playistName');
+
+    if(playistName.innerText === 'All Tracks'){
+        await getAllSongs();
+        localStorage.clear();
+        localStorage.setItem('songs',JSON.stringify(songs));
+        //window.location.href = 'Playlists.html';
+    }
 }
 
-function setPlaylistDetails( playlist){
+function setPlaylistDetails(playlist) {
     const playistName = document.getElementById('playistName');
     const playlistDescription = document.getElementById('playlistDescription');
 
@@ -151,21 +153,85 @@ function setPlaylistDetails( playlist){
     songCount(playlist.songs.length);
 }
 
-function songCount(songs){
+function songCount(songs) {
     const songCount = document.getElementById('songCount');
 
-    if(songs.length !== undefined){
+    if (songs.length !== undefined) {
         songCount.innerText = songs.length + ' songs';
         return;
     }
     songCount.innerText = '0 songs';
 }
 
+function goToAllTrack(){
+    window.location.href = 'Playlists.html';
+}
+
+allSongs = []
+
+async function getAllSongDetails(){
+    const response = await fetch(api_endpoint + "/song/all", {
+        method: "POST",
+        body: JSON.stringify({
+            "username":  sessionStorage.getItem("username"),
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+
+    allSongs = (await response.json()).songs;
+    displayAllSongs();
+    console.log('sond details: ',allSongs);
+}
 
 
+function setVisibility() {
+    let x = document.getElementById("add-to-playlist-box");
+    if (x.style.display === "none") {
+        x.style.display = "flex";
+        if(allSongs=[]){
+            getAllSongDetails().then( )
+        }
+    } else {
+        x.style.display = "none";
+    }
+}
+function displayAllSongs(){
 
+    for(const song of allSongs){
+        console.log('list item: ',song.id)
+        const songList = document.getElementById("song-option-list");
 
+        const newSongOption = document.createElement('LI');
+ 
+        newSongOption.className = "song-option-li";
+        newSongOption.innerText = song.title;
+        newSongOption.id = song.id;
+        newSongOption.onclick = () => addSongToPlaylist(song.id);
 
+        //Appending Elements
+        songList.appendChild(newSongOption);
 
+    }
+}
 
+async function addSongToPlaylist(songId) {
+    console.log("songID: ",songId);
 
+    let x = document.getElementById(songId);
+    console.log("selected song with id " + x.id)
+    console.log(currentPlaylist)
+
+   const response = await fetch(api_endpoint + "/playlist/song", {
+        method: "POST",
+        body: JSON.stringify({
+            "playlist_id": currentPlaylist.id,
+            "song_id":songId
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+
+}

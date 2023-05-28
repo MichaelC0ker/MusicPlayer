@@ -45,7 +45,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription, "Tsepo")
+    addPlaylistToDatabase(playlistName, playlistDescription,  sessionStorage.getItem("username"))
   }
 
   return valid;
@@ -120,16 +120,9 @@ async function storeSongData() {
   for(let song of songs){
 
     if (song) {
-      
-      const request = {
-        method: "GET",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8"
-          }
-        }
-      const aws_cred_req = await fetch(api_endpoint + "/credentials");
-      const aws_cred_json = await aws_cred_req.json();
-
+      REGION = ''
+      ACCESSKEYID = ''
+      SECRETACCESSKEY = ''
       let file = song;
       let fileName = file.name;
       let userID = sessionStorage.getItem("username", request);
@@ -145,73 +138,71 @@ async function storeSongData() {
         params: { Bucket: "music-player-web-app" }
       });
 
-      s3.upload({
-        Key: filePath,
-        Body: file
-      }, function (err, data) {
-        if (err) {
-          console.log(err)
-          reject('error');
-        }
-        console.log(data)
-        alert('Successfully Uploaded!');
-      });
+    s3.upload({
+      Key: filePath,
+      Body: file
+    }, function (err, data) {
+      if (err) {
+        console.log(err)
+        reject('error');
+      }
+      console.log(data)
+      alert('Successfully Uploaded!');
+    });
 
-      jsmediatags.read(song, {
-        onSuccess: function (tag) {
-          console.log('song meta data: ',tag)
-          // Array buffer to base64
-          const data = tag.tags.picture.data
-          const format = tag.tags.picture.format
-          let base64String = ""
-          for (let i = 0; i < data.length; i++) {
-            base64String += String.fromCharCode(data[i])
-          }
-          // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
-          picture = String.raw`data:${format};base64,${window.btoa(base64String)}`
-          songTitle = tag.tags.title
-          artist = tag.tags.artist
-          albumName = tag.tags.album
-          genre = tag.tags.genre
+
+    jsmediatags.read(song, {
+      onSuccess: function (tag) {
+        console.log(tag)
+        // Array buffer to base64
+        const data = tag.tags.picture.data
+        const format = tag.tags.picture.format
+        let base64String = ""
+        for (let i = 0; i < data.length; i++) {
+          base64String += String.fromCharCode(data[i])
+        }
+        // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
+        picture = String.raw`data:${format};base64,${window.btoa(base64String)}`
+        songTitle = tag.tags.title
+        artist = tag.tags.artist
+        albumName = tag.tags.album
+        genre = tag.tags.genre
 
           songURL = urlPrefix + encodeURIComponent(filePath)
 
-        //inserting  song into database
-        fetch(api_endpoint + "/song", {
-          method: "POST",
-          body: JSON.stringify({
-            "username": sessionStorage.getItem("username"),
-            "title": songTitle,
-            "song_url": songURL,
-            "duration": 3000,
-            "genre": genre,
-            "album": {
-              "title": albumName,
-              "release_year": 2020
-            },
-            "artist": artist,
-            "coverart": picture
+          //inserting  song into database
+          fetch(api_endpoint + "/song", {
+            method: "POST",
+            body: JSON.stringify({
+              "username": sessionStorage.getItem("username"),
+              "title": songTitle,
+              "song_url": songURL,
+              "duration": 3000,
+              "genre": genre,
+              "album": {
+                "title": albumName,
+                "release_year": 2020
+              },
+              "artist": artist,
+              "coverart": "test",
 
-            }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8"
-            }
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+          .then((response) => {
+            console.log(response.json())
+            window.location.href = "index.html";
           })
-            .then((response) => {
-              console.log(response.json())
-              console.log('Song added successfully!!!');
-            })
-        },
-        onError: function (error) {
-          console.log(error)
-        }
-      })
-
-      
-    }
+      },
+      onError: function (error) {
+        console.log(error)
+      }
+    })
   }
 
-  //window.location.href = "index.html";
+}
 }
 
 function onSubmitSong() {
@@ -220,7 +211,7 @@ function onSubmitSong() {
     storeSongData();
     console.log("we're moving");
     // storeSongData();
-
+  
 }
 
 

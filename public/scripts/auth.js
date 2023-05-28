@@ -107,7 +107,7 @@ const processSuccessResponse = (response) => {
     }
 
     console.log(`Successfully logged in as ${response?.id}`);
-    sessionStorage.setItem('user', response.id);
+    sessionStorage.setItem('username', response.id);
 
     const main = document.getElementById('main-content');
     const loader = document.getElementById('animated-loader');

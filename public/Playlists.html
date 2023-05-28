@@ -1,43 +1,63 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 
-<html lang="en">
+	<html lang="en">
 
-<head>
+	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>Music player</title>
-	<script src="scripts/constants.js"></script>
+	<!-- <script src="scripts/constants.js"></script> -->
 	<script src="scripts/data.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="styles/style.css">
-</head>
+	</head>
 
-<body onload="setSongs()">
+	<body onload="loadAllTracks();setSongs()">
 
 	<header>
+
 		<nav id="navbar">
 
-			<a href="playing.html">Playing</a>
-			<a href="index.html">Home</a>
-			<a href="new.html">New</a>
-			<a href="authForm.html">Login</a>
+		<a href="playing.html">Playing</a>
+		<a href="index.html">Home</a>
+		<a href="new.html">New</a>
+		<a href="authForm.html">Login</a>
 		</nav>
+
 	</header>
 
-	<section id="playlist-screen">
+		<section id="playlist-screen">
 
 		<section id="heading-section">
+
+		<article id="playlist-details">
 			<figure class="heading-thumb">
 				<img src="assets/images/banner2.jpg" alt="" />
 			</figure>
+
 			<summary class="heading-details">
 				<p id="playistName">All Tracks</p>
 				<p id="playlistDescription">This is a list of all your tracks.</p>
 				<p id="songCount"># Songs</p>
 			</summary>
-		</section>
 
+		</article>
+
+		<section id="add-to-playlist-section">
+			<button id="add-to-playlist-btn" onclick ="setVisibility()">
+
+				Add song
+			</button>
+
+			<article id="add-to-playlist-box" >
+				<ul id="song-option-list">
+
+				</ul>
+			</article>
+		</section>
+		</section>
 	</section>
-</body>
-		
+
+	</body>  
+
 </html>

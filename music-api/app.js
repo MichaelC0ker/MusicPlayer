@@ -7,11 +7,11 @@ import { getCredentials } from './src/controllers/credentialsController.js';
 import * as Auth from './src/controllers/authController.js';
 import { createPlaylist, addSongToPlaylist, getPlaylist, getAllPlaylists, updatePlaylistInfo, deletePlaylist, removeSong } from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
-import * as https from 'https';
+import * as http from 'http';
 import * as fs from 'fs';
 
 // eslint-disable-next-line no-undef
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8443;
 
 const writeResponse = (res, statusCode, headers, data, contentType = Constants.headers.CONTENT_TYPE) => {
   if (!statusCode || !statusCode instanceof Number) {
@@ -158,5 +158,5 @@ const sslOptions = {
 };
 
 // eslint-disable-next-line no-unused-vars
-const server = https.createServer(sslOptions, await reqListener).listen(PORT);
+const server = http.createServer(await reqListener).listen(PORT);
 
