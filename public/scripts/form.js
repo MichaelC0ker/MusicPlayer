@@ -1,14 +1,12 @@
-
-
 function addPlaylistToDatabase(playlistName, playlistDescription, username) {
 
   //adding file details to database
-  fetch("http://localhost:5000" + "/playlist", {
+  fetch(apiBaseUrl + "/playlist", {
     method: "POST",
     body: JSON.stringify({
       "title": playlistName,
       "description": playlistDescription,
-      "username": "Tsepo",
+      "username": sessionStorage.getItem("username"),
       "songs": []
     }),
     headers: {
@@ -47,7 +45,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription, "Tsepo")
+    addPlaylistToDatabase(playlistName, playlistDescription, 'Tsepo')
   }
 
   return valid;
@@ -82,10 +80,10 @@ const id3Handlers = {
 
 
     //inserting  song into database
-    fetch("http://localhost:5000" + "/song", {
+    fetch(api_endpoint + "/song", {
       method: "POST",
       body: JSON.stringify({
-        "username": "Tsepo",
+        "username": sessionStorage.getItem("username"),
         "title": songTitle,
         "song_url": "test",
         "duration": 3000,
@@ -110,7 +108,7 @@ const id3Handlers = {
 };
 
 
-function storeSongData() {
+async function storeSongData() {
   const songs = document.getElementById("song-file-input").files
 
   //storing song into database
@@ -122,53 +120,53 @@ function storeSongData() {
   for(let song of songs){
 
     if (song) {
-      REGION = 'eu-west-1'
-      ACCESSKEYID = 'AKIAYR4ZEX3AWXUMZEFP'
-      SECRETACCESSKEY = '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'
+      REGION = ''
+      ACCESSKEYID = ''
+      SECRETACCESSKEY = ''
       let file = song;
       let fileName = file.name;
-      let userID = "22"
+      let userID = sessionStorage.getItem("username", request);
       let filePath = 'music/' + userID +"#"+fileName; //we create a music folder and seperate them by usernames 
       const urlPrefix =   "https://music-player-web-app.s3.eu-west-1.amazonaws.com/"
-      let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
+      // let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
 
       var s3 = new AWS.S3({
-        region: REGION,
-        accessKeyId: ACCESSKEYID,
-        secretAccessKey: SECRETACCESSKEY,
+        region: aws_cred_json.AWS_REGION,
+        accessKeyId: aws_cred_json.AWS_ACCESS_KEY,
+        secretAccessKey: aws_cred_json.AWS_SECRET_ACCESS_KEY,
         apiVersion: '2008-10-17',
         params: { Bucket: "music-player-web-app" }
       });
 
-      s3.upload({
-        Key: filePath,
-        Body: file
-      }, function (err, data) {
-        if (err) {
-          console.log(err)
-          reject('error');
+    s3.upload({
+      Key: filePath,
+      Body: file
+    }, function (err, data) {
+      if (err) {
+        console.log(err)
+        reject('error');
+      }
+      console.log(data)
+      alert('Successfully Uploaded!');
+    });
+
+
+    jsmediatags.read(song, {
+      onSuccess: function (tag) {
+        console.log(tag)
+        // Array buffer to base64
+        const data = tag.tags.picture.data
+        const format = tag.tags.picture.format
+        let base64String = ""
+        for (let i = 0; i < data.length; i++) {
+          base64String += String.fromCharCode(data[i])
         }
-        console.log(data)
-        alert('Successfully Uploaded!');
-      });
-
-
-      jsmediatags.read(song, {
-        onSuccess: function (tag) {
-          console.log('song meta data: ',tag)
-          // Array buffer to base64
-          const data = tag.tags.picture.data
-          const format = tag.tags.picture.format
-          let base64String = ""
-          for (let i = 0; i < data.length; i++) {
-            base64String += String.fromCharCode(data[i])
-          }
-          // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
-          picture = String.raw`data:${format};base64,${window.btoa(base64String)}`
-          songTitle = tag.tags.title
-          artist = tag.tags.artist
-          albumName = tag.tags.album
-          genre = tag.tags.genre
+        // document.querySelector("#cover").src = `data:${format};base64,${window.btoa(base64String)}`
+        picture = String.raw`data:${format};base64,${window.btoa(base64String)}`
+        songTitle = tag.tags.title
+        artist = tag.tags.artist
+        albumName = tag.tags.album
+        genre = tag.tags.genre
 
           songURL = urlPrefix + encodeURIComponent(filePath)
 
@@ -188,24 +186,23 @@ function storeSongData() {
               "artist": artist,
               "coverart": "test",
 
-            }),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8"
-            }
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        })
+          .then((response) => {
+            console.log(response.json())
+            window.location.href = "index.html";
           })
-            .then((response) => {
-              console.log(response.json())
-              console.log('Song added successfully!!!');
-            })
-        },
-        onError: function (error) {
-          console.log(error)
-        }
-      })
-    }
+      },
+      onError: function (error) {
+        console.log(error)
+      }
+    })
   }
 
-  //window.location.href = "index.html";
+}
 }
 
 function onSubmitSong() {
@@ -214,7 +211,7 @@ function onSubmitSong() {
     storeSongData();
     console.log("we're moving");
     // storeSongData();
-
+  
 }
 
 

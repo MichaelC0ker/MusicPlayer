@@ -191,9 +191,11 @@ a{
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
+	justify-content: space-around;
 	width: auto;
 	height: auto;
 	background-image: linear-gradient(rgba(128,128,128,0.2),rgba(128,128,128,0.4));
+
 }
 
 #playlist-details{
@@ -519,3 +521,50 @@ a{
 		font-size: 2.5vh;
 	}
 }
+
+#add-to-playlist-section{
+	width: 20vh;
+	height: 20vh;
+	padding: 0;
+  }
+  #add-to-playlist-box{
+	background-color:none;
+	height: 80%;
+	width: 100%;
+	display:none;
+	overflow: scroll;
+	padding: 0;
+	margin: 0;
+
+  }
+  
+  #add-to-playlist-btn{
+	width: 100%;
+	height: 20%;
+	display:flex;
+	align-items: center;
+	color: white;
+    background-color: #444;
+    border: 1px;
+    border-radius: 2px;
+	align-items: center;
+    justify-content: space-around;	
+  }
+  #song-option-list{
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .song-option-li{
+	display: flex;
+	width: 100%;
+	height:20%;
+	margin: 0;
+	align-items: center;
+	background-color: #888;
+	
+  }
