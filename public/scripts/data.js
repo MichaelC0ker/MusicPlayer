@@ -2,7 +2,6 @@
 
 let songs = [];
 let playlists = [];
-//let playlist_id = -1 ;
 let currentPlaylist;
 
 const setSongs = () => {
@@ -16,6 +15,7 @@ console.log('storage',localStorage);
         currentPlaylist = JSON.parse(localStorage.getItem('Playlist'));
         songs = currentPlaylist.songs
         setPlaylistDetails(currentPlaylist);
+        console.log('curerent: ',currentPlaylist)
     }
 
 	console.log("kk")
@@ -59,13 +59,12 @@ const setPlaylist = () => {
 
         let playlist = i;
         console.log(playlist);
-
-
-        const playlistGroup = document.getElementById('all-playlists-group');
-
-        //created elements
-        const playlist_Card = document.createElement('SECTION');
-        playlist_Card.className = 'playlist-card';
+		
+		const playlistGroup = document.getElementById('all-playlists-group');
+		
+		//created elements
+		const playlist_Card = document.createElement('SECTION');
+		playlist_Card.className = 'playlist-card';
 
         playlist_Card.addEventListener('click', () => {
             localStorage.clear();
@@ -89,10 +88,10 @@ const setPlaylist = () => {
 };
 
 async function getAllSongs(){
-	const response = await fetch(api_endpoint + "/song/all", {
+	const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": sessionStorage.getItem("username"),
+            "username": "Tsepo",
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -103,10 +102,10 @@ async function getAllSongs(){
 }
 
 async function getPlaylists(){
-	const response = await fetch(api_endpoint + "/playlist/all", {
+	const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": sessionStorage.getItem("username"),  
+            "username": 'Tsepo',  
             }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -121,7 +120,7 @@ async function getPlaylists(){
 
 async function getSinglePlaylist(playlist_id) {
 
-    const response = await fetch(api_endpoint + "/playlist/" + playlist_id , {
+    const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/playlist/" + playlist_id , {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -134,11 +133,15 @@ async function getSinglePlaylist(playlist_id) {
     setSongs();
 }
 
-async function loadAllTracks() {
-    await getAllSongs();
-    localStorage.clear();
-    localStorage.setItem('songs',JSON.stringify(songs));
-    //window.location.href = 'Playlists.html';
+async function loadAllTracks(){
+    const playistName = document.getElementById('playistName');
+
+    if(playistName.innerText === 'All Tracks'){
+        await getAllSongs();
+        localStorage.clear();
+        localStorage.setItem('songs',JSON.stringify(songs));
+        //window.location.href = 'Playlists.html';
+    }
 }
 
 function setPlaylistDetails(playlist) {
@@ -164,11 +167,71 @@ function goToAllTrack(){
     window.location.href = 'Playlists.html';
 }
 
+allSongs = []
+
+async function getAllSongDetails(){
+    const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/song/all", {
+        method: "POST",
+        body: JSON.stringify({
+            "username":  "Tsepo",
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+
+    allSongs = (await response.json()).songs;
+    displayAllSongs();
+    console.log('sond details: ',allSongs);
+}
 
 
+function setVisibility() {
+    let x = document.getElementById("add-to-playlist-box");
+    if (x.style.display === "none") {
+        x.style.display = "flex";
+        if(allSongs=[]){
+            getAllSongDetails().then( )
+        }
+    } else {
+        x.style.display = "none";
+    }
+}
+function displayAllSongs(){
 
+    for(const song of allSongs){
+        console.log('list item: ',song.id)
+        const songList = document.getElementById("song-option-list");
 
+        const newSongOption = document.createElement('LI');
+ 
+        newSongOption.className = "song-option-li";
+        newSongOption.innerText = song.title;
+        newSongOption.id = song.id;
+        newSongOption.onclick = () => addSongToPlaylist(song.id);
 
+        //Appending Elements
+        songList.appendChild(newSongOption);
 
+    }
+}
 
+async function addSongToPlaylist(songId) {
+    console.log("songID: ",songId);
 
+    let x = document.getElementById(songId);
+    console.log("selected song with id " + x.id)
+    console.log(currentPlaylist)
+
+   const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/playlist/song", {
+        method: "POST",
+        body: JSON.stringify({
+            "playlist_id": currentPlaylist.id,
+            "song_id":songId
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+
+}
