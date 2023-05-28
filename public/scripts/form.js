@@ -171,7 +171,7 @@ async function storeSongData() {
           songURL = urlPrefix + encodeURIComponent(filePath)
 
           //inserting  song into database
-          fetch("http://localhost:5000" + "/song", {
+          fetch("http://d27gtrxlpituk.cloudfront.net:8443" + "/song", {
             method: "POST",
             body: JSON.stringify({
               "username": "Tsepo",

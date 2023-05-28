@@ -1,4 +1,5 @@
 @import url("index.css");
+@import url("style.css");
 
 #animated-loader {
     width: 100px;
@@ -76,6 +77,12 @@
 #auth-overlay-popup ~ * {
     filter: grayscale(25%) blur(7px);
     pointer-events: none;
+}
+
+#main-content {
+    background: #141414;
+    backdrop-filter: blur(5px);
+    background-image: linear-gradient(rgba(128,128,128,0.2),rgba(128,128,128,0.1));
 }
 
 #main-content h1 {
