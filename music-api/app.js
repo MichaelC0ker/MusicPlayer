@@ -44,7 +44,7 @@ const returnNotFoundResponse = (req, res) => {
 };
 
 const reqListener = async (req, res) => {
-  console.log(`Received ${req.method} `);
+  console.log(`Received ${req.method} request for ${req.url}`);
   switch (true) {
     case (req.url === '/credentials' && req.method ==='GET'): {
       const result = await getCredentials(req);
@@ -154,15 +154,10 @@ const reqListener = async (req, res) => {
 };
 
 const sslOptions = {
-  key: fs.readFileSync('./ssl/newprivate.key'),
-  cert: fs.readFileSync('./ssl/server.crt'),
-  ca: [
-    fs.readFileSync('./ssl/root.crt'),
-    fs.readFileSync('./ssl/intm.crt')
-  ]
+  key: fs.readFileSync('./ssl/privatekey.key'),
+  cert: fs.readFileSync('./ssl/certificate.crt')
 };
 
 // eslint-disable-next-line no-unused-vars
 const server = https.createServer(sslOptions, await reqListener).listen(PORT);
-console.log(`Server started and running on ${PORT}`);
 
