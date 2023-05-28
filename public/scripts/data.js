@@ -91,7 +91,7 @@ async function getAllSongs(){
 	const response = await fetch(api_endpoint + "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Tsepo",
+            "username": sessionStorage.getItem("username"),
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -105,7 +105,7 @@ async function getPlaylists(){
 	const response = await fetch(api_endpoint + "/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": 'Tsepo',  
+            "username": sessionStorage.getItem("username"),  
             }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -173,7 +173,7 @@ async function getAllSongDetails(){
     const response = await fetch(api_endpoint + "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username":  "Tsepo",
+            "username":  sessionStorage.getItem("username"),
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
