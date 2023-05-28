@@ -129,13 +129,13 @@ async function storeSongData() {
         
       const aws_cred_req = await fetch(api_endpoint + "/credentials");
       const aws_cred_json = await aws_cred_req.json();
-      
+
       REGION = ''
       ACCESSKEYID = ''
       SECRETACCESSKEY = ''
       let file = song;
       let fileName = file.name;
-      let userID = sessionStorage.getItem("username", request);
+      let userID = sessionStorage.getItem("username");
       let filePath = 'music/' + userID +"#"+fileName; //we create a music folder and seperate them by usernames 
       const urlPrefix =   "https://music-player-web-app.s3.eu-west-1.amazonaws.com/"
       // let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
