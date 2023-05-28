@@ -6,7 +6,7 @@ const pool = await databasePool;
 export const retrieveUser = async (profileId) => {
   const sql_query = `SELECT id, username
                         FROM [User] 
-                        WHERE id = @profile_id`;
+                        WHERE username = @profile_id`;
   const result = await pool.request()
     .input('profile_id', sql.VarChar, profileId)
     .query(sql_query);

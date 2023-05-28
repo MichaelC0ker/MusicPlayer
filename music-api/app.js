@@ -46,6 +46,15 @@ const returnNotFoundResponse = (req, res) => {
 const reqListener = async (req, res) => {
   console.log(`Received ${req.method} request for ${req.url}`);
   switch (true) {
+    case (req.url === '/' && req.method === 'GET'): {
+      let data = {
+        data: {
+          message: "Welcome!"
+        }
+      }
+      writeResponse(res,  httpStatus.OK, null, data);
+      return;
+    }
     case (req.url === '/credentials' && req.method ==='GET'): {
       const result = await getCredentials(req);
       writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
@@ -160,4 +169,7 @@ const sslOptions = {
 
 // eslint-disable-next-line no-unused-vars
 const server = https.createServer(sslOptions, await reqListener).listen(PORT);
+
+server.keepAliveTimeout = (60 * 1000) + 1000;
+server.headersTimeout = (60 * 1000) + 2000;
 
