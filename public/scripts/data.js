@@ -2,114 +2,118 @@
 
 let songs = [];
 let playlists = [];
-let playlist_id = -1 ;
+let playlist_id = -1;
+
+
+
 
 const setSongs = () => {
 
-    if(localStorage.getItem('songs') !== null){
+
+    if (localStorage.getItem('songs') !== null) {
         songs = JSON.parse(localStorage.getItem('songs'));
         songCount(songs);
         localStorage.clear();
     }
 
-    if(localStorage.getItem('Playlist') !== null){
+    if (localStorage.getItem('Playlist') !== null) {
         let currenPlaylist = JSON.parse(localStorage.getItem('Playlist'));
         songs = currenPlaylist.songs
         setPlaylistDetails(currenPlaylist);
         localStorage.clear();
     }
 
-	console.log("kk")
-	console.log('songs: ',songs)
-	for(const i of songs){
-		console.log(i)
-		let song = i;
-		
-		const playlist = document.getElementById('playlist-screen');
-		//console.log(typeof playlist);
-		//console.log(playlist);
+    console.log("kk")
+    console.log('songs: ', songs)
+    for (const i of songs) {
+        console.log(i)
+        let song = i;
 
-		//created elements
-		const playlistItem = document.createElement('SECTION');
-		playlistItem.className = 'list';
-		playlistItem.addEventListener('click', () => {
-			localStorage.setItem('song',JSON.stringify(song))
+        const playlist = document.getElementById('playlist-screen');
+        //console.log(typeof playlist);
+        //console.log(playlist);
+
+        //created elements
+        const playlistItem = document.createElement('SECTION');
+        playlistItem.className = 'list';
+        playlistItem.addEventListener('click', () => {
+            localStorage.setItem('song', JSON.stringify(song))
             window.location.href = 'playing.html';
-	    })
+        })
 
-		const newArticle = document.createElement('ARTICLE');
-		newArticle.className = 'playlist-cover';
-		
-		const newCover = document.createElement('IMG');
-		newCover.src = 'assets/images/banner2.jpg';
+        const newArticle = document.createElement('ARTICLE');
+        newArticle.className = 'playlist-cover';
 
-		const newP = document.createElement('P');
-		newP.className = 'playlist-name';
-		newP.innerText = song.title;
+        const newCover = document.createElement('IMG');
+        newCover.src = 'assets/images/banner2.jpg';
 
-		//Appending Elements
-		playlist.appendChild(playlistItem);
-		playlistItem.appendChild(newArticle);
-		newArticle.appendChild(newCover);
-		playlistItem.appendChild(newP);
-	}
+        const newP = document.createElement('P');
+        newP.className = 'playlist-name';
+        newP.innerText = song.title;
+
+        //Appending Elements
+        playlist.appendChild(playlistItem);
+        playlistItem.appendChild(newArticle);
+        newArticle.appendChild(newCover);
+        playlistItem.appendChild(newP);
+    }
 };
 
 const setPlaylist = () => {
 
-	for(const i of playlists){
+    for (const i of playlists) {
 
-		let playlist = i;
+        let playlist = i;
         console.log(playlist);
 
-		
-		const playlistGroup = document.getElementById('all-playlists-group');
-		
-		//created elements
-		const playlist_Card = document.createElement('SECTION');
-		playlist_Card.className = 'playlist-card';
+
+        const playlistGroup = document.getElementById('all-playlists-group');
+
+        //created elements
+        const playlist_Card = document.createElement('SECTION');
+        playlist_Card.className = 'playlist-card';
 
         playlist_Card.addEventListener('click', () => {
             //songs = playlist.songs;
-            localStorage.setItem('Playlist',JSON.stringify(playlist))
+            localStorage.setItem('Playlist', JSON.stringify(playlist))
             window.location.href = 'Playlists.html';
         })
-		
-		const newCover = document.createElement('IMG');
-		newCover.className = 'playlist-card-cover';
-		newCover.src = 'assets/images/banner2.jpg';
 
-		const playlist_name = document.createElement('P');
-		playlist_name.className = 'playlist-card-name';
-		playlist_name.innerText = playlist.title;
+        const newCover = document.createElement('IMG');
+        newCover.className = 'playlist-card-cover';
+        newCover.src = 'assets/images/banner2.jpg';
 
-		//Appending Elements
-		playlistGroup.appendChild(playlist_Card);
-		playlist_Card.appendChild(newCover);
-		playlist_Card.appendChild(playlist_name);
-	}
+        const playlist_name = document.createElement('P');
+        playlist_name.className = 'playlist-card-name';
+        playlist_name.innerText = playlist.title;
+
+        //Appending Elements
+        playlistGroup.appendChild(playlist_Card);
+        playlist_Card.appendChild(newCover);
+        playlist_Card.appendChild(playlist_name);
+    }
 };
 
-async function getAllSongs(){
-	const response = await fetch("http://localhost:5000"+"/song/all", {
+async function getAllSongs() {
+    const response = await fetch("http://localhost:5000" + "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Tsepo",
+            "username": "Michael",
         }),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
     });
 
     songs = (await response.json()).songs;
 }
 
-async function getPlaylists(){
-	const response = await fetch("http://localhost:5000/playlist/all", {
+async function getPlaylists() {
+    const response = await fetch("http://localhost:5000/playlist/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Tsepo",  
-            }),
+            "username": "Michael",
+        }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
         }
@@ -121,9 +125,9 @@ async function getPlaylists(){
 }
 
 
-async function getSinglePlaylist(playlist_id){
+async function getSinglePlaylist(playlist_id) {
 
-    const response = await fetch("http://localhost:5000/playlist/" + playlist_id , {
+    const response = await fetch("http://localhost:5000/playlist/" + playlist_id, {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -136,13 +140,13 @@ async function getSinglePlaylist(playlist_id){
     setSongs();
 }
 
-async function loadAllTracks(){
+async function loadAllTracks() {
     await getAllSongs();
-    localStorage.setItem('songs',JSON.stringify(songs));
+    localStorage.setItem('songs', JSON.stringify(songs));
     window.location.href = 'Playlists.html';
 }
 
-function setPlaylistDetails( playlist){
+function setPlaylistDetails(playlist) {
     const playistName = document.getElementById('playistName');
     const playlistDescription = document.getElementById('playlistDescription');
 
@@ -151,10 +155,10 @@ function setPlaylistDetails( playlist){
     songCount(playlist.songs.length);
 }
 
-function songCount(songs){
+function songCount(songs) {
     const songCount = document.getElementById('songCount');
 
-    if(songs.length !== undefined){
+    if (songs.length !== undefined) {
         songCount.innerText = songs.length + ' songs';
         return;
     }

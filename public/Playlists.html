@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>Music player</title>
 	<script src="scripts/data.js"></script>
+	<script src="scripts/addToPlaylist.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="styles/style.css">
 </head>
@@ -26,6 +27,7 @@
 	<section id="playlist-screen">
 
 		<section id="heading-section">
+			<article id="playlist-details">
 			<figure class="heading-thumb">
 				<img src="assets/images/banner2.jpg" alt="" />
 			</figure>
@@ -34,7 +36,31 @@
 				<p id="playlistDescription">This is a list of all your tracks.</p>
 				<p id="songCount"># Songs</p>
 			</summary>
+		</article>
+			<section id="add-to-playlist-section">
+				<button id="add-to-playlist-btn" onclick ="setVisibility()">
+				  Add song 
+				</button>
+				<article id="add-to-playlist-box" >
+				  <ul id="song-option-list">
+					<li class="song-option-li" id="1" onclick="addSongToPlaylist(this.id)" >
+					  Playlist 1
+					</li>
+					<li class="song-option-li">
+						Playlist 1
+					  </li>
+					  <li class="song-option-li">
+						Playlist 1
+					  </li>
+					  <li class="song-option-li">
+						Playlist 1
+					  </li>
+				  </ul>
+			  </article>
+			  </section>
 		</section>
+		
+
 
 	</section>
 </body>
