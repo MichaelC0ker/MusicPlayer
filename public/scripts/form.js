@@ -45,7 +45,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription, "Michael")
+    addPlaylistToDatabase(playlistName, playlistDescription, 'Tsepo')
   }
 
   return valid;
@@ -120,9 +120,9 @@ async function storeSongData() {
   for(let song of songs){
 
     if (song) {
-      REGION = 'eu-west-1'
-      ACCESSKEYID = 'AKIAYR4ZEX3AWXUMZEFP'
-      SECRETACCESSKEY = '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'
+      REGION = ''
+      ACCESSKEYID = ''
+      SECRETACCESSKEY = ''
       let file = song;
       let fileName = file.name;
       let userID = sessionStorage.getItem("username", request);

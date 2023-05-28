@@ -10,7 +10,7 @@ async function getAllSongDetails(){
     const response = await fetch("http://localhost:5000" + "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": "Michael",
+            "username": 'Tsepo',
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
