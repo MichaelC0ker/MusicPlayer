@@ -5,12 +5,12 @@ import { queryParamExtrator } from '../utils/requestHelper.js';
 export const getUserData = async (req) => {
   const headers = req.headers;
 
-  let username;
+  let code;
 
-  let isValidRequest = !headers || !headers.user || headers.user === '';
+  let isValidRequest = !headers || !headers.code || headers.code === '';
 
   try {
-    username = headers.user;
+    code = headers.code;
   } catch {
     isValidRequest = false;
   }
@@ -22,7 +22,7 @@ export const getUserData = async (req) => {
     };
   }
 
-  const response = await AuthService.getUserData(username);
+  const response = await AuthService.getUserData(code);
 
   if (!response || !response.ok) {
     const status = response.data.error === 'bad_verification_code'
@@ -43,9 +43,11 @@ export const getUserData = async (req) => {
 };
 
 export const getAccessToken = async (req) => {
-  const queryParameters = queryParamExtrator(req.url);
+  const headers = req.headers;
 
-  if (!queryParameters || !queryParameters.code) {
+  const isInvalidRequest = !headers.code || headers.code === '';
+
+  if (isInvalidRequest) {
     return {
       status: httpStatus.BAD_REQUEST,
       data: 'Failed to get request token from request'
@@ -53,7 +55,7 @@ export const getAccessToken = async (req) => {
   }
 
   try {
-    const response = await AuthService.getAccessToken(queryParameters.code);
+    const response = await AuthService.getAccessToken(headers.code);
 
     if (!response || !response.ok) {
       const status = response.data.error === 'bad_verification_code'
@@ -65,7 +67,7 @@ export const getAccessToken = async (req) => {
       };
     }
 
-    return await getUserData({ headers: response.data.token });
+    return response;
   } catch (err) {
     return {
       ok: false,

@@ -1,15 +1,17 @@
-import http from 'http';
 import httpStatus from 'http-status-codes';
 
 import { getPostData, getIdParam } from './src/utils/requestHelper.js';
 
 import { Constants } from './src/utils/constants.js';
+import { getCredentials } from './src/controllers/credentialsController.js';
 import * as Auth from './src/controllers/authController.js';
 import { createPlaylist, addSongToPlaylist, getPlaylist, getAllPlaylists, updatePlaylistInfo, deletePlaylist, removeSong } from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
+import * as https from 'https';
+import * as fs from 'fs';
 
 // eslint-disable-next-line no-undef
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8443;
 
 const writeResponse = (res, statusCode, headers, data, contentType = Constants.headers.CONTENT_TYPE) => {
   if (!statusCode || !statusCode instanceof Number) {
@@ -43,10 +45,15 @@ const returnNotFoundResponse = (req, res) => {
 
 const reqListener = async (req, res) => {
   switch (true) {
+    case (req.url === '/credentials' && req.method ==='GET'): {
+      const result = await getCredentials(req);
+      writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
+      return;
+    }
     case (req.method === 'OPTIONS'):
       writeResponse(res, httpStatus.OK);
       break;
-    case (req.url.startsWith('/auth/callback') && req.method === 'GET'): {
+    case (req.url.startsWith('/auth/magic') && req.method === 'GET'): {
       const result = await Auth.getAccessToken(req);
 
       writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
@@ -145,6 +152,11 @@ const reqListener = async (req, res) => {
   }
 };
 
+const sslOptions = {
+  key: fs.readFileSync('./ssl/privatekey.key'),
+  cert: fs.readFileSync('./ssl/certificate.crt')
+};
+
 // eslint-disable-next-line no-unused-vars
-const server = http.createServer(await reqListener).listen(PORT);
+const server = https.createServer(sslOptions, await reqListener).listen(PORT);
 
