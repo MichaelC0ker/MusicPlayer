@@ -45,7 +45,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription, 'Tsepo')
+    addPlaylistToDatabase(playlistName, playlistDescription,  sessionStorage.getItem("username"))
   }
 
   return valid;
@@ -171,10 +171,10 @@ async function storeSongData() {
           songURL = urlPrefix + encodeURIComponent(filePath)
 
           //inserting  song into database
-          fetch("http://localhost:5000" + "/song", {
+          fetch(api_endpoint + "/song", {
             method: "POST",
             body: JSON.stringify({
-              "username": "Tsepo",
+              "username": sessionStorage.getItem("username"),
               "title": songTitle,
               "song_url": songURL,
               "duration": 3000,

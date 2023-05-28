@@ -7,10 +7,10 @@
 allSongs = []
 
 async function getAllSongDetails(){
-    const response = await fetch("http://localhost:5000" + "/song/all", {
+    const response = await fetch(api_endpoint+ "/song/all", {
         method: "POST",
         body: JSON.stringify({
-            "username": 'Tsepo',
+            "username":  sessionStorage.getItem("username"),
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -52,7 +52,7 @@ async function addSongToPlaylist(songId) {
     var x = document.getElementById(id);
    console.log("selected song with id " + x.id )
 
-   const response = await fetch("http://localhost:5000" + "/playlist/song", {
+   const response = await fetch(api_endpoint + "/playlist/song", {
         method: "POST",
         body: JSON.stringify({
             "playlist_id": currentPlaylist.id,
