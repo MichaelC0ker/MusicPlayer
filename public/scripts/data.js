@@ -2,19 +2,20 @@
 
 let songs = [];
 let playlists = [];
-let playlist_id = -1 ;
+//let playlist_id = -1 ;
+let currentPlaylist;
 
 const setSongs = () => {
-
+console.log('storage',localStorage);
     if(localStorage.getItem('songs') !== null){
         songs = JSON.parse(localStorage.getItem('songs'));
         songCount(songs);
     }
 
     if(localStorage.getItem('Playlist') !== null){
-        let currenPlaylist = JSON.parse(localStorage.getItem('Playlist'));
-        songs = currenPlaylist.songs
-        setPlaylistDetails(currenPlaylist);
+        currentPlaylist = JSON.parse(localStorage.getItem('Playlist'));
+        songs = currentPlaylist.songs
+        setPlaylistDetails(currentPlaylist);
     }
 
 	console.log("kk")
@@ -24,8 +25,6 @@ const setSongs = () => {
 		let song = i;
 		
 		const playlist = document.getElementById('playlist-screen');
-		//console.log(typeof playlist);
-		//console.log(playlist);
 
 		//created elements
 		const playlistItem = document.createElement('SECTION');
@@ -139,7 +138,7 @@ async function loadAllTracks(){
     await getAllSongs();
     localStorage.clear();
     localStorage.setItem('songs',JSON.stringify(songs));
-    window.location.href = 'Playlists.html';
+    //window.location.href = 'Playlists.html';
 }
 
 function setPlaylistDetails( playlist){
@@ -159,6 +158,10 @@ function songCount(songs){
         return;
     }
     songCount.innerText = '0 songs';
+}
+
+function goToAllTrack(){
+    window.location.href = 'Playlists.html';
 }
 
 

@@ -122,9 +122,9 @@ function storeSongData() {
   for(let song of songs){
 
     if (song) {
-      REGION = ''
-      ACCESSKEYID = ''
-      SECRETACCESSKEY = ''
+      REGION = 'eu-west-1'
+      ACCESSKEYID = 'AKIAYR4ZEX3AWXUMZEFP'
+      SECRETACCESSKEY = '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'
       let file = song;
       let fileName = file.name;
       let userID = "22"
@@ -186,7 +186,7 @@ function storeSongData() {
                 "release_year": 2020
               },
               "artist": artist,
-              "coverart": picture,
+              "coverart": "test",
 
             }),
             headers: {
