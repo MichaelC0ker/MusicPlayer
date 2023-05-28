@@ -120,6 +120,16 @@ async function storeSongData() {
   for(let song of songs){
 
     if (song) {
+      const request = {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
+        }
+      }
+        
+      const aws_cred_req = await fetch(api_endpoint + "/credentials");
+      const aws_cred_json = await aws_cred_req.json();
+      
       REGION = ''
       ACCESSKEYID = ''
       SECRETACCESSKEY = ''
