@@ -1,1 +1,1 @@
-const api_endpoint = "http://localhost:5000"
+const api_endpoint = "http://d27gtrxlpituk.cloudfront.net:8443"

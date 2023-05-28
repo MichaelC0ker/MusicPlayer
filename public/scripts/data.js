@@ -88,7 +88,7 @@ const setPlaylist = () => {
 };
 
 async function getAllSongs(){
-	const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/song/all", {
+	const response = await fetch(api_endpoint + "/song/all", {
         method: "POST",
         body: JSON.stringify({
             "username": "Tsepo",
@@ -102,7 +102,7 @@ async function getAllSongs(){
 }
 
 async function getPlaylists(){
-	const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/playlist/all", {
+	const response = await fetch(api_endpoint + "/playlist/all", {
         method: "POST",
         body: JSON.stringify({
             "username": 'Tsepo',  
@@ -120,7 +120,7 @@ async function getPlaylists(){
 
 async function getSinglePlaylist(playlist_id) {
 
-    const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/playlist/" + playlist_id , {
+    const response = await fetch(api_endpoint + "/playlist/" + playlist_id , {
         method: "GET",
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -170,7 +170,7 @@ function goToAllTrack(){
 allSongs = []
 
 async function getAllSongDetails(){
-    const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/song/all", {
+    const response = await fetch(api_endpoint + "/song/all", {
         method: "POST",
         body: JSON.stringify({
             "username":  "Tsepo",
@@ -223,7 +223,7 @@ async function addSongToPlaylist(songId) {
     console.log("selected song with id " + x.id)
     console.log(currentPlaylist)
 
-   const response = await fetch("http://d27gtrxlpituk.cloudfront.net:8443/playlist/song", {
+   const response = await fetch(api_endpoint + "/playlist/song", {
         method: "POST",
         body: JSON.stringify({
             "playlist_id": currentPlaylist.id,
