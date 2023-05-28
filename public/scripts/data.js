@@ -2,7 +2,6 @@
 
 let songs = [];
 let playlists = [];
-//let playlist_id = -1 ;
 let currentPlaylist;
 
 const setSongs = () => {
@@ -59,7 +58,6 @@ const setPlaylist = () => {
 
 		let playlist = i;
         console.log(playlist);
-
 		
 		const playlistGroup = document.getElementById('all-playlists-group');
 		
@@ -135,10 +133,14 @@ async function getSinglePlaylist(playlist_id){
 }
 
 async function loadAllTracks(){
-    await getAllSongs();
-    localStorage.clear();
-    localStorage.setItem('songs',JSON.stringify(songs));
-    //window.location.href = 'Playlists.html';
+    const playistName = document.getElementById('playistName');
+
+    if(playistName.innerText === 'All Tracks'){
+        await getAllSongs();
+        localStorage.clear();
+        localStorage.setItem('songs',JSON.stringify(songs));
+        //window.location.href = 'Playlists.html';
+    }
 }
 
 function setPlaylistDetails( playlist){
