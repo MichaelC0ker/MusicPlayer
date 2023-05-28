@@ -7,7 +7,7 @@ import { getCredentials } from './src/controllers/credentialsController.js';
 import * as Auth from './src/controllers/authController.js';
 import { createPlaylist, addSongToPlaylist, getPlaylist, getAllPlaylists, updatePlaylistInfo, deletePlaylist, removeSong } from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
-import * as http from 'http';
+import * as https from 'https';
 import * as fs from 'fs';
 
 // eslint-disable-next-line no-undef
