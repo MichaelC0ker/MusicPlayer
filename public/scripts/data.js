@@ -13,14 +13,12 @@ const setSongs = () => {
     if (localStorage.getItem('songs') !== null) {
         songs = JSON.parse(localStorage.getItem('songs'));
         songCount(songs);
-        localStorage.clear();
     }
 
     if (localStorage.getItem('Playlist') !== null) {
         let currenPlaylist = JSON.parse(localStorage.getItem('Playlist'));
         songs = currenPlaylist.songs
         setPlaylistDetails(currenPlaylist);
-        localStorage.clear();
     }
 
     console.log("kk")
@@ -33,11 +31,12 @@ const setSongs = () => {
         //console.log(typeof playlist);
         //console.log(playlist);
 
-        //created elements
-        const playlistItem = document.createElement('SECTION');
-        playlistItem.className = 'list';
-        playlistItem.addEventListener('click', () => {
-            localStorage.setItem('song', JSON.stringify(song))
+		//created elements
+		const playlistItem = document.createElement('SECTION');
+		playlistItem.className = 'list';
+		playlistItem.addEventListener('click', () => {
+            localStorage.removeItem('song');
+			localStorage.setItem('song',JSON.stringify(song))
             window.location.href = 'playing.html';
         })
 
@@ -74,11 +73,11 @@ const setPlaylist = () => {
         playlist_Card.className = 'playlist-card';
 
         playlist_Card.addEventListener('click', () => {
-            //songs = playlist.songs;
-            localStorage.setItem('Playlist', JSON.stringify(playlist))
+            localStorage.clear();
+            localStorage.setItem('Playlist',JSON.stringify(playlist))
             window.location.href = 'Playlists.html';
         })
-
+        
         const newCover = document.createElement('IMG');
         newCover.className = 'playlist-card-cover';
         newCover.src = 'assets/images/banner2.jpg';
@@ -142,7 +141,8 @@ async function getSinglePlaylist(playlist_id) {
 
 async function loadAllTracks() {
     await getAllSongs();
-    localStorage.setItem('songs', JSON.stringify(songs));
+    localStorage.clear();
+    localStorage.setItem('songs',JSON.stringify(songs));
     window.location.href = 'Playlists.html';
 }
 

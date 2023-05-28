@@ -19,19 +19,32 @@ async function getAllSongDetails(){
 
     allSongs = (await response.json()).songs;
 }
+
+
 function setVisibility() {
     var x = document.getElementById("add-to-playlist-box");
     if (x.style.display === "none") {
         x.style.display = "flex";
         if(allSongs=[]){
-            getAllSongDetails()
+            getAllSongDetails().then( )
         }
     } else {
         x.style.display = "none";
     }
 }
 function displayAllSongs(){
+    for(song of allSongs){
+    const songList = docucument.getElementById("song-option-list");
+    const newSongOption = document.createElement('LI');
+    newSongOption.className = "song-option-li";
+    newSongOption.innerText = song.title;
+    newSongOption.id = song.id;
+    newSongOption.onclick = "addSongToPlaylist(this.id)"
 
+    //Appending Elements
+    songList.appendChild(newSongOption);
+
+    }
 }
 function addSongToPlaylist(id) {
     
