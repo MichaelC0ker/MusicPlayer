@@ -2,9 +2,9 @@
 
 let songs = [];
 let playlists = [];
-let playlist_id = -1;
+//let playlist_id = -1;
 
-
+let currentPlaylist
 
 
 const setSongs = () => {
@@ -16,9 +16,9 @@ const setSongs = () => {
     }
 
     if (localStorage.getItem('Playlist') !== null) {
-        let currenPlaylist = JSON.parse(localStorage.getItem('Playlist'));
-        songs = currenPlaylist.songs
-        setPlaylistDetails(currenPlaylist);
+      currentPlaylist = JSON.parse(localStorage.getItem('Playlist'));
+        songs = currentPlaylist.songs
+        setPlaylistDetails(currentPlaylist);
     }
 
     console.log("kk")
