@@ -16,10 +16,10 @@ export const retrieveUser = async (profileId) => {
 
 export const addUser = async (username) => {
   const sql_query = `BEGIN
-   IF NOT EXISTS (SELECT * FROM User 
+   IF NOT EXISTS (SELECT * FROM [User] 
                    WHERE username = @username)
    BEGIN
-       INSERT INTO [User]('username') VALUES (@username); 
+       INSERT INTO [User](username) VALUES (@username); 
        SELECT SCOPE_IDENTITY() AS id;
    END
 END`;
