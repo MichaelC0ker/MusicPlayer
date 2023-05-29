@@ -1,7 +1,7 @@
 function addPlaylistToDatabase(playlistName, playlistDescription, username) {
 
   //adding file details to database
-  fetch(apiBaseUrl + "/playlist", {
+  fetch(api_endpoint + "/playlist", {
     method: "POST",
     body: JSON.stringify({
       "title": playlistName,
@@ -45,7 +45,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription,  sessionStorage.getItem("username"))
+    addPlaylistToDatabase(playlistName, playlistDescription, sessionStorage.getItem("username"))
   }
 
   return valid;
@@ -120,12 +120,24 @@ async function storeSongData() {
   for(let song of songs){
 
     if (song) {
+      const request = {
+
+        method: "GET",
+        headers: {
+
+        "Content-type": "application/json; charset=UTF-8"
+
+        }
+      }
+
+      const aws_cred_req = await fetch(api_endpoint + "/credentials");
+      const aws_cred_json = await aws_cred_req.json();
       REGION = ''
       ACCESSKEYID = ''
       SECRETACCESSKEY = ''
       let file = song;
       let fileName = file.name;
-      let userID = sessionStorage.getItem("username", request);
+      let userID = sessionStorage.getItem("username");console.log(userID);
       let filePath = 'music/' + userID +"#"+fileName; //we create a music folder and seperate them by usernames 
       const urlPrefix =   "https://music-player-web-app.s3.eu-west-1.amazonaws.com/"
       // let fileUrl = 'https://' + REGION + '/music-player-web-app/' + filePath;
@@ -193,7 +205,7 @@ async function storeSongData() {
         })
           .then((response) => {
             console.log(response.json())
-            window.location.href = "index.html";
+            //window.location.href = "index.html";
           })
       },
       onError: function (error) {
@@ -220,7 +232,7 @@ function onSubmitSong() {
 function onSubmitPlaylist() {
   let submit = validatePlaylistInput();
   if (submit) {
-    window.location.href = "index.html";
+    //window.location.href = "index.html";
   }
 }
 

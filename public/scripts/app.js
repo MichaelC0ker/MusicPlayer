@@ -23,9 +23,9 @@ const volumeSlider = document.querySelector('.volume-slider');
 const backBtn = document.querySelector('.music-player .back-btn');
 
 //Music Player Back Button Click Event
-backBtn.addEventListener('click', () => {
-	musicPlayerSection.classList.remove('active');
-})
+// backBtn.addEventListener('click', () => {
+// 	musicPlayerSection.classList.remove('active');
+// })
 
 //Play Button Click event
 playBtn.addEventListener('click', () => {
@@ -42,16 +42,17 @@ pauseBtn.addEventListener('click', () => {
 })
 
 //Function for setting music up
-const setMusic = (i) => {
+const setMusic = () => {
 	let song
 	seekBar.value = 0;
 
 	if(localStorage.getItem('song') !== null){
         song = JSON.parse(localStorage.getItem('song'));
+		console.log('song; ',song)
         localStorage.clear();
     }
 	console.log(song);
-	currentMusic = i;
+	//currentMusic = i;
 	
 	music.src = song.song_url;
 	songName.innerHTML = song.title;
