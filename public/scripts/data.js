@@ -140,6 +140,7 @@ async function loadAllTracks(){
         await getAllSongs();
         localStorage.clear();
         localStorage.setItem('songs',JSON.stringify(songs));
+        setSongs();
         //window.location.href = 'Playlists.html';
     }
 }
@@ -150,7 +151,7 @@ function setPlaylistDetails(playlist) {
 
     playistName.innerText = playlist.title;
     playlistDescription.innerText = playlist.description;
-    songCount(playlist.songs.length);
+    songCount(playlist.songs);
 }
 
 function songCount(songs) {
@@ -164,6 +165,7 @@ function songCount(songs) {
 }
 
 function goToAllTrack(){
+    localStorage.clear();
     window.location.href = 'Playlists.html';
 }
 

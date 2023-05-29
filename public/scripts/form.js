@@ -1,7 +1,7 @@
 function addPlaylistToDatabase(playlistName, playlistDescription, username) {
 
   //adding file details to database
-  fetch(apiBaseUrl + "/playlist", {
+  fetch(api_endpoint + "/playlist", {
     method: "POST",
     body: JSON.stringify({
       "title": playlistName,
@@ -45,7 +45,7 @@ function validatePlaylistInput() {
     toast.innerHTML = text
     setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 3000);
   } else {
-    addPlaylistToDatabase(playlistName, playlistDescription,  sessionStorage.getItem("username"))
+    addPlaylistToDatabase(playlistName, playlistDescription, sessionStorage.getItem("username"))
   }
 
   return valid;
@@ -203,7 +203,7 @@ async function storeSongData() {
         })
           .then((response) => {
             console.log(response.json())
-            window.location.href = "index.html";
+            //window.location.href = "index.html";
           })
       },
       onError: function (error) {
@@ -230,7 +230,7 @@ function onSubmitSong() {
 function onSubmitPlaylist() {
   let submit = validatePlaylistInput();
   if (submit) {
-    window.location.href = "index.html";
+    //window.location.href = "index.html";
   }
 }
 
