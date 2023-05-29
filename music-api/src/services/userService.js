@@ -6,7 +6,7 @@ const pool = await databasePool;
 export const retrieveUser = async (profileId) => {
   const sql_query = `SELECT id, username
                         FROM [User] 
-                        WHERE id = @profile_id`;
+                        WHERE username = @profile_id`;
   const result = await pool.request()
     .input('profile_id', sql.VarChar, profileId)
     .query(sql_query);
@@ -16,10 +16,10 @@ export const retrieveUser = async (profileId) => {
 
 export const addUser = async (username) => {
   const sql_query = `BEGIN
-   IF NOT EXISTS (SELECT * FROM User 
+   IF NOT EXISTS (SELECT * FROM [User] 
                    WHERE username = @username)
    BEGIN
-       INSERT INTO [User]('username') VALUES (@username); 
+       INSERT INTO [User](username) VALUES (@username); 
        SELECT SCOPE_IDENTITY() AS id;
    END
 END`;

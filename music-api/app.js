@@ -7,7 +7,7 @@ import { getCredentials } from './src/controllers/credentialsController.js';
 import * as Auth from './src/controllers/authController.js';
 import { createPlaylist, addSongToPlaylist, getPlaylist, getAllPlaylists, updatePlaylistInfo, deletePlaylist, removeSong } from './src/controllers/playlistController.js';
 import { uploadSong, getAllSongs, getSong, deleteSong } from './src/controllers/songController.js';
-import * as http from 'http';
+import * as https from 'https';
 import * as fs from 'fs';
 
 // eslint-disable-next-line no-undef
@@ -44,7 +44,17 @@ const returnNotFoundResponse = (req, res) => {
 };
 
 const reqListener = async (req, res) => {
+  console.log(`Received ${req.method} request for ${req.url}`);
   switch (true) {
+    case (req.url === '/' && req.method === 'GET'): {
+      let data = {
+        data: {
+          message: "Welcome!"
+        }
+      }
+      writeResponse(res,  httpStatus.OK, null, data);
+      return;
+    }
     case (req.url === '/credentials' && req.method ==='GET'): {
       const result = await getCredentials(req);
       writeResponse(res, result.status ?? httpStatus.OK, result?.headers, result?.data);
@@ -153,10 +163,17 @@ const reqListener = async (req, res) => {
 };
 
 const sslOptions = {
-  key: fs.readFileSync('./ssl/privatekey.key'),
-  cert: fs.readFileSync('./ssl/certificate.crt')
+  key: fs.readFileSync('./ssl/newprivate.key'),
+  cert: fs.readFileSync('./ssl/server.crt'),
+  ca: [
+    fs.readFileSync('./ssl/root.crt'),
+    fs.readFileSync('./ssl/intm.crt')
+  ]
 };
 
 // eslint-disable-next-line no-unused-vars
-const server = http.createServer(await reqListener).listen(PORT);
+const server = https.createServer(sslOptions, await reqListener).listen(PORT);
+
+server.keepAliveTimeout = (60 * 1000) + 1000;
+server.headersTimeout = (60 * 1000) + 2000;
 
