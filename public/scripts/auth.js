@@ -77,7 +77,7 @@ const addUser = async() => {
     const data = await fetchResponse.json();
 
     if(data.ok) {
-        sessionStorage.setItem('username', username);
+        sessionStorage.setItem('username', username.toString());
         window.location.href="index.html"
     } else {
         
