@@ -115,13 +115,13 @@ const processSuccessResponse = (response) => {
     const successText = document.createElement('p');
 
     successHeading.innerText = 'Successfully authenticated';
-    successText.innerText = `Your login id is ${response.id}<br />You will be redirected automatically in 5 seconds`;
+    successText.innerText = `Your login id is ${response.id}. You will be redirected automatically in 6 seconds`;
 
     main.removeChild(loader);
     main.appendChild(successHeading);
     main.appendChild(successText);
 
-    setTimeout(() => window.location.href = 'new.html', 5000);
+    setTimeout(() => window.location.href = 'new.html', 6000);
 };
 
 const checkUserAuthStatus = async () => {
