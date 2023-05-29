@@ -163,8 +163,12 @@ const reqListener = async (req, res) => {
 };
 
 const sslOptions = {
-  key: fs.readFileSync('./ssl/privatekey.key'),
-  cert: fs.readFileSync('./ssl/certificate.crt')
+  key: fs.readFileSync('./ssl/newprivate.key'),
+  cert: fs.readFileSync('./ssl/server.crt'),
+  ca: [
+    fs.readFileSync('./ssl/root.crt'),
+    fs.readFileSync('./ssl/intm.crt')
+  ]
 };
 
 // eslint-disable-next-line no-unused-vars
