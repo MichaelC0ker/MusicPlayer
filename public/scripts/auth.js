@@ -69,7 +69,7 @@ const addUser = async() => {
         method: 'GET',
         headers: {
             Accept: 'application/json',
-            user: username
+            user: username.toString()
         }
     };
 
