@@ -23,9 +23,9 @@ const volumeSlider = document.querySelector('.volume-slider');
 const backBtn = document.querySelector('.music-player .back-btn');
 
 //Music Player Back Button Click Event
-// backBtn.addEventListener('click', () => {
-// 	musicPlayerSection.classList.remove('active');
-// })
+backBtn.addEventListener('click', () => {
+	musicPlayerSection.classList.remove('active');
+})
 
 //Play Button Click event
 playBtn.addEventListener('click', () => {
